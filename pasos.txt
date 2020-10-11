@@ -1,0 +1,143 @@
+Creamos carpeta 'server'
+
+Dentro de carpeta 'server' ejecutamos para crear un package-json:
+    npm init --yes
+
+Instalando dependencias:
+    express, para nuestro servidor.
+    morgan, para ir viendo en consola lo que el cliente va pidiendo.
+    cors, permitira comunicar dos servidores, angular levanta un servidor quien se comunicara con el servidor de la API
+
+Dentro de carpeta 'server' ejecutamos:
+    npm i express morgan cors
+
+Creamos carpeta 'src' dentro de 'server':
+    Para el codigo de nuestra aplicacion
+
+Dentro de carpeta 'src' creamos archivo 'index.ts'
+    Es por el typescript
+
+Instalamos typescript (de forma global):
+    npm install -g typescript (este da un error de que no tiene permisos)
+    sudo npm install -g typescript --unsafe-perm (con este comando ya instala)
+
+Creamos un archivo de configuracion llamado 'tsconfig.json':
+    tsc --init
+
+Dentro del archivo 'tsconfig.json' modificamos algunas cosas:
+    antes-> "target": "es5" despues-> "target": "es6"
+    descomentamos y agregamos 'build': "outDir": "./build", (es carpeta donde va colocar todo el codigo typescript)
+
+ejecutamos solamente (esto pasa el codigo typescript a javascript):
+    tsc
+
+pero cada vez que agreguemos algo en 'index.ts' tendriamos que ejecutar 'tsc' para que haga los cambios en 'index.js', entonces
+aremos lo siguiente para que haga esto por nosotros:
+    vamos a package.json:
+    eliminamos el "test": "echo \"Error: no test specified\" && exit 1" que esta en 'scripts'
+    y agremos "build":"tsc -w" esto es para que se quede vigilando los cambios.
+
+Ejecutamos (siempre estando dentro de carpeta 'server' en consola):
+    npm run build (aqui se queda escuchando o vigilando cualquier cambio)
+
+pero ahora resulta que hay que estar ejecuntando 'npm run build' siempre, entonces instalaremos otro modulo:
+ahora mismo en consola se esta ejecutando 'npm run build' que esta a la escucha.
+abrimos una nueva terminal y accedemos a la carpeta 'server' con 'cd server' y ejecutamos:
+    npm i nodemon -D (-D le dice a nuestro proyecto que lo instale por aparte de las dependencias que ya emos instalado)
+
+agremos un nuevo comando dentro de 'package.json' para ejecutar 'nodemon'
+dentro de 'scripts' agregamos:
+    "dev": "nodemon build/index.js" (miestras 'tsc' esta vigilando los archivos, 'nodemon' esta vigilando la carpeta 'build' para ver que archivos han cambiado)
+
+ejecutamos:
+    npm run dev
+
+hasta ahora:
+    se esta ejecutando en una terminal 'tsc'
+    y en otra terminal 'nodemon'
+
+abrimos una nueva terminal e instalamos otro modulo siempre dentro de carpeta 'server':
+    npm i @types/express -D
+
+Luego se han hechos cambios en 'index.ts' para el servidor.
+
+Creamos carpeta 'routes' dentro de 'src'
+
+Dentro de carpeta 'routes' creamos dos archivos:
+    'indexRoutes'
+    'gameRouters' (prueba)
+
+Luego de hacer las configuraciones y los import de las dos paginas anteriores mencionadas,
+importamos 'morgan' y 'cors' pero tenemos que instalar (siempre dentro de carpeta server):
+    npm i @types/morgan @types/cors -Dentro
+
+/////////////////////////////////////////////////////////////////FRONTEND//////////////////////////////////////////////////
+
+Instalamos 'angular cli' que sirve para generar proyecto esqueleto de angular, en el proyecto ejecutamos (ya no dentro de la carpeta 'server' sino en la carpeta del proyecto):
+    npm install -g @angular/cli (permisos denegados)
+    sudo npm install -g @angular/cli --unsafe-perm (con esto jala)
+
+    nos aparecera un mensaje para compartir datos con angular, le damos 'n'
+
+creamos esqueleto de angular:
+    ng new client --routing ('client' puede ser cualquier nombre, 'routing' para que vaya mostrando rutas en el navegador)
+
+    nos aparecera un si queremos CSS u otro, escogemos CSS.
+
+nos movemos a carpeta 'cliente'
+    cd client
+
+creamos componentes:
+    ng g c components/navigation ('c' de componente, y para tener orden estaran dentro de 'components')
+
+creamos carpeta 'models' dentro de 'app' que esta contendra los modelos de los datos
+
+dentro de 'models' creamos interface llamada 'login.ts'
+
+ejecutamos angular, dentro de carpeta 'client':
+    ng serve
+
+estara en modo desarrollador en el puerto 4200
+    http://localhost:4200
+
+modificamos el archivo 'app.component.html' que esta dentro de carpeta 'app'
+
+modificamos interface de componente 'login' por ejemplo.
+    nos vamos dentro a carpeta del componente 'login' y editamos ahi 'login.component.html'
+
+utilizaremos bootstrap para las interfaces:
+    nos vamos a : https://getbootstrap.com/
+    luego a 'get started' copiamos el de 'css'
+    y lo copiamos en 'index.html' que esta dentro de 'src'
+
+en la pagina de bootstrap hay una seccion de ejemplos de multiples componentes.
+
+nos vamos a https://bootswatch.com/ para campiar estilos de componentes
+
+Siempre en 'index.html' en la parte de bootstrap, ponemos href="https://bootswatch.com/4/lux/bootstrap.min.css"
+
+Empezamos a crear rutas, para negar entre paginas:
+    nos vamos a carpeta 'app' y en archivo 'app-routing-module.ts' las definimos
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+en una terminal (accedemos a carpeta 'server'):
+    npm run build (tsc)
+en otra terminal (accedemos a carpeta 'server'):
+    npm run dev (nodemon)
+
+en otra terminal
+    ng serve (accedeos a carpeta 'client')
