@@ -71,6 +71,19 @@ Luego de hacer las configuraciones y los import de las dos paginas anteriores me
 importamos 'morgan' y 'cors' pero tenemos que instalar (siempre dentro de carpeta server):
     npm i @types/morgan @types/cors -Dentro
 
+/////////////////////////////////////////////////////////////////BASE DE DATOS//////////////////////////////////////////////////
+Dentro de carpeta 'server' instalamos oracle:
+    npm i oracledb
+
+Dentro de 'server'->'src' creamos un archivo keys.ts:
+    Este tendra como las credenciales de conexion
+
+Dentro de 'server'->'src' creamos carpeta 'controllers':
+    Para llevar un mejor control de consultas
+
+Dentro de 'controllers' creamos archivo indexControllers.ts:
+
+
 /////////////////////////////////////////////////////////////////FRONTEND//////////////////////////////////////////////////
 
 Instalamos 'angular cli' que sirve para generar proyecto esqueleto de angular, en el proyecto ejecutamos (ya no dentro de la carpeta 'server' sino en la carpeta del proyecto):
@@ -93,6 +106,9 @@ creamos componentes:
 creamos carpeta 'models' dentro de 'app' que esta contendra los modelos de los datos
 
 dentro de 'models' creamos interface llamada 'login.ts'
+
+creamos un servicio (para consultas):
+    ng g s services/productos ('s' de servicio, y para tener un orden estaran dentro de 'services')
 
 ejecutamos angular, dentro de carpeta 'client':
     ng serve

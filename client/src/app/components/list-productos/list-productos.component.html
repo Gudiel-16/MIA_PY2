@@ -2,4 +2,13 @@
 <!--PARA QUE SIEMPRE SALGA LA BARRA DE NAVEGACION DE USUARIO-->
 <app-navigation-usuario></app-navigation-usuario>
 
-<p>list-productos works!</p>
+<div class="col-md-4" *ngFor="let aja of misProductos.rows">
+    <div class="card text-center">
+        <div class="card-header">
+           {{aja[1]}}
+        </div>
+        <div class="card-body">
+
+        </div>
+    </div>
+</div>
