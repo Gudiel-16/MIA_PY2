@@ -132,6 +132,10 @@ nos vamos a https://bootswatch.com/ para campiar estilos de componentes
 
 Siempre en 'index.html' en la parte de bootstrap, ponemos href="https://bootswatch.com/4/lux/bootstrap.min.css"
 
+Siempre en 'index.html' ponemos: (es para iconos)
+    <script src="https://kit.fontawesome.com/896fa8e4a1.js" crossorigin="anonymous"></script>
+
+
 Empezamos a crear rutas, para negar entre paginas:
     nos vamos a carpeta 'app' y en archivo 'app-routing-module.ts' las definimos
 
@@ -144,8 +148,7 @@ Empezamos a crear rutas, para negar entre paginas:
 
 
 
-
-
+En 'server'->'src'->'index.ts' definimos las rutas creadas en carpeta 'routes'
 
 
 
@@ -153,7 +156,8 @@ Empezamos a crear rutas, para negar entre paginas:
 en una terminal (accedemos a carpeta 'server'):
     npm run build (tsc)
 en otra terminal (accedemos a carpeta 'server'):
+    export LD_LIBRARY_PATH=/usr/lib/oracle/18.5/client64/lib:$LD_LIBRARY_PATH
     npm run dev (nodemon)
 
-en otra terminal
-    ng serve (accedeos a carpeta 'client')
+en otra terminal (accedeos a carpeta 'client')
+    ng serve 

@@ -2,13 +2,62 @@
 <!--PARA QUE SIEMPRE SALGA LA BARRA DE NAVEGACION DE USUARIO-->
 <app-navigation-usuario></app-navigation-usuario>
 
-<div class="col-md-4" *ngFor="let aja of misProductos.rows">
-    <div class="card text-center">
-        <div class="card-header">
-           {{aja[1]}}
+<!--PARA BUSQUEDAS-->
+<nav class="navbar navbar-light bg-light">
+    <!--PARA BUSCAR PRODUCTO-->
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="BUSCAR PRODUCTO" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">BUSCAR</button>
+    </form>
+    <!--PARA PRECIO-->
+    <div class="btn-group">
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          PRECIO
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
         </div>
-        <div class="card-body">
+        <button class="btn btn-success">                  
+            <i class="fas fa-search"></i>
+            BUSCAR
+        </button>
+    </div>
+    <!--PARA BUSCAR CATEGORIA-->
+    <div class="btn-group">
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          CATEGORIA
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+        </div>
+        <button class="btn btn-success">                  
+            <i class="fas fa-search"></i>
+            BUSCAR
+        </button>
+    </div>
+  </nav>
 
+<!--LISTADO DE PRODUCTOS-->
+<div class="float-md-left col-md-4" *ngFor="let aja of misProductos.rows" style="padding: 10px;">
+    <div class="card text-center">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            {{aja[1]}}
+            <button class="btn btn-success">                  
+                <i class="fas fa-info-circle"></i>
+                DETALLE
+            </button>
         </div>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ353GaSlVQLX0q1YwAY__DxNUi0EYjy0TnMA&usqp=CAU" alt="">
+        
+        <div class="card-body">
+            <p>Precio: Q. {{aja[4]}}</p>
+            <p>{{aja[6]}}</p>
+        </div>
+        <a href="" class="btn btn-success btn-block">
+            AGREGAR A CARRO
+        </a>
     </div>
 </div>
+

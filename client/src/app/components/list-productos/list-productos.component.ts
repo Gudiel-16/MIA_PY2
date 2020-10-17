@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 
 //importamos servicios
 import { ProductosService } from '../../services/productos.service'
@@ -9,6 +9,9 @@ import { ProductosService } from '../../services/productos.service'
   styleUrls: ['./list-productos.component.css']
 })
 export class ListProductosComponent implements OnInit {
+
+  //agregando una fila a todo el componente (para que se coloque uno al lado del otro)
+  //@HostBinding('class') classes='row';
 
   //arreglo
   misProductos: any =[];

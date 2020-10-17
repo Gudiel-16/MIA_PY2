@@ -13,10 +13,11 @@ class IndexController{
     }
 
     public async obtenerTodosUsuarios (req :Request,res: Response) {
-        let sql = "select * from producto where codigo=1";
+        let sql = "select * from producto";
         let cnn = await oracledb.getConnection(keys.cns);
         let result = await cnn.execute(sql, [], { true:Boolean });
         cnn.release();
+        console.log(result)
         res.status(200).json(result);
     }
 

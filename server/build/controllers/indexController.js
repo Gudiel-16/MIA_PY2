@@ -24,10 +24,11 @@ class IndexController {
     }
     obtenerTodosUsuarios(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let sql = "select * from producto where codigo=1";
+            let sql = "select * from producto";
             let cnn = yield oracledb.getConnection(keys_1.default.cns);
             let result = yield cnn.execute(sql, [], { true: Boolean });
             cnn.release();
+            console.log(result);
             res.status(200).json(result);
         });
     }
