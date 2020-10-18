@@ -14,12 +14,12 @@ class IndexRoutes{
     }
 
     config(): void {
-        //ruta inicial
-        this.router.get('/usuario/listProductos/:id', indexController.obtenerUsuario);
-
+        
         this.router.get('/usuario/listProductos',indexController.obtenerTodosUsuarios);
 
-        this.router.post('/',indexController.crearUsuario);
+        this.router.post('/usuario/addProducto',indexController.crearProducto);
+
+        this.router.get('/usuario/listProductos/:id', indexController.obtenerUsuario);
         
         this.router.put('/:id',indexController.actualizarUsuario)
     }

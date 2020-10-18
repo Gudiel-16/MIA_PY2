@@ -1,6 +1,10 @@
 export interface Producto{
-    codigo?:number;
+    id_producto?:number;
     nombre?:string;
-    categoria?:string;
-    state?:number;
+    descripcion?:string;
+    palab_clave?:string;
+    precio?:number;
+    ruta?:string;
+    nom_cat?:string;
+    id_c?:number;
 }

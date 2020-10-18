@@ -11,10 +11,9 @@ class IndexRoutes {
         this.config();
     }
     config() {
-        //ruta inicial
-        this.router.get('/usuario/listProductos/:id', indexController_1.indexController.obtenerUsuario);
         this.router.get('/usuario/listProductos', indexController_1.indexController.obtenerTodosUsuarios);
-        this.router.post('/', indexController_1.indexController.crearUsuario);
+        this.router.post('/usuario/addProducto', indexController_1.indexController.crearProducto);
+        this.router.get('/usuario/listProductos/:id', indexController_1.indexController.obtenerUsuario);
         this.router.put('/:id', indexController_1.indexController.actualizarUsuario);
     }
 }

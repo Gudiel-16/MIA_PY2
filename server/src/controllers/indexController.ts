@@ -21,8 +21,23 @@ class IndexController{
         res.status(200).json(result);
     }
 
-    public crearUsuario(req :Request,res: Response){
-        res.json({text:'Creando usuario...'});
+    public async crearProducto(req :Request,res: Response){
+        //son los valores que recibe para insertar, y son los nombres de los campos de nuestra tabla
+        var autoCommit=true;
+        const { id_producto, nombre, descripcion, palab_clave,ruta,precio,nom_cat,id_c } = req.body; //req.body, recibe un cuerpo de msj (un json)
+
+        // los : son porque reciben parametros
+        let sql = "insert into producto(nombre,descripcion,palab_clave,precio,ruta,nom_cat,id_c) values (:nombre,:descripcion,:palab_clave,:precio,:ruta,:nom_cat,:id_c)";
+
+        let cnn=await oracledb.getConnection(keys.cns);
+        await cnn.execute(sql,[nombre,descripcion,palab_clave,precio,ruta,nom_cat,id_c],{autoCommit});
+        cnn.release();
+
+
+        //devuelvo el dato que se inserto
+        res.status(200).json({
+            "Respuesta": "Producto Guardado"
+        });
     }
 
     public actualizarUsuario(req :Request,res: Response){

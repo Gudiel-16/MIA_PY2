@@ -26,6 +26,6 @@ export class ProductosService {
   }
 
   saveProducto(producto: Producto){
-    return this.http.post(`${this.API_URI}/usuario/listProductos/`,producto);
+    return this.http.post(`${this.API_URI}/usuario/addProducto/`,producto);
   }
 }

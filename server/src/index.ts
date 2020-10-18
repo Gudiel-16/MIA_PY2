@@ -4,7 +4,6 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import indexRoutes from './routes/indexRoutes';
-import gameRoutes from './routes/gameRoutes';
 
 class Server{
 
@@ -29,7 +28,6 @@ class Server{
     //para definir de app las rutas de nuestro servidor
     routes(): void {
         this.app.use('/',indexRoutes);
-        this.app.use('/api/games',gameRoutes);
     }
 
     //para poder inicializar el servidor

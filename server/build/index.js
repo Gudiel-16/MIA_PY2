@@ -7,7 +7,6 @@ const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
-const gameRoutes_1 = __importDefault(require("./routes/gameRoutes"));
 class Server {
     //se ejecuta al instanciar la clase, y devolvera objeto tipo express
     constructor() {
@@ -26,7 +25,6 @@ class Server {
     //para definir de app las rutas de nuestro servidor
     routes() {
         this.app.use('/', indexRoutes_1.default);
-        this.app.use('/api/games', gameRoutes_1.default);
     }
     //para poder inicializar el servidor
     start() {

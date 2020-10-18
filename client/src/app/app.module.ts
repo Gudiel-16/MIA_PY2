@@ -4,26 +4,35 @@ import { NgModule } from '@angular/core';
 //importamos modulo
 import { HttpClientModule } from '@angular/common/http'
 
+//importamos form
+import { FormsModule } from '@angular/forms'
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavigationUsuarioComponent } from './components/navigation-usuario/navigation-usuario.component';
 import { ListProductosComponent } from './components/list-productos/list-productos.component';
+import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
+import { AddProductoComponent } from './components/add-producto/add-producto.component'
 
 //importamos el servicio
-import { ProductosService } from './services/productos.service'
+import { ProductosService } from './services/productos.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavigationUsuarioComponent,
-    ListProductosComponent
+    ListProductosComponent,
+    DetalleProductoComponent,
+    AddProductoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule //importamos modulo
+    HttpClientModule, //importamos modulo
+    FormsModule,
   ],
   providers: [
     ProductosService //tendra los metodos para poder pedir datos

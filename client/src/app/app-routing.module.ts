@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { NavigationUsuarioComponent } from './components/navigation-usuario/navigation-usuario.component';
 import { ListProductosComponent } from './components/list-productos/list-productos.component'
+import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component'
+import { AddProductoComponent } from './components/add-producto/add-producto.component'
 
 //definimos las rutas
 const routes: Routes = [
@@ -24,6 +26,10 @@ const routes: Routes = [
   {
     path:'usuario/listProductos',
     component: ListProductosComponent
+  },
+  {
+    path:'usuario/addProducto',
+    component: AddProductoComponent
   }
 
 ];
