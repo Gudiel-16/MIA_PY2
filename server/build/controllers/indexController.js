@@ -19,16 +19,27 @@ const oracledb = require('oracledb');
 //credenciales de conexion de base de datos
 const keys_1 = __importDefault(require("../keys"));
 class IndexController {
-    obtenerUsuario(req, res) {
-        //res.json({text:'Usuario con ID' + req.params.id});
+    obtenerUnProducto(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            //res.json({text:'Usuario con ID' + req.params.id});
+            const idProd = req.params.id;
+            var autoCommit = false;
+            let sql = "select * from producto where id_producto=" + idProd;
+            let cnn = yield oracledb.getConnection(keys_1.default.cns);
+            let result = yield cnn.execute(sql, [], { autoCommit });
+            cnn.release();
+            //console.log(result)
+            res.status(200).json(result);
+        });
     }
     obtenerTodosUsuarios(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            var autoCommit = false;
             let sql = "select * from producto";
             let cnn = yield oracledb.getConnection(keys_1.default.cns);
-            let result = yield cnn.execute(sql, [], { true: Boolean });
+            let result = yield cnn.execute(sql, [], { autoCommit });
             cnn.release();
-            console.log(result);
+            //console.log(result)
             res.status(200).json(result);
         });
     }

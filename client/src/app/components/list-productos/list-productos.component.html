@@ -44,7 +44,7 @@
     <div class="card text-center">
         <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
             {{aja[1]}}
-            <button class="btn btn-success">                  
+            <button [routerLink]="['detalleProducto',aja[0]]" class="btn btn-success"><!--redireccionamos a ruta, y pasamos ID-->                
                 <i class="fas fa-info-circle"></i>
                 DETALLE
             </button>

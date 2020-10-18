@@ -7,17 +7,26 @@ const oracledb = require('oracledb');
 import  keys  from '../keys';
 
 class IndexController{
-    public obtenerUsuario (req :Request,res: Response) {
+
+    public async obtenerUnProducto (req :Request,res: Response) {
         //res.json({text:'Usuario con ID' + req.params.id});
-       
+        const idProd=req.params.id;
+        var autoCommit=false;
+        let sql = "select * from producto where id_producto="+idProd;
+        let cnn = await oracledb.getConnection(keys.cns);
+        let result = await cnn.execute(sql, [], { autoCommit });
+        cnn.release();
+        //console.log(result)
+        res.status(200).json(result);
     }
 
     public async obtenerTodosUsuarios (req :Request,res: Response) {
+        var autoCommit=false;
         let sql = "select * from producto";
         let cnn = await oracledb.getConnection(keys.cns);
-        let result = await cnn.execute(sql, [], { true:Boolean });
+        let result = await cnn.execute(sql, [], { autoCommit });
         cnn.release();
-        console.log(result)
+        //console.log(result)
         res.status(200).json(result);
     }
 
@@ -32,7 +41,6 @@ class IndexController{
         let cnn=await oracledb.getConnection(keys.cns);
         await cnn.execute(sql,[nombre,descripcion,palab_clave,precio,ruta,nom_cat,id_c],{autoCommit});
         cnn.release();
-
 
         //devuelvo el dato que se inserto
         res.status(200).json({

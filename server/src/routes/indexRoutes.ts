@@ -19,7 +19,7 @@ class IndexRoutes{
 
         this.router.post('/usuario/addProducto',indexController.crearProducto);
 
-        this.router.get('/usuario/listProductos/:id', indexController.obtenerUsuario);
+        this.router.get('/usuario/listProductos/detalleProducto/:id', indexController.obtenerUnProducto);
         
         this.router.put('/:id',indexController.actualizarUsuario)
     }

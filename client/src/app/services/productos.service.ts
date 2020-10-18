@@ -22,10 +22,10 @@ export class ProductosService {
   }
 
   getProducto(id:string){
-    return this.http.get(`${this.API_URI}/usuario/listProductos/${id}`);
+    return this.http.get(`${this.API_URI}/usuario/listProductos/detalleProducto/${id}`);
   }
 
   saveProducto(producto: Producto){
-    return this.http.post(`${this.API_URI}/usuario/addProducto/`,producto);
+    return this.http.post(`${this.API_URI}/usuario/addProducto`,producto);
   }
 }

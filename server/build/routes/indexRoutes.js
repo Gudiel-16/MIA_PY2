@@ -13,7 +13,7 @@ class IndexRoutes {
     config() {
         this.router.get('/usuario/listProductos', indexController_1.indexController.obtenerTodosUsuarios);
         this.router.post('/usuario/addProducto', indexController_1.indexController.crearProducto);
-        this.router.get('/usuario/listProductos/:id', indexController_1.indexController.obtenerUsuario);
+        this.router.get('/usuario/listProductos/detalleProducto/:id', indexController_1.indexController.obtenerUnProducto);
         this.router.put('/:id', indexController_1.indexController.actualizarUsuario);
     }
 }
