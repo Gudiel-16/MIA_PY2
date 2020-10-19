@@ -1,0 +1,46 @@
+<div class="col-md-6 offset-md-3" style="margin-top: 25px;">
+  <span class="d-block p-3 bg-dark text-white">REGISTRATE <br> Es rapido y facil. </span>
+    <p></p>
+    <form>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <input type="text" class="form-control" [(ngModel)]="miClient.nombre" [ngModelOptions]="{standalone: true}" placeholder="Ingrese su nombre">
+          </div>
+          <div class="form-group col-md-6">
+              <input type="text" class="form-control" [(ngModel)]="miClient.apellido" [ngModelOptions]="{standalone: true}"  placeholder="Ingrese su apellido">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <input type="email" class="form-control" [(ngModel)]="miClient.correo" [ngModelOptions]="{standalone: true}" placeholder="Ingrese su correo">
+          </div>
+        </div>        
+        <div class="form-row">            
+          <div class="form-group col-md-6">
+            <input type="password" class="form-control" [(ngModel)]="miClient.pass" [ngModelOptions]="{standalone: true}" placeholder="Password">
+          </div>
+          <div class="form-group col-md-6">
+            <input type="password" class="form-control" placeholder="Confirm password">
+          </div>
+        </div>       
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <input type="text" class="form-control" [(ngModel)]="miClient.pais" [ngModelOptions]="{standalone: true}" placeholder="Ingrese su pais">
+          </div> 
+          <div class="form-group col-md-6">
+            <input class="form-control" type="date" value="2020-11-06" [(ngModel)]="miClient.fech_nac" [ngModelOptions]="{standalone: true}" >
+          </div>
+        </div>
+        <div class="form-row">            
+            <div class="col-md-6 offset-md-3">
+                <p></p>
+                <div class="card card-body text-center">
+                  <input type="file" class="d-none" (change)="onPhotoSelected($event)" #photoInput><!--cuando de click en la imagen le pasamos un evento-->
+                  <img [src]="photoSelecter || '/assets/productoSinFoto.png'" class="img-fluid" alt="No Image" (click)="photoInput.click()"> <!--se ejecuta lo de arriba por el #-->
+                </div>  
+            </div>
+        </div>
+        <p></p>           
+        <button type="submit" class="btn btn-primary btn-block" (click)="addNewCliente()">REGISTRARSE</button>
+      </form>
+</div>

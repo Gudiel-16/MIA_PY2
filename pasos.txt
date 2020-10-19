@@ -141,8 +141,14 @@ Empezamos a crear rutas, para negar entre paginas:
 
 
 
-
-
+//Cuenta cloudinary
+Despues de crear cuenta:
+    settings (hasta arriba) -> Upload
+    en la parte de 'Upload presents' -> 'Add Upload preset'
+    damos un nombre
+    en 'Signing Mode' -> 'Unsigned'
+    nombre de folder
+    
 
 
 
