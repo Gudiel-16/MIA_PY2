@@ -4,6 +4,9 @@ import { Cliente } from 'src/app/models/registroCliente'
 //importamos servicio de cloudinary
 import { UploadService } from '../../../servicesCloudinary/upload.service'
 
+//ngBootstrap
+import { NgbModal,NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
+
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
 }
@@ -33,8 +36,11 @@ export class RegistroClienteComponent implements OnInit {
     confirmacion:0
   };
 
+  //para darle propiedades a ngBootstrap
+  ngModalOption:NgbModalOptions={};
+
   //inicializammos (para cloudinary)
-  constructor(private _uploadService:UploadService) { }
+  constructor(private _uploadService:UploadService, private ngbModal:NgbModal) { }
 
   ngOnInit(): void {
   }
@@ -51,10 +57,10 @@ export class RegistroClienteComponent implements OnInit {
     }
   }
 
-  addNewCliente(){
+  addNewCliente(contenido){
     //para guardar imagen en cloudinary
     //metemos credenciales y enviamos image
-    const data=new FormData();
+    /*const data=new FormData();
     data.append('file',this.file);
     data.append('upload_preset','angular_cloudinary');
     data.append('cloud_name','gudiel16'); 
@@ -65,7 +71,17 @@ export class RegistroClienteComponent implements OnInit {
         console.log(res.secure_url); //ruta a guardar en base de datos
       },
       err=>console.error(err)
-     )
+     )*/
+     if (this.miClient.nombre=='aja'){
+      console.log("yes")
+    }else{
+      this.ngModalOption.backdrop='static';
+      this.ngModalOption.keyboard=true;
+      this.ngModalOption.centered=true;
+      this.ngbModal.open(contenido,this.ngModalOption);
+    }
   }
+
+ 
 
 }

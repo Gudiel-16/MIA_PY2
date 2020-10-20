@@ -17,6 +17,9 @@ import { DetalleProductoComponent } from './components/detalle-producto/detalle-
 import { AddProductoComponent } from './components/add-producto/add-producto.component'
 import { RegistroClienteComponent } from './components/registro-cliente/registro-cliente.component';
 
+//ngBootstrap
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+
 //importamos el servicio
 import { ProductosService } from './services/productos.service';
 
@@ -36,6 +39,7 @@ import { ProductosService } from './services/productos.service';
     AppRoutingModule,
     HttpClientModule, //importamos modulo
     FormsModule,
+    NgbModule, 
   ],
   providers: [
     ProductosService //tendra los metodos para poder pedir datos
