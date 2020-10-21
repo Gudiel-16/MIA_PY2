@@ -20,7 +20,7 @@ class IndexController{
         res.status(200).json(result);
     }
 
-    public async obtenerTodosUsuarios (req :Request,res: Response) {
+    public async obtenerTodosProductos (req :Request,res: Response) {
         var autoCommit=false;
         let sql = "select * from producto";
         let cnn = await oracledb.getConnection(keys.cns);

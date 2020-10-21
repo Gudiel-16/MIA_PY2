@@ -7,6 +7,8 @@ import { ListProductosComponent } from './components/list-productos/list-product
 import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component'
 import { AddProductoComponent } from './components/add-producto/add-producto.component'
 import { RegistroClienteComponent } from './components/registro-cliente/registro-cliente.component'
+//para verificar si esta logueado o no, no deja pasar a otras paginas si no lo esta
+import { OutsGuard } from './guards/outs.guard'
 
 //definimos las rutas
 const routes: Routes = [
@@ -26,7 +28,8 @@ const routes: Routes = [
   },
   {
     path:'usuario',
-    component: NavigationUsuarioComponent
+    component: NavigationUsuarioComponent,
+    canActivate:[OutsGuard] //esto hace que no entre un usuario, sino esta logueado
   },
   {
     path:'usuario/listProductos',

@@ -1,13 +1,13 @@
 <div class="container" style="width: 600px; margin-top: 100px;">
     <form>
         <div class="form-group">
-          <label for="exampleInputEmail1">USUARIO</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <label for="exampleInputEmail1">CORREO</label>
+          <input [(ngModel)]="miCorreo" [ngModelOptions]="{standalone: true}" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
           <small id="emailHelp" class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small>
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">PASSWORD</label>
-          <input type="password" class="form-control" id="exampleInputPassword1">
+          <input [(ngModel)]="miPass" [ngModelOptions]="{standalone: true}" type="password" class="form-control" id="exampleInputPassword1">
         </div>
         <div class="form-group form-check">
           <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -16,7 +16,7 @@
         <div class="form-group">
           
         </div>
-        <button type="submit" class="btn btn-primary btn-block" routerLink="/usuario">LOGIN</button>
+        <button type="submit" class="btn btn-primary btn-block" (click)="ingresar()">LOGIN</button>
         <button type="submit" class="btn btn-primary btn-block" routerLink="registro" >REGISTRARSE</button>
         <button type="submit" class="btn btn-primary btn-block">RECUPERAR PASSWORD</button>
     </form>

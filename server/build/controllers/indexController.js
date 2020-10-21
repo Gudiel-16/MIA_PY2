@@ -32,7 +32,7 @@ class IndexController {
             res.status(200).json(result);
         });
     }
-    obtenerTodosUsuarios(req, res) {
+    obtenerTodosProductos(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var autoCommit = false;
             let sql = "select * from producto";

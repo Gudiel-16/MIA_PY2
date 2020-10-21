@@ -139,7 +139,6 @@ instalamos ng-bootstrap (dentro de carpeta 'client'):
     npm install --save @ng-bootstrap/ng-bootstrap
 
 
-
 //Cuenta cloudinary
 Despues de crear cuenta:
     settings (hasta arriba) -> Upload
@@ -149,6 +148,11 @@ Despues de crear cuenta:
     nombre de folder
     
 
+//agregamos un 'guard' en angular, esto para que cuando no alla nada en 'localStorage' no nos deje avanzar a otras paginas
+//dentro de carpete 'client'
+    ng g g guards/outs (outs->salidas)
+    
+    //nos saldran varias opciones, escogemos CanActivate
 
 
 

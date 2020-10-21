@@ -7,7 +7,6 @@ import { HttpClientModule } from '@angular/common/http'
 //importamos form
 import { FormsModule } from '@angular/forms'
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -22,7 +21,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 //importamos el servicio
 import { ProductosService } from './services/productos.service';
-
 
 @NgModule({
   declarations: [

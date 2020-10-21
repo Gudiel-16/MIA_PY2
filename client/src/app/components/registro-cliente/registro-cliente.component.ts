@@ -7,6 +7,12 @@ import { UploadService } from '../../../servicesCloudinary/upload.service'
 //ngBootstrap
 import { NgbModal,NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
 
+//importamos para tener acceso a las rutas
+import { Router } from '@angular/router';
+
+//importamos servicio
+import { ProductosService } from '../../services/productos.service'
+
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
 }
@@ -23,6 +29,7 @@ export class RegistroClienteComponent implements OnInit {
   file:File;
   photoSelecter:string | ArrayBuffer;
 
+  //id_c no importa el valor, es autoincrement en oracle.
   miClient: Cliente={
     id_c:1,
     nombre:'',
@@ -33,20 +40,20 @@ export class RegistroClienteComponent implements OnInit {
     pass:'',
     image:'',
     creditos:10000,
-    confirmacion:0
+    confirmacion:1
   };
 
   //para darle propiedades a ngBootstrap
   ngModalOption:NgbModalOptions={};
 
   //inicializammos (para cloudinary)
-  constructor(private _uploadService:UploadService, private ngbModal:NgbModal) { }
+  constructor(private _uploadService:UploadService, private ngbModal:NgbModal,private service:ProductosService, private router:Router ) { }
 
   ngOnInit(): void {
   }
 
   //se ejecuta cuando le damos click encima de la imagen
-  onPhotoSelected(event:HtmlInputEvent): void{
+  async onPhotoSelected(event:HtmlInputEvent){
     //si hay imagen seleccionada
     if (event.target.files && event.target.files[0]){
       //convertimos y guardamos la imagen en 'file;
@@ -58,27 +65,39 @@ export class RegistroClienteComponent implements OnInit {
   }
 
   addNewCliente(contenido){
-    //para guardar imagen en cloudinary
-    //metemos credenciales y enviamos image
-    /*const data=new FormData();
-    data.append('file',this.file);
-    data.append('upload_preset','angular_cloudinary');
-    data.append('cloud_name','gudiel16'); 
+     //validamos que los campos esten llenos
+     if (this.miClient.nombre!='' && this.miClient.apellido!='' && this.miClient.correo!='' 
+     && this.miClient.pais!='' && this.miClient.fech_nac!=''){
+         //para guardar imagen en cloudinary
+        //metemos credenciales y enviamos image
+        const data=new FormData();
+        data.append('file',this.file);
+        data.append('upload_preset','angular_cloudinary');
+        data.append('cloud_name','gudiel16'); 
 
-    this._uploadService.uploadImage(data).subscribe( 
-      res=>{
-        console.log(res);
-        console.log(res.secure_url); //ruta a guardar en base de datos
-      },
-      err=>console.error(err)
-     )*/
-     if (this.miClient.nombre=='aja'){
-      console.log("yes")
+        this._uploadService.uploadImage(data).subscribe( 
+          res=>{
+            //console.log(res.secure_url); //ruta a guardar en base de datos
+            this.miClient.image=res.secure_url;
+
+            //guardamos en base de datos
+            this.service.saveCliente(this.miClient).subscribe(
+              resp=>{
+                //console.log(resp);
+                //mostramos msj en pantalla
+                this.ngModalOption.backdrop='static';
+                this.ngModalOption.keyboard=true;
+                this.ngModalOption.centered=true;
+                this.ngbModal.open(contenido,this.ngModalOption);
+              },
+              errr=>console.error(errr)
+            );
+          },
+          err=>console.error(err)
+        )        
+
     }else{
-      this.ngModalOption.backdrop='static';
-      this.ngModalOption.keyboard=true;
-      this.ngModalOption.centered=true;
-      this.ngbModal.open(contenido,this.ngModalOption);
+      //elert error
     }
   }
 

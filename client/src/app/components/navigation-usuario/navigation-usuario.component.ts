@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
+//importamos para tener acceso a las rutas
+import { Router } from '@angular/router';
+
+//importamos servicio
+import { ProductosService } from '../../services/productos.service'
+
 @Component({
   selector: 'app-navigation-usuario',
   templateUrl: './navigation-usuario.component.html',
@@ -7,9 +13,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationUsuarioComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router, private service:ProductosService) { }
 
   ngOnInit(): void {
+  }
+
+  cerrarSecion(){
+    this.service.logoutLS();
+    this.router.navigate(['/login']); //si no esta logueado me redirije a login para que meta sus datos
   }
 
 }

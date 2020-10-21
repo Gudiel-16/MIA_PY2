@@ -1,10 +1,7 @@
 import { Router } from 'express';
 
 import {indexController} from '../controllers/indexController';
-
-//const oracledb = require('oracledb');
-//credenciales de conexion de base de datos
-//import  keys  from '../keys';
+import {indexControllerCliente} from '../controllers/controllersCliente';
 
 class IndexRoutes{
     public router: Router = Router();
@@ -15,13 +12,17 @@ class IndexRoutes{
 
     config(): void {
         
-        this.router.get('/usuario/listProductos',indexController.obtenerTodosUsuarios);
+        //CLIENTE
+        this.router.post('/usuario/registro',indexControllerCliente.crearCliente);
+        this.router.post('/login/ingresar',indexControllerCliente.buscarCliente);
+
+        //PRODUCTO
+        this.router.get('/usuario/listProductos',indexController.obtenerTodosProductos);
 
         this.router.post('/usuario/addProducto',indexController.crearProducto);
 
         this.router.get('/usuario/listProductos/detalleProducto/:id', indexController.obtenerUnProducto);
         
-        this.router.put('/:id',indexController.actualizarUsuario)
     }
 }
 
