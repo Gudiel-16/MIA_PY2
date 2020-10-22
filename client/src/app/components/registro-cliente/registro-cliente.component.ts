@@ -86,8 +86,10 @@ export class RegistroClienteComponent implements OnInit {
                 //enviamos correo
                 this.service.envCorreoConfirm(this.miClient).subscribe(
                   resp=>{
+                    console.log(resp);
                     //guardamos en storage
-                    this.service.setClienteLSConfirm(this.miClient);
+                    let user:Cliente=this.miClient;
+                    this.service.setClienteLSConfirm(user);
                     //mostramos msj en pantalla
                     this.ngModalOption.backdrop='static';
                     this.ngModalOption.keyboard=true;

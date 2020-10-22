@@ -16,7 +16,7 @@ export class CuentaConfirmadaComponent implements OnInit {
   constructor(private service:ProductosService, private router:Router) {  }
 
   ngOnInit(): void {
-    
+    this.ejectuar();
   }
 
   ejectuar(){

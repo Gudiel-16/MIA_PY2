@@ -63,7 +63,7 @@ class IndexControllerCorreoConfirm {
                 html: Present
             });
             console.log("message sent", info.messageId);
-            res.send('received');
+            res.status(201).send({ msg: "Correo Enviado" });
         });
     }
 }

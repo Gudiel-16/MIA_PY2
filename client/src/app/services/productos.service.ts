@@ -114,7 +114,6 @@ export class ProductosService {
   deleteLSConfirm(){
     //borramos y direccionamos
     localStorage.removeItem('usuarioSinConfirm');
-    this.router.navigate(['/login']); //si no esta logueado me redirije a login para que meta sus datos
   }
 
 }
