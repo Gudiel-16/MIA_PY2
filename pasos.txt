@@ -71,6 +71,9 @@ Luego de hacer las configuraciones y los import de las dos paginas anteriores me
 importamos 'morgan' y 'cors' pero tenemos que instalar (siempre dentro de carpeta server):
     npm i @types/morgan @types/cors -Dentro
 
+Instalamos 'nodemailer' para enviar correos (dentro de carpeta 'server'):
+    npm install nodemailer
+
 /////////////////////////////////////////////////////////////////BASE DE DATOS//////////////////////////////////////////////////
 Dentro de carpeta 'server' instalamos oracle:
     npm i oracledb

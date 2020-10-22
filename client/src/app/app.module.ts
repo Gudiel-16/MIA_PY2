@@ -21,6 +21,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 //importamos el servicio
 import { ProductosService } from './services/productos.service';
+import { CuentaConfirmadaComponent } from './components/cuenta-confirmada/cuenta-confirmada.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ProductosService } from './services/productos.service';
     ListProductosComponent,
     DetalleProductoComponent,
     AddProductoComponent,
-    RegistroClienteComponent
+    RegistroClienteComponent,
+    CuentaConfirmadaComponent
   ],
   imports: [
     BrowserModule,

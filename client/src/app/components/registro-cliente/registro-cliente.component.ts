@@ -40,7 +40,7 @@ export class RegistroClienteComponent implements OnInit {
     pass:'',
     image:'',
     creditos:10000,
-    confirmacion:1
+    confirmacion:0
   };
 
   //para darle propiedades a ngBootstrap
@@ -83,12 +83,19 @@ export class RegistroClienteComponent implements OnInit {
             //guardamos en base de datos
             this.service.saveCliente(this.miClient).subscribe(
               resp=>{
-                //console.log(resp);
-                //mostramos msj en pantalla
-                this.ngModalOption.backdrop='static';
-                this.ngModalOption.keyboard=true;
-                this.ngModalOption.centered=true;
-                this.ngbModal.open(contenido,this.ngModalOption);
+                //enviamos correo
+                this.service.envCorreoConfirm(this.miClient).subscribe(
+                  resp=>{
+                    //guardamos en storage
+                    this.service.setClienteLSConfirm(this.miClient);
+                    //mostramos msj en pantalla
+                    this.ngModalOption.backdrop='static';
+                    this.ngModalOption.keyboard=true;
+                    this.ngModalOption.centered=true;
+                    this.ngbModal.open(contenido,this.ngModalOption);
+                  },
+                  errr=>console.log(errr)
+                );                
               },
               errr=>console.error(errr)
             );
@@ -99,6 +106,11 @@ export class RegistroClienteComponent implements OnInit {
     }else{
       //elert error
     }
+  }
+
+  aceptar(){
+    this.ngbModal.dismissAll(); //cerrar model
+    this.router.navigate(['/login']); //si no esta logueado me redirije a login para que meta sus datos
   }
 
  

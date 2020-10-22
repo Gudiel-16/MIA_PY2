@@ -34,6 +34,10 @@ export class ProductosService {
     return this.http.post(`${this.API_URI}/usuario/registro`,cliente);
   }
 
+  updateStateConfirmCliente(cliente : Cliente){
+    return this.http.put(`${this.API_URI}/updateConfirmClient`,cliente);
+  }
+
   //METODOS PRODUCTO
   getProductos(){
     return this.http.get(`${this.API_URI}/usuario/listProductos`);
@@ -47,7 +51,12 @@ export class ProductosService {
     return this.http.post(`${this.API_URI}/usuario/addProducto`,producto);
   }
 
-  //LOGIN
+  //CORREOS
+  envCorreoConfirm(cliente : Cliente){
+    return this.http.post(`${this.API_URI}/login/registro/envCorreoConfirm`,cliente);
+  }
+
+  //LOGIN, recibe correo y pass y verifica si existe en base de datos
   login(correo,pass){
     const url="http://localhost:3000/login/ingresar";
     return this.http.post(`${this.API_URI}/login/ingresar`,
@@ -60,13 +69,19 @@ export class ProductosService {
     
   }
 
-  //SET a localStorage
+  //SET a localStorage (guarda informacion del cliente, cuando se loguea)
   setClienteLS(cliente:Cliente){
     let user:string = JSON.stringify(cliente);
     localStorage.setItem('usuarioLogueado',user);
   }
 
-  //GET de localStorage
+  //GUARDA en localstorage (para cuando confirme cuenta)
+  setClienteLSConfirm(cliente:Cliente){
+    let user:string = JSON.stringify(cliente);
+    localStorage.setItem('usuarioSinConfirm',user);
+  }
+
+  //GET de localStorage, retorna informacion del cliente (si existe)
   getClienteLS(){
     let user=localStorage.getItem('usuarioLogueado');
     if (!isNullOrUndefined(user)) {
@@ -77,10 +92,28 @@ export class ProductosService {
     }
   }
 
-  //LOGOUT
+  //RETORNA valores del cliente a confirmar
+  getClienteLSConfirm(){
+    let user=localStorage.getItem('usuarioSinConfirm');
+    if (!isNullOrUndefined(user)) {
+      let user_json=JSON.parse(user);
+      return user_json;
+    }else{
+      return null;
+    }
+  }
+
+  //LOGOUT (elimina para cerrar sesion)
   logoutLS(){
     //borramos y direccionamos
     localStorage.removeItem('usuarioLogueado');
+    this.router.navigate(['/login']); //si no esta logueado me redirije a login para que meta sus datos
+  }
+
+  //ELIMINARA, ya cuando alla confirmado
+  deleteLSConfirm(){
+    //borramos y direccionamos
+    localStorage.removeItem('usuarioSinConfirm');
     this.router.navigate(['/login']); //si no esta logueado me redirije a login para que meta sus datos
   }
 

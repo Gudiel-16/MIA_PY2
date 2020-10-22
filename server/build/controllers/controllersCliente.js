@@ -65,5 +65,16 @@ class IndexControllerCliente {
             }
         });
     }
+    actualizarEstadoConfirmacionCliente(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var autoCommit = true;
+            const { correo, pass } = req.body;
+            let sql = "update cliente set confirmacion=1 where correo=:correo and pass=:pass";
+            let cnn = yield oracledb.getConnection(keys_1.default.cns);
+            let result = yield cnn.execute(sql, [correo, pass], { autoCommit });
+            cnn.release();
+            res.status(201).send({ msg: "Usuario Actualizado" });
+        });
+    }
 }
 exports.indexControllerCliente = new IndexControllerCliente();

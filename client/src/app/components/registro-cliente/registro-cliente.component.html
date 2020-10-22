@@ -48,7 +48,7 @@
 <ng-template #contenido let-modal>
       <div class="modal-header">
         <h5 class="modal-title">CUENTA CREADA</h5>
-        <button type="button" (click)="modal.close()" aria-label="Close" class="close">
+        <button type="button" (click)="aceptar()" aria-label="Close" class="close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -63,6 +63,6 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success">ACEPTAR</button>
+        <button type="button" class="btn btn-success" (click)="aceptar()">ACEPTAR</button>
       </div>
 </ng-template>

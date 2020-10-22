@@ -56,7 +56,21 @@ class IndexControllerCliente{
         }else{
             res.status(201).json({msg:false});
         }
-    } 
+    }
+    
+    public async actualizarEstadoConfirmacionCliente(req :Request,res: Response){
+        var autoCommit=true;
+        const { correo, pass} = req.body; 
+
+        let sql= "update cliente set confirmacion=1 where correo=:correo and pass=:pass"
+        let cnn = await oracledb.getConnection(keys.cns);
+        let result = await cnn.execute(sql, [correo,pass], { autoCommit });
+        cnn.release();
+
+        res.status(201).send({msg:"Usuario Actualizado"});
+
+
+    }
 }
 
 export const indexControllerCliente= new IndexControllerCliente();

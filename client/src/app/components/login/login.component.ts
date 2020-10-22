@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
   miPass:string="";
 
   ingresar(){
-    this.service.login(this.miCorreo,this.miPass).subscribe((res)=>{
 
+    this.service.login(this.miCorreo,this.miPass).subscribe((res)=>{
       //si es true
       if(res['msg']){
         let datosUser:Cliente=res['datauser']; //informacion del cliente
