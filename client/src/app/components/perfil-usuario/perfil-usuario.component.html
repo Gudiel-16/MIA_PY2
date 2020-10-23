@@ -1,0 +1,54 @@
+<!--PARA QUE SIEMPRE SALGA LA BARRA DE NAVEGACION DE USUARIO-->
+<app-navigation-usuario></app-navigation-usuario>
+
+<!--TARJETA PRINCIPAL, DONDE INSERTAREMOS LOS DATOS-->
+<div class="row" style="margin-top: 25px;"> <!--para que los ponga a la par-->
+
+    <div class="col-md-4 offset-md-2">
+        <div class="card">
+            <div class="card-body">
+                <form> 
+                    <div class="form-group">
+                        <input type="text" name="creditos" placeholder="Creditos" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="nombre" placeholder="Nombre" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="apellido" placeholder="Apellido" class="form-control">
+                    </div>                
+                    <div class="form-group">
+                        <input type="text" name="pais" placeholder="Pais" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="date" value="2020-11-06">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="correo" placeholder="Correo" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="pass" placeholder="Password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="confPass" placeholder="Confirm Pass" class="form-control">
+                    </div>                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card card-body text-center">
+            <form>
+                <label for="exampleInputEmail1">Foto de Perfil</label>
+                <input type="file" class="d-none"><!--cuando de click en la imagen le pasamos un evento-->
+                <img src="/assets/productoSinFoto.png" class="img-fluid" alt="No Image"> <!--se ejecuta lo de arriba por el #-->  
+                <label for="exampleInputEmail1">Para actualizar foto, click encima de la misma</label>
+                <button class="btn btn-outline-info btn-block">
+                    <i class="fas fa-edit"></i> MODIFICAR DATOS
+                </button>                     
+            </form>
+        </div>
+    </div>
+
+</div>

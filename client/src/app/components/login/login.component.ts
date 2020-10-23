@@ -29,7 +29,8 @@ export class LoginComponent implements OnInit {
       //si es true
       if(res['msg']){
         let datosUser:Cliente=res['datauser']; //informacion del cliente
-        this.service.setClienteLS(datosUser);
+        this.service.setClienteLS(datosUser); //guardo en localStorage (LS)
+        this.router.navigate(['usuario']); //navego a usuario
       }else{
         //no existe o no se a confirmado
       }

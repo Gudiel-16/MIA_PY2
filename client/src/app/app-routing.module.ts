@@ -8,6 +8,8 @@ import { DetalleProductoComponent } from './components/detalle-producto/detalle-
 import { AddProductoComponent } from './components/add-producto/add-producto.component'
 import { RegistroClienteComponent } from './components/registro-cliente/registro-cliente.component'
 import { CuentaConfirmadaComponent } from './components/cuenta-confirmada/cuenta-confirmada.component';
+import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
+import { NavigationAdminComponent } from './components/navigation-admin/navigation-admin.component';
 
 //para verificar si esta logueado o no, no deja pasar a otras paginas si no lo esta
 import { OutsGuard } from './guards/outs.guard'
@@ -31,12 +33,21 @@ const routes: Routes = [
   {
     path:'login/registro/confirmCuenta',
     component: CuentaConfirmadaComponent
+  },
+  {
+    path:'admin',
+    component: NavigationAdminComponent
   }
   ,
   {
     path:'usuario',
     component: NavigationUsuarioComponent,
     canActivate:[OutsGuard] //esto hace que no entre un usuario, sino esta logueado
+  },
+  {
+    path:'usuario/perfil',
+    component: PerfilUsuarioComponent,
+    //canActivate:[OutsGuard] //esto hace que no entre un usuario, sino esta logueado
   },
   {
     path:'usuario/listProductos',

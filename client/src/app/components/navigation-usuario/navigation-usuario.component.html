@@ -1,11 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-top: 20px;">
   <div class="container">
-    <a class="navbar-brand" href="#">GTSales</a>
+    <a class="navbar-brand" href="#">GTSales Marketplace</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
+      <div class="navbar-nav ml-auto">
+        <a class="nav-link" routerLink="listProductos">Perfil</a>
         <a class="nav-link" routerLink="listProductos">Productos</a>
         <a class="nav-link" routerLink="addProducto">Agregar Producto</a>
         <a class="nav-link" (click)="cerrarSecion()">Cerrar Sesion</a>
