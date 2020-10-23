@@ -23,4 +23,16 @@ export class NavigationUsuarioComponent implements OnInit {
     this.router.navigate(['/login']); //si no esta logueado me redirije a login para que meta sus datos
   }
 
+  perfil(){
+    this.router.navigate(['/usuario/perfil']);
+  }
+
+  productos(){
+    this.router.navigate(['/usuario/listProductos']);
+  }
+
+  agregProductos(){
+    this.router.navigate(['/usuario/addProducto']);
+  }
+
 }

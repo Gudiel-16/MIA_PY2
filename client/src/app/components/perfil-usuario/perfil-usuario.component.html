@@ -9,25 +9,25 @@
             <div class="card-body">
                 <form> 
                     <div class="form-group">
-                        <input type="text" name="creditos" placeholder="Creditos" class="form-control">
+                        <input type="text" [(ngModel)]="miClient.creditos" [ngModelOptions]="{standalone: true}" name="creditos" placeholder="Creditos" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="nombre" placeholder="Nombre" class="form-control">
+                        <input type="text" [(ngModel)]="miClient.nombre" [ngModelOptions]="{standalone: true}" name="nombre" placeholder="Nombre" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="apellido" placeholder="Apellido" class="form-control">
+                        <input type="text" [(ngModel)]="miClient.apellido" [ngModelOptions]="{standalone: true}" name="apellido" placeholder="Apellido" class="form-control">
                     </div>                
                     <div class="form-group">
-                        <input type="text" name="pais" placeholder="Pais" class="form-control">
+                        <input type="text" [(ngModel)]="miClient.pais" [ngModelOptions]="{standalone: true}" name="pais" placeholder="Pais" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="date" value="2020-11-06">
+                        <input class="form-control" [(ngModel)]="miClient.fech_nac" [ngModelOptions]="{standalone: true}" type="date" value="2020-11-06">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="correo" placeholder="Correo" class="form-control">
+                        <input type="text" name="correo" [(ngModel)]="miClient.correo" [ngModelOptions]="{standalone: true}" placeholder="Correo" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="pass" placeholder="Password" class="form-control">
+                        <input type="text" name="pass" [(ngModel)]="miClient.pass" [ngModelOptions]="{standalone: true}" placeholder="Password" class="form-control">
                     </div>
                     <div class="form-group">
                         <input type="text" name="confPass" placeholder="Confirm Pass" class="form-control">
@@ -41,14 +41,35 @@
         <div class="card card-body text-center">
             <form>
                 <label for="exampleInputEmail1">Foto de Perfil</label>
-                <input type="file" class="d-none"><!--cuando de click en la imagen le pasamos un evento-->
-                <img src="/assets/productoSinFoto.png" class="img-fluid" alt="No Image"> <!--se ejecuta lo de arriba por el #-->  
+                <input type="file" class="d-none" (change)="onPhotoSelected($event)" #photoInput><!--cuando de click en la imagen le pasamos un evento-->
+                <img [src]="photoSelecter || miClient.image" class="img-fluid" alt="No Image" (click)="photoInput.click()"> <!--se ejecuta lo de arriba por el #-->  
                 <label for="exampleInputEmail1">Para actualizar foto, click encima de la misma</label>
-                <button class="btn btn-outline-info btn-block">
+                <button class="btn btn-outline-info btn-block" (click)="updateCliente(contenido)">
                     <i class="fas fa-edit"></i> MODIFICAR DATOS
                 </button>                     
             </form>
         </div>
     </div>
-
 </div>
+
+<ng-template #contenido let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">DATOS ACTUALIZADOS</h5>
+      <button type="button" (click)="aceptar()" aria-label="Close" class="close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <img src="/assets/check.png" style="width: 100px; height: 70px;">
+        </div>
+        <div class="form-group col-md-6" style="padding-left: 15px;">
+          Se han actualizado sus datos correctamente.
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="aceptar()">ACEPTAR</button>
+    </div>
+</ng-template>

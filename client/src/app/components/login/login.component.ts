@@ -22,20 +22,34 @@ export class LoginComponent implements OnInit {
 
   miCorreo: string=""
   miPass:string="";
+  micheck:boolean=false;
 
   ingresar(){
 
-    this.service.login(this.miCorreo,this.miPass).subscribe((res)=>{
-      //si es true
-      if(res['msg']){
-        let datosUser:Cliente=res['datauser']; //informacion del cliente
-        this.service.setClienteLS(datosUser); //guardo en localStorage (LS)
-        this.router.navigate(['usuario']); //navego a usuario
-      }else{
-        //no existe o no se a confirmado
-      }
+    //si es admin
+    if(this.micheck){
 
-    })
+    }else{
+      this.service.login(this.miCorreo,this.miPass).subscribe((res)=>{
+        //si es true
+        if(res['msg']){
+          let datosUser:Cliente=res['datauser']; //informacion del cliente
+          this.service.setClienteLS(datosUser); //guardo en localStorage (LS)
+          this.router.navigate(['usuario']); //navego a usuario
+        }else{
+          //no existe o no se a confirmado
+        }  
+      });
+    }
+    
+  }
+
+  registro(){
+    this.router.navigate(['/login/registro']);
+  }
+
+  recPass(){
+    console.log(this.micheck);
   }
 
 }

@@ -38,6 +38,14 @@ export class ProductosService {
     return this.http.put(`${this.API_URI}/updateConfirmClient`,cliente);
   }
 
+  getDatePerfil(cliente : Cliente){
+    return this.http.post(`${this.API_URI}/usuario/returnDatosPerfil`,cliente);
+  }
+
+  updateDateCliente(cliente : Cliente){
+    return this.http.put(`${this.API_URI}/usuario/updateDateCliente`,cliente);
+  }
+
   //METODOS PRODUCTO
   getProductos(){
     return this.http.get(`${this.API_URI}/usuario/listProductos`);
@@ -65,8 +73,7 @@ export class ProductosService {
       "pass":pass
     },
     {headers:this.headers})
-    .pipe(map(data=>data));
-    
+    .pipe(map(data=>data));    
   }
 
   //SET a localStorage (guarda informacion del cliente, cuando se loguea)

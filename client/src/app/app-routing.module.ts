@@ -60,26 +60,7 @@ const routes: Routes = [
   {
     path:'usuario/listProductos/detalleProducto/:id',
     component: DetalleProductoComponent
-  },
-  { //cuando se esta dentro de 'addProducto' y nos queremos pasar a 'listProductos' esta busca la ruta 'usuario/addProducto/listProductos'
-    //entonces cuando pasa eso redireccionamos hacia donde es, para que no nos de error
-    path:'usuario/addProducto/listProductos',
-    redirectTo:'usuario/listProductos'
-  },
-  { //redireccionamos porque nos da error
-    path:'usuario/listProductos/addProducto',
-    redirectTo:'usuario/addProducto'
-  },
-  { //redireccionamos porque nos da error
-    path:'usuario/listProductos/detalleProducto/:id/listProductos',
-    redirectTo:'usuario/listProductos'
-  },
-  { //redireccionamos porque nos da error
-    path:'usuario/listProductos/detalleProducto/:id/addProducto',
-    redirectTo:'usuario/addProducto'
-  }
-
-  
+  }  
 
 ];
 

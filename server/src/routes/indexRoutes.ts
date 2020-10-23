@@ -17,6 +17,8 @@ class IndexRoutes{
         this.router.post('/usuario/registro',indexControllerCliente.crearCliente);
         this.router.post('/login/ingresar',indexControllerCliente.buscarCliente);
         this.router.put('/updateConfirmClient',indexControllerCliente.actualizarEstadoConfirmacionCliente);
+        this.router.post('/usuario/returnDatosPerfil',indexControllerCliente.datosPerfilCliente);
+        this.router.put('/usuario/updateDateCliente',indexControllerCliente.actualizarDatosCliente);
 
         //PRODUCTO
         this.router.get('/usuario/listProductos',indexController.obtenerTodosProductos);

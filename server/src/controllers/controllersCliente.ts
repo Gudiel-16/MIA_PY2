@@ -68,8 +68,49 @@ class IndexControllerCliente{
         cnn.release();
 
         res.status(201).send({msg:"Usuario Actualizado"});
+    }
 
+    public async datosPerfilCliente (req :Request,res: Response) {
+        var autoCommit=false;
+        const { id_c } = req.body; 
+        console.log(req.body);
+        let sql = "select id_c, nombre, apellido, correo, pais, fech_nac, pass, image, creditos, confirmacion from cliente where id_c=:id_c";
+        let cnn = await oracledb.getConnection(keys.cns);
+        let result = await cnn.execute(sql, [id_c], { autoCommit });
+        cnn.release();
 
+        //si existe
+        if(result.rows.length>0){
+            res.status(201).json(
+                {
+                    datauser:{
+                        "id_c":result.rows[0][0],
+                        "nombre":result.rows[0][1],
+                        "apellido":result.rows[0][2],
+                        "correo":result.rows[0][3],
+                        "pais":result.rows[0][4],
+                        "fech_nac":result.rows[0][5],
+                        "pass":result.rows[0][6],
+                        "image":result.rows[0][7],
+                        "creditos":result.rows[0][8]
+                    }
+                }
+            );
+        }else{
+            res.status(201).json({msg:false});
+        }
+    }
+
+    public async actualizarDatosCliente(req :Request,res: Response){
+        var autoCommit=true;
+        const { id_c, nombre, apellido, pais, fech_nac, pass, image } = req.body; //req.body, recibe un cuerpo de msj (un json)
+
+        let sql= "update cliente set nombre=:nombre, apellido=:apellido, pais=:pais, fech_nac=:fech_nac, pass=:pass, image=:image where id_c=:id_c"
+        let cnn = await oracledb.getConnection(keys.cns);
+        let result = await cnn.execute(sql, [nombre,apellido,pais,fech_nac,pass,image,id_c], { autoCommit });
+        cnn.release();
+
+        res.status(201).send({msg:"Datos Usuario Actualizado"});
     }
 }
 

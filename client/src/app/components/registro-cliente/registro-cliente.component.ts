@@ -21,7 +21,7 @@ interface HtmlInputEvent extends Event{
   selector: 'app-registro-cliente',
   templateUrl: './registro-cliente.component.html',
   styleUrls: ['./registro-cliente.component.css'],
-  providers:[UploadService] //importamos como proveedor
+  providers:[UploadService] //importamos como proveedor IMPORTANTE
 })
 export class RegistroClienteComponent implements OnInit {
 
