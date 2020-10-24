@@ -26,6 +26,7 @@ import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuar
 import { NavigationAdminComponent } from './components/navigation-admin/navigation-admin.component';
 import { PerfilAdminComponent } from './components/perfil-admin/perfil-admin.component';
 import { RecuperarPasswordComponent } from './components/recuperar-password/recuperar-password.component';
+import { CategoriasComponent } from './components/categorias/categorias.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { RecuperarPasswordComponent } from './components/recuperar-password/recu
     PerfilUsuarioComponent,
     NavigationAdminComponent,
     PerfilAdminComponent,
-    RecuperarPasswordComponent
+    RecuperarPasswordComponent,
+    CategoriasComponent
   ],
   imports: [
     BrowserModule,

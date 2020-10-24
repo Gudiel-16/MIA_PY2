@@ -15,15 +15,24 @@ export class ListProductosComponent implements OnInit {
 
   //arreglo
   misProductos: any =[];
+  misCategorias: any =[];
 
   //variable tipo ProductosService
-  constructor(private productosService:ProductosService) { }
+  constructor(private service:ProductosService) { }
 
   ngOnInit(): void {
     //mando a llamar todos los productos
-    this.productosService.getProductos().subscribe(
+    this.service.getProductos().subscribe(
       res=>{
+        //lleno array de productos
         this.misProductos=res;
+        //actualizo combobox de categorias
+        this.service.getCategorias().subscribe(
+          res=>{
+            this.misCategorias=res
+          },
+          err=>console.error(err)
+        );
         console.log(this.misProductos.rows)
       },
       err=>console.log(err)

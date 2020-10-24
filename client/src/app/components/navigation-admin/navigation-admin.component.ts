@@ -27,7 +27,7 @@ export class NavigationAdminComponent implements OnInit {
   }
 
   categorias(){
-
+    this.router.navigate(['/admin/categorias']);
   }
 
   reportes(){

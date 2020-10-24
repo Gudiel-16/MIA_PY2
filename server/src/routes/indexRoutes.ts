@@ -5,6 +5,7 @@ import {indexControllerCliente} from '../controllers/controllersCliente';
 import {indexControllerCorreoConfirm} from '../controllers/controllersCorreoConfirm'
 import {indexControllerAdmin} from '../controllers/controllersAdmin'
 import {indexControllerCorreoRecupPass} from "../controllers/controllersCorreoRecupPass";
+import { indexControllerCategoria } from '../controllers/controllersCategoria';
 
 class IndexRoutes{
     public router: Router = Router();
@@ -31,10 +32,12 @@ class IndexRoutes{
 
         //PRODUCTO
         this.router.get('/usuario/listProductos',indexController.obtenerTodosProductos);
-
         this.router.post('/usuario/addProducto',indexController.crearProducto);
-
         this.router.get('/usuario/listProductos/detalleProducto/:id', indexController.obtenerUnProducto);
+
+        //CATEGORIA
+        this.router.post('/admin/categorias/crearCategoria',indexControllerCategoria.crearCategoria);
+        this.router.get('/admin/categorias/listCategorias',indexControllerCategoria.obtenerCategorias);
         
         //ENVIO DE CORREO
         this.router.post('/login/registro/envCorreoConfirm',indexControllerCorreoConfirm.enviarCorreoDeConfirmacion);

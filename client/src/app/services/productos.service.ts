@@ -49,6 +49,18 @@ export class ProductosService {
     return this.http.put(`${this.API_URI}/admin/updateDateAdmin`,admin);
   }
 
+  saveCategoria(id_ad,nombre){
+    return this.http.post(`${this.API_URI}/admin/categorias/crearCategoria`,
+    {
+      "id_ad":id_ad,
+      "nombre":nombre
+    });
+  }
+
+  getCategorias(){
+    return this.http.get(`${this.API_URI}/admin/categorias/listCategorias`);
+  }
+
   //METODOS CLIENTE
   saveCliente(cliente : Cliente){
     return this.http.post(`${this.API_URI}/usuario/registro`,cliente);

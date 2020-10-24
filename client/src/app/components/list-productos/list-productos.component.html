@@ -10,37 +10,31 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">BUSCAR</button>
     </form>
     <!--PARA PRECIO-->
-    <div class="btn-group">
-        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          PRECIO
-        </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-        </div>
-        <button class="btn btn-success">                  
-            <i class="fas fa-search"></i>
-            BUSCAR
-        </button>
-    </div>
+    <div class="form-inline">
+      <select class="form-control"> 
+        <option>Precio ASC</option>
+        <option>Precio DESC</option>
+      </select>
+      <button class="btn btn-success" style="margin-left: 25px;">                  
+        <i class="fas fa-search"></i>
+        BUSCAR
+      </button>
+    </div>  
+        
     <!--PARA BUSCAR CATEGORIA-->
-    <div class="btn-group">
-        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          CATEGORIA
-        </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-        </div>
-        <button class="btn btn-success">                  
-            <i class="fas fa-search"></i>
-            BUSCAR
-        </button>
-    </div>
+    <div class="form-inline">
+      <select class="form-control"> 
+        <option *ngFor="let nomCat of misCategorias" >{{nomCat}}</option>
+      </select>
+      <button class="btn btn-success" style="margin-left: 25px;">                  
+        <i class="fas fa-search"></i>
+        BUSCAR
+      </button>
+    </div>  
   </nav>
 
 <!--LISTADO DE PRODUCTOS-->
-<div class="float-md-left col-md-4" *ngFor="let aja of misProductos.rows" style="padding: 10px;">
+<div class="float-md-left col-md-4" *ngFor="let aja of misProductos" style="padding: 10px;">
     <div class="card text-center">
         <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
             {{aja[1]}}

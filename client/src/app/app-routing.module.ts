@@ -12,6 +12,7 @@ import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuar
 import { NavigationAdminComponent } from './components/navigation-admin/navigation-admin.component';
 import { PerfilAdminComponent } from './components/perfil-admin/perfil-admin.component';
 import { RecuperarPasswordComponent } from './components/recuperar-password/recuperar-password.component';
+import { CategoriasComponent } from './components/categorias/categorias.component';
 
 //para verificar si esta logueado o no, no deja pasar a otras paginas si no lo esta
 import { OutsGuard } from './guards/outs.guard'
@@ -48,7 +49,12 @@ const routes: Routes = [
     path:'admin/perfil',
     component: PerfilAdminComponent,
     //canActivate:[OutsGuard] //esto hace que no entre un usuario, sino esta logueado
-  } 
+  },
+  {
+    path:'admin/categorias',
+    component: CategoriasComponent,
+    //canActivate:[OutsGuard] //esto hace que no entre un usuario, sino esta logueado
+  }  
   ,
   {
     path:'usuario',

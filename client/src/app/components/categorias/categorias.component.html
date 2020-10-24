@@ -1,0 +1,58 @@
+<!--PARA QUE SIEMPRE SALGA LA BARRA DE NAVEGACION DE USUARIO-->
+<app-navigation-usuario></app-navigation-usuario>
+
+<!--TARJETA PRINCIPAL, DONDE INSERTAREMOS LOS DATOS-->
+<div class="row" style="margin-top: 25px;"> <!--para que los ponga a la par-->
+
+    <div class="float-md-left col-md-4 offset-md-2" style="padding: 10px;">
+        <div class="card text-center">
+            <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                AGREGAR NUEVA CATEGORIA
+            </div>
+            
+            <div class="card-body">
+                <div class="form-group">
+                    <input type="text" name="nombre" [(ngModel)]="nomNewCat" [ngModelOptions]="{standalone: true}" placeholder="Nombre" class="form-control">
+                </div>
+            </div>
+            <button class="btn btn-success btn-block" (click)="addCategoria(contenido)">
+                AGREGAR CATEGORIA
+            </button>
+        </div>
+    </div>
+
+    <div class="float-md-left col-md-4" style="padding: 10px;">
+        <div class="card text-center">
+            <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                CATEGORIAS ACTUALES                
+            </div>          
+            <div class="card-body">
+                <div class="form-group">
+                    <select class="form-control"> 
+                      <option *ngFor="let nomCat of misCategorias" >{{nomCat}}</option>
+                    </select>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #contenido let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">SE HA GUARDADO CATEGORIA</h5>
+      <button type="button" (click)="aceptar()" aria-label="Close" class="close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <img src="/assets/check.png" style="width: 200px; height: 140px;">
+        </div>
+        <div class="form-group col-md-6" style="padding-left: 15px; padding-top: 50px;">
+          Categoria guardada exitosamente.
+        </div>
+        <button type="button" class="btn btn-outline-success btn-block" (click)="aceptar()">ACEPTAR</button>
+      </div>
+    </div>
+</ng-template>
