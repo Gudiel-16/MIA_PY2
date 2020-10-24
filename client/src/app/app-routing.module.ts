@@ -10,6 +10,8 @@ import { RegistroClienteComponent } from './components/registro-cliente/registro
 import { CuentaConfirmadaComponent } from './components/cuenta-confirmada/cuenta-confirmada.component';
 import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
 import { NavigationAdminComponent } from './components/navigation-admin/navigation-admin.component';
+import { PerfilAdminComponent } from './components/perfil-admin/perfil-admin.component';
+import { RecuperarPasswordComponent } from './components/recuperar-password/recuperar-password.component';
 
 //para verificar si esta logueado o no, no deja pasar a otras paginas si no lo esta
 import { OutsGuard } from './guards/outs.guard'
@@ -35,9 +37,18 @@ const routes: Routes = [
     component: CuentaConfirmadaComponent
   },
   {
+    path:'login/recuperarPassword',
+    component: RecuperarPasswordComponent
+  },
+  {
     path:'admin',
     component: NavigationAdminComponent
-  }
+  },
+  {
+    path:'admin/perfil',
+    component: PerfilAdminComponent,
+    //canActivate:[OutsGuard] //esto hace que no entre un usuario, sino esta logueado
+  } 
   ,
   {
     path:'usuario',

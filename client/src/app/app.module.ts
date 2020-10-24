@@ -24,6 +24,8 @@ import { ProductosService } from './services/productos.service';
 import { CuentaConfirmadaComponent } from './components/cuenta-confirmada/cuenta-confirmada.component';
 import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
 import { NavigationAdminComponent } from './components/navigation-admin/navigation-admin.component';
+import { PerfilAdminComponent } from './components/perfil-admin/perfil-admin.component';
+import { RecuperarPasswordComponent } from './components/recuperar-password/recuperar-password.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { NavigationAdminComponent } from './components/navigation-admin/navigati
     RegistroClienteComponent,
     CuentaConfirmadaComponent,
     PerfilUsuarioComponent,
-    NavigationAdminComponent
+    NavigationAdminComponent,
+    PerfilAdminComponent,
+    RecuperarPasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -18,6 +18,22 @@ export class NavigationAdminComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  perfil(){
+    this.router.navigate(['/admin/perfil']);
+  }
+
+  denNot(){
+
+  }
+
+  categorias(){
+
+  }
+
+  reportes(){
+
+  }
+
   cerrarSecion(){
     this.service.logoutLS();
     this.router.navigate(['/login']); //si no esta logueado me redirije a login para que meta sus datos

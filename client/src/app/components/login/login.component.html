@@ -18,6 +18,29 @@
         </div>
         <button type="submit" class="btn btn-primary btn-block" (click)="ingresar()">LOGIN</button>
         <button type="submit" class="btn btn-primary btn-block" (click)="registro()" >REGISTRARSE</button>
-        <button type="submit" class="btn btn-primary btn-block" (click)="recPass()"> RECUPERAR PASSWORD</button>
+        <button type="submit" class="btn btn-primary btn-block" (click)="recPass(contenido)"> RECUPERAR PASSWORD</button>
     </form>
 </div>
+
+<ng-template #contenido let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">RECUPERACION DE PASSWORD</h5>
+    <button type="button" (click)="aceptar()" aria-label="Close" class="close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <i class="fas fa-exclamation-triangle"></i>Se le enviara a su correo un link, para que pueda ingresar su nueva password.
+      </div>
+      <div class="form-group col-md-12">
+        Ingrese su correo electronico:
+      </div>
+      <div class="form-group col-md-12">
+        <input [(ngModel)]="correoRec" [ngModelOptions]="{standalone: true}" type="text" name="correo" placeholder="Correo" class="form-control">
+      </div>       
+      <button type="button" class="btn btn-outline-success btn-block" (click)="ejecutar()">RECUPERAR</button>
+    </div>
+  </div>
+</ng-template>

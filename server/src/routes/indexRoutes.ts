@@ -4,6 +4,7 @@ import {indexController} from '../controllers/indexController';
 import {indexControllerCliente} from '../controllers/controllersCliente';
 import {indexControllerCorreoConfirm} from '../controllers/controllersCorreoConfirm'
 import {indexControllerAdmin} from '../controllers/controllersAdmin'
+import {indexControllerCorreoRecupPass} from "../controllers/controllersCorreoRecupPass";
 
 class IndexRoutes{
     public router: Router = Router();
@@ -17,6 +18,7 @@ class IndexRoutes{
         //ADMINISTRADOR
         this.router.post('/login/ingresarAdmin',indexControllerAdmin.buscarAdmin);
         this.router.post('/admin/returnDatosPerfil',indexControllerAdmin.datosPerfilAdmin);
+        this.router.put('/admin/updateDateAdmin',indexControllerAdmin.actualizarDatosAdmin);
 
         //CLIENTE
         this.router.post('/usuario/registro',indexControllerCliente.crearCliente);
@@ -24,6 +26,8 @@ class IndexRoutes{
         this.router.put('/updateConfirmClient',indexControllerCliente.actualizarEstadoConfirmacionCliente);
         this.router.post('/usuario/returnDatosPerfil',indexControllerCliente.datosPerfilCliente);
         this.router.put('/usuario/updateDateCliente',indexControllerCliente.actualizarDatosCliente);
+        this.router.post('/usuario/returnDatosRecuperarPass',indexControllerCliente.datosClienteRecuperarPass);
+        this.router.put('/usuario/updatePassCliente',indexControllerCliente.actualizarPassCliente);
 
         //PRODUCTO
         this.router.get('/usuario/listProductos',indexController.obtenerTodosProductos);
@@ -32,9 +36,9 @@ class IndexRoutes{
 
         this.router.get('/usuario/listProductos/detalleProducto/:id', indexController.obtenerUnProducto);
         
-        //ENVIO DE CORREO DE CONFIRMACION
+        //ENVIO DE CORREO
         this.router.post('/login/registro/envCorreoConfirm',indexControllerCorreoConfirm.enviarCorreoDeConfirmacion);
-
+        this.router.post('/login/envCorreoRecPass',indexControllerCorreoRecupPass.enviarCorreoRecPass);
     }
 }
 

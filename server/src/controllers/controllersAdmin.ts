@@ -42,7 +42,7 @@ class IndexControllerAdmin{
     public async datosPerfilAdmin (req :Request,res: Response) {
         var autoCommit=false;
         const { id_ad } = req.body; 
-        console.log(req.body);
+
         let sql = "select id_ad, nombre, apellido, correo, pais, fech_nac, pass, image from administrador where id_ad=:id_ad";
         let cnn = await oracledb.getConnection(keys.cns);
         let result = await cnn.execute(sql, [id_ad], { autoCommit });
@@ -53,7 +53,7 @@ class IndexControllerAdmin{
             res.status(201).json(
                 {
                     datauser:{
-                        "id_c":result.rows[0][0],
+                        "id_ad":result.rows[0][0],
                         "nombre":result.rows[0][1],
                         "apellido":result.rows[0][2],
                         "correo":result.rows[0][3],
@@ -67,6 +67,18 @@ class IndexControllerAdmin{
         }else{
             res.status(201).json({msg:false});
         }
+    }
+
+    public async actualizarDatosAdmin(req :Request,res: Response){
+        var autoCommit=true;
+        const { id_ad, nombre, apellido, pais, fech_nac, pass, image } = req.body; //req.body, recibe un cuerpo de msj (un json)
+        console.log(req.body);
+        let sql= "update administrador set nombre=:nombre, apellido=:apellido, pais=:pais, fech_nac=:fech_nac, pass=:pass, image=:image where id_ad=:id_ad"
+        let cnn = await oracledb.getConnection(keys.cns);
+        let result = await cnn.execute(sql, [nombre,apellido,pais,fech_nac,pass,image,id_ad], { autoCommit });
+        cnn.release();
+
+        res.status(201).send({msg:"Datos Administrador Actualizado"});
     }
 }
 

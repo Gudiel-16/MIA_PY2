@@ -6,7 +6,7 @@ import { UploadService } from '../../../servicesCloudinary/upload.service';
 //ngBootstrap
 import { NgbModal,NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
 
-import { Cliente } from 'src/app/models/registroCliente';
+import { Administrador } from 'src/app/models/admin_Interface';
 
 //importamos para tener acceso a las rutas
 import { Router } from '@angular/router';
@@ -19,42 +19,40 @@ interface HtmlInputEvent extends Event{
 }
 
 @Component({
-  selector: 'app-perfil-usuario',
-  templateUrl: './perfil-usuario.component.html',
-  styleUrls: ['./perfil-usuario.component.css'],
+  selector: 'app-perfil-admin',
+  templateUrl: './perfil-admin.component.html',
+  styleUrls: ['./perfil-admin.component.css'],
   providers:[UploadService] //importamos como proveedor IMPORTANTE
 })
-export class PerfilUsuarioComponent implements OnInit {
+export class PerfilAdminComponent implements OnInit {
 
   //variables para mandar image a cloudinary
   file:File;
   photoSelecter:string | ArrayBuffer;
 
-  miClient: Cliente={
-    id_c:1,
+  miAdmin: Administrador={
+    id_ad:1,
     nombre:'',
     apellido:'',
     correo:'',
     pais:'',
     fech_nac:'',
     pass:'',
-    image:'',
-    creditos:10000,
-    confirmacion:0
+    image:''
   };
 
   //para darle propiedades a ngBootstrap
   ngModalOption:NgbModalOptions={};
 
-  constructor(private _uploadService:UploadService, private ngbModal:NgbModal,private service:ProductosService, private router:Router) { } 
+  constructor(private _uploadService:UploadService, private ngbModal:NgbModal,private service:ProductosService, private router:Router) { }
 
   ngOnInit(): void {
-    let d_json=this.service.getClienteLS();
+    let d_json=this.service.getAdminLS();
     if(d_json){
-      let cliente:Cliente=d_json;
-      this.service.getDatePerfil(cliente).subscribe(
+      let admin:Administrador=d_json;
+      this.service.getDatePerfilAdmin(admin).subscribe(
         res=>{
-          this.miClient=res['datauser'];
+          this.miAdmin=res['datauser'];
         },
         err=>console.error(err)
       );
@@ -63,9 +61,7 @@ export class PerfilUsuarioComponent implements OnInit {
     }
   }
 
-  //se ejecuta cuando le damos click encima de la imagen
   async onPhotoSelected(event:HtmlInputEvent){
-    //si hay imagen seleccionada
     if (event.target.files && event.target.files[0]){
       //convertimos y guardamos la imagen en 'file;
       this.file=<File>event.target.files[0];
@@ -75,16 +71,14 @@ export class PerfilUsuarioComponent implements OnInit {
     }
   }
 
-  updateCliente(contenido){
-    //validamos que los campos esten llenos
-    if (this.miClient.nombre!='' && this.miClient.apellido!='' && this.miClient.correo!='' 
-    && this.miClient.pais!='' && this.miClient.fech_nac!='' && this.miClient.pass!=''){
+  updateAdmin(contenido){
+    if (this.miAdmin.nombre!='' && this.miAdmin.apellido!='' && this.miAdmin.correo!='' 
+    && this.miAdmin.pais!='' && this.miAdmin.fech_nac!='' && this.miAdmin.pass!=''){
 
       //si no selecciona foto se enviara la misma ruta de image que ya tiene
-      if(this.file==null){
-
+      if (this.file==null){
         //guardamos en base de datos sin guardar image en cloudinary
-        this.service.updateDateCliente(this.miClient).subscribe(
+        this.service.updateDateAdmin(this.miAdmin).subscribe(
           resp=>{               
              console.log(resp);
              //mostramos msj en pantalla
@@ -108,10 +102,10 @@ export class PerfilUsuarioComponent implements OnInit {
        this._uploadService.uploadImage(data).subscribe( 
          res=>{
            //console.log(res.secure_url); //ruta a guardar en base de datos
-           this.miClient.image=res.secure_url;
+           this.miAdmin.image=res.secure_url;
 
            //guardamos en base de datos
-           this.service.updateDateCliente(this.miClient).subscribe(
+           this.service.updateDateAdmin(this.miAdmin).subscribe(
              resp=>{               
                 console.log(resp);
                 //mostramos msj en pantalla
@@ -125,18 +119,19 @@ export class PerfilUsuarioComponent implements OnInit {
            );
          },
          err=>console.error(err)
-       );   
+       );    
       }
-
-             
+      
+        
 
    }else{
      //elert error
    }
- }
+  }
 
- aceptar(){
-  this.ngbModal.dismissAll(); //cerrar model
-}
+  aceptar(){
+    this.ngbModal.dismissAll(); //cerrar model
+  }
+  
 
-}
+} 
