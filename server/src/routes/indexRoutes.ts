@@ -3,6 +3,7 @@ import { Router } from 'express';
 import {indexController} from '../controllers/indexController';
 import {indexControllerCliente} from '../controllers/controllersCliente';
 import {indexControllerCorreoConfirm} from '../controllers/controllersCorreoConfirm'
+import {indexControllerAdmin} from '../controllers/controllersAdmin'
 
 class IndexRoutes{
     public router: Router = Router();
@@ -13,6 +14,10 @@ class IndexRoutes{
 
     config(): void {
         
+        //ADMINISTRADOR
+        this.router.post('/login/ingresarAdmin',indexControllerAdmin.buscarAdmin);
+        this.router.post('/admin/returnDatosPerfil',indexControllerAdmin.datosPerfilAdmin);
+
         //CLIENTE
         this.router.post('/usuario/registro',indexControllerCliente.crearCliente);
         this.router.post('/login/ingresar',indexControllerCliente.buscarCliente);

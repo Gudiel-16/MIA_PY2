@@ -4,12 +4,16 @@ const express_1 = require("express");
 const indexController_1 = require("../controllers/indexController");
 const controllersCliente_1 = require("../controllers/controllersCliente");
 const controllersCorreoConfirm_1 = require("../controllers/controllersCorreoConfirm");
+const controllersAdmin_1 = require("../controllers/controllersAdmin");
 class IndexRoutes {
     constructor() {
         this.router = express_1.Router();
         this.config();
     }
     config() {
+        //ADMINISTRADOR
+        this.router.post('/login/ingresarAdmin', controllersAdmin_1.indexControllerAdmin.buscarAdmin);
+        this.router.post('/admin/returnDatosPerfil', controllersAdmin_1.indexControllerAdmin.datosPerfilAdmin);
         //CLIENTE
         this.router.post('/usuario/registro', controllersCliente_1.indexControllerCliente.crearCliente);
         this.router.post('/login/ingresar', controllersCliente_1.indexControllerCliente.buscarCliente);

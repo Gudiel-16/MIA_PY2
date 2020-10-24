@@ -110,7 +110,6 @@ class IndexControllerCliente {
         return __awaiter(this, void 0, void 0, function* () {
             var autoCommit = true;
             const { id_c, nombre, apellido, pais, fech_nac, pass, image } = req.body; //req.body, recibe un cuerpo de msj (un json)
-            console.log(req.body);
             let sql = "update cliente set nombre=:nombre, apellido=:apellido, pais=:pais, fech_nac=:fech_nac, pass=:pass, image=:image where id_c=:id_c";
             let cnn = yield oracledb.getConnection(keys_1.default.cns);
             let result = yield cnn.execute(sql, [nombre, apellido, pais, fech_nac, pass, image, id_c], { autoCommit });
