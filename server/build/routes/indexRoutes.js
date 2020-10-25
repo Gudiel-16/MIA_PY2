@@ -7,6 +7,7 @@ const controllersCorreoConfirm_1 = require("../controllers/controllersCorreoConf
 const controllersAdmin_1 = require("../controllers/controllersAdmin");
 const controllersCorreoRecupPass_1 = require("../controllers/controllersCorreoRecupPass");
 const controllersCategoria_1 = require("../controllers/controllersCategoria");
+const controllersReaccion_1 = require("../controllers/controllersReaccion");
 class IndexRoutes {
     constructor() {
         this.router = express_1.Router();
@@ -36,6 +37,15 @@ class IndexRoutes {
         //CATEGORIA
         this.router.post('/admin/categorias/crearCategoria', controllersCategoria_1.indexControllerCategoria.crearCategoria);
         this.router.get('/admin/categorias/listCategorias', controllersCategoria_1.indexControllerCategoria.obtenerCategorias);
+        //REACCION
+        this.router.post('/reaccion/insertar', controllersReaccion_1.indexControllerReaccion.insertar);
+        this.router.post('/reaccion/cantidadmegusta', controllersReaccion_1.indexControllerReaccion.cantidadMegusta);
+        this.router.post('/reaccion/cantidadnomegusta', controllersReaccion_1.indexControllerReaccion.cantidadNomegusta);
+        this.router.post('/reaccion/usuarioyaexiste', controllersReaccion_1.indexControllerReaccion.siExiste_idUsarioIdProducto);
+        this.router.post('/reaccion/usuarioyadiomegusta', controllersReaccion_1.indexControllerReaccion.siUsuarioYaDioMeGusta);
+        this.router.post('/reaccion/usuarioyadionomegusta', controllersReaccion_1.indexControllerReaccion.siUsuarioYaDioNoMeGusta);
+        this.router.put('/reaccion/megustaAnomegusta', controllersReaccion_1.indexControllerReaccion.deMegustaAnomegusta);
+        this.router.put('/reaccion/nomegustaAmegusta', controllersReaccion_1.indexControllerReaccion.deNoMegustaAmegusta);
         //ENVIO DE CORREO
         this.router.post('/login/registro/envCorreoConfirm', controllersCorreoConfirm_1.indexControllerCorreoConfirm.enviarCorreoDeConfirmacion);
         this.router.post('/login/envCorreoRecPass', controllersCorreoRecupPass_1.indexControllerCorreoRecupPass.enviarCorreoRecPass);

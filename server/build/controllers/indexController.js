@@ -29,7 +29,7 @@ class IndexController {
             let result = yield cnn.execute(sql, [], { autoCommit });
             cnn.release();
             //console.log(result)
-            res.status(200).json(result);
+            res.status(200).json(result.rows);
         });
     }
     obtenerTodosProductos(req, res) {

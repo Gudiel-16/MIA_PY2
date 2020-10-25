@@ -42,10 +42,9 @@
             {{aja[1]}}
             <button [routerLink]="['detalleProducto',aja[0]]" class="btn btn-success" alt=""><!--redireccionamos a ruta, y pasamos ID-->                
                 <i class="fas fa-info-circle"></i></button>
-        </div>
-        <img [src]="aja[5]" class="card-img-top" alt="" style="height: 200px; width: auto;">
-        
+        </div>        
         <div class="card-body">
+            <img [src]="aja[5]" class="card-img-top" alt="" style="height: 200px; width: 200px;">
             <p>Precio: Q. {{aja[4]}}</p>
             <p>{{aja[6]}}</p>
         </div>

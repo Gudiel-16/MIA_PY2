@@ -6,6 +6,7 @@ import {indexControllerCorreoConfirm} from '../controllers/controllersCorreoConf
 import {indexControllerAdmin} from '../controllers/controllersAdmin'
 import {indexControllerCorreoRecupPass} from "../controllers/controllersCorreoRecupPass";
 import { indexControllerCategoria } from '../controllers/controllersCategoria';
+import { indexControllerReaccion } from '../controllers/controllersReaccion'
 
 class IndexRoutes{
     public router: Router = Router();
@@ -43,9 +44,20 @@ class IndexRoutes{
         this.router.post('/admin/categorias/crearCategoria',indexControllerCategoria.crearCategoria);
         this.router.get('/admin/categorias/listCategorias',indexControllerCategoria.obtenerCategorias);
         
+        //REACCION
+        this.router.post('/reaccion/insertar',indexControllerReaccion.insertar);
+        this.router.post('/reaccion/cantidadmegusta',indexControllerReaccion.cantidadMegusta);
+        this.router.post('/reaccion/cantidadnomegusta',indexControllerReaccion.cantidadNomegusta);
+        this.router.post('/reaccion/usuarioyaexiste',indexControllerReaccion.siExiste_idUsarioIdProducto);
+        this.router.post('/reaccion/usuarioyadiomegusta',indexControllerReaccion.siUsuarioYaDioMeGusta);
+        this.router.post('/reaccion/usuarioyadionomegusta',indexControllerReaccion.siUsuarioYaDioNoMeGusta);
+        this.router.put('/reaccion/megustaAnomegusta',indexControllerReaccion.deMegustaAnomegusta);
+        this.router.put('/reaccion/nomegustaAmegusta',indexControllerReaccion.deNoMegustaAmegusta);
+
         //ENVIO DE CORREO
         this.router.post('/login/registro/envCorreoConfirm',indexControllerCorreoConfirm.enviarCorreoDeConfirmacion);
         this.router.post('/login/envCorreoRecPass',indexControllerCorreoRecupPass.enviarCorreoRecPass);
+        
     }
 }
 

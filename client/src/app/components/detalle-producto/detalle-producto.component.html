@@ -4,27 +4,27 @@
 <!--TARJETA PRINCIPAL, DONDE INSERTAREMOS LOS DATOS-->
 <div class="row" style="margin-top: 25px;"> <!--para que los ponga a la par-->
 
-    <div class="col-md-4 offset-md-2">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-body">
                 <form> 
                     <div class="form-group">
+                        <label style="color: navy;">Nombre</label>
                         <input type="text" name="nombre" [(ngModel)]="miProduct.nombre" [ngModelOptions]="{standalone: true}" placeholder="Nombre" class="form-control">
                     </div>
+                    <label style="color: navy;">Categoria</label>
                     <div class="form-group">
-                        <select class="form-control" [(ngModel)]="miProduct.nom_cat" [ngModelOptions]="{standalone: true}">
-                          <option>1</option>
-                        </select>
-                    </div>                
+                        <input type="text" name="Categoria" [(ngModel)]="miProduct.nom_cat" [ngModelOptions]="{standalone: true}" placeholder="Nombre" class="form-control">
+                    </div>
+                    <label style="color: navy;">Descripcion</label>                
                     <div class="form-group">
                         <textarea class="form-control" name="descripcion" [(ngModel)]="miProduct.descripcion" [ngModelOptions]="{standalone: true}" placeholder="Descripcion" rows="3"></textarea>
                     </div>
+                    <label style="color: navy;">Palabras Clave</label>
                     <div class="form-group">
                         <textarea class="form-control" name="palab_clave" [(ngModel)]="miProduct.palab_clave" [ngModelOptions]="{standalone: true}" placeholder="Palabras Clave" rows="3"></textarea>
                     </div>
-                    <div class="form-group">
-                        <input type="url" name="image" placeholder="Image" [(ngModel)]="miProduct.ruta" [ngModelOptions]="{standalone: true}" class="form-control">
-                    </div>
+                    <label style="color: navy;">Precio Q.</label>
                     <div class="form-group">
                         <input type="text" name="precio" [(ngModel)]="miProduct.precio" [ngModelOptions]="{standalone: true}" placeholder="Precio" class="form-control">
                     </div>                    
@@ -33,41 +33,36 @@
         </div>
     </div>
 
-
-<!--PARA IR VISUALIZANDO COMO VAN QUEDANDO LOS DATOS
     <div class="col-md-4">
         <div class="card card-body text-center">
-            <h3>{{miProduct.nombre == '' ? 'Nombre' : miProduct.nombre}}</h3>
-            <p>{{miProduct.descripcion == '' ? 'Escribe Tu Descripcion' : miProduct.descripcion}}</p>
-            <img [src]="miProduct.ruta == '' ? '/assets/productoSinFoto.png' : miProduct.ruta" class="card-img-top"  alt="">
-            <p>{{miProduct.nom_cat == '' ? 'Categoria' : miProduct.nom_cat}}</p>
-            <p>{{miProduct.precio == null ? 'Q. 0.0' : miProduct.precio}}</p>
+            <form>
+                <img [src]="miProduct.ruta == '' ? '/assets/productoSinFoto.png' : miProduct.ruta" class="card-img-top"  alt="">
+                <button class="btn btn-outline-success" style="margin: 10px;" (click)="updatemegusta()">
+                    <i class="fas fa-thumbs-up"></i>
+                    <label> {{cantMegusta}}</label>
+                </button>
+                <button class="btn btn-outline-danger" style="margin: 10px;" (click)="updateNomegusta()">
+                    <i class="fas fa-thumbs-down"></i>
+                    <label> {{cantNomegusta}}</label>
+                </button>          
+            </form>
         </div>
-    </div>-->
-
-<div class="col-md-4">
-    <div class="card card-body text-center">
-        <form>
-            <img [src]="miProduct.ruta == '' ? '/assets/productoSinFoto.png' : miProduct.ruta" class="card-img-top"  alt="">
-            <button class="btn btn-outline-success" style="margin: 10px;">
-                <i class="fas fa-thumbs-up"></i>
-                <label> 100</label>
-            </button>
-            <button class="btn btn-outline-danger" style="margin: 10px;">
-                <i class="fas fa-thumbs-down"></i>
-                <label> 100</label>
-            </button>
-            <button class="btn btn-outline-info btn-block">
-                <i class="fas fa-comment-dots"></i> CHAT
-            </button>
-            <button class="btn btn-outline-info btn-block">
-                <i class="fas fa-comment-alt"></i> COMENTARIO
-            </button>
-            <button class="btn btn-outline-info btn-block">
-                <i class="far fa-plus-square"></i> AGREGAR A CARRO
-            </button>            
-        </form>
     </div>
-</div>
+
+    <div class="col-md-4">
+        <div class="card card-body text-center">
+            <form>                
+                <button class="btn btn-outline-info btn-block">
+                    <i class="fas fa-comment-dots"></i> CHAT
+                </button>
+                <button class="btn btn-outline-info btn-block">
+                    <i class="fas fa-comment-alt"></i> COMENTARIO
+                </button>
+                <button class="btn btn-outline-info btn-block">
+                    <i class="far fa-plus-square"></i> AGREGAR A CARRO
+                </button>            
+            </form>
+        </div>
+    </div>
 
 </div>

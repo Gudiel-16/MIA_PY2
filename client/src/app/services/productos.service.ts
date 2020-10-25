@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 //importamos interfaz
 import { Producto } from '../models/listProductos'
 import { Cliente } from '../models/registroCliente'
+import { Reaccion } from '../models/reaccion_Interface';
 import { Administrador } from '../models/admin_Interface';
 import { isNullOrUndefined } from 'util';
 import { map } from 'rxjs/operators'
@@ -135,6 +136,65 @@ export class ProductosService {
   }
 
 
+  //REACCION
+
+  reac_insertar(reaccion:Reaccion){
+    return this.http.post(`${this.API_URI}/reaccion/insertar`,reaccion);
+  }
+  
+  reac_cantidadMeGusta(id_producto){
+    return this.http.post(`${this.API_URI}/reaccion/cantidadmegusta`,
+    {
+      "id_producto":id_producto
+    });
+  }
+
+  reac_cantidadNoMeGusta(id_producto){
+    return this.http.post(`${this.API_URI}/reaccion/cantidadnomegusta`,
+    {
+      "id_producto":id_producto
+    });
+  }
+
+  reac_idUsuarioIdClienteExistenteEnMismaFila(id_c,id_producto){
+    return this.http.post(`${this.API_URI}/reaccion/usuarioyaexiste`,
+    {
+      "id_c":id_c,
+      "id_producto":id_producto
+    });
+  }
+
+  reac_yaDioMeGusta(id_c,id_producto){
+    return this.http.post(`${this.API_URI}/reaccion/usuarioyadiomegusta`,
+    {
+      "id_c":id_c,
+      "id_producto":id_producto
+    });
+  }
+
+  reac_yaDioNoMeGusta(id_c,id_producto){
+    return this.http.post(`${this.API_URI}/reaccion/usuarioyadionomegusta`,
+    {
+      "id_c":id_c,
+      "id_producto":id_producto
+    });
+  }
+
+  reac_deMegustaAnomegusta(id_c,id_producto){
+    return this.http.put(`${this.API_URI}/reaccion/megustaAnomegusta`,
+    {
+      "id_c":id_c,
+      "id_producto":id_producto
+    });
+  }
+
+  reac_deNoegustaAmegusta(id_c,id_producto){
+    return this.http.put(`${this.API_URI}/reaccion/nomegustaAmegusta`,
+    {
+      "id_c":id_c,
+      "id_producto":id_producto
+    });
+  }
 
   //CORREOS
   envCorreoConfirm(cliente : Cliente){
