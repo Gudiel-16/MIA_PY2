@@ -34,6 +34,10 @@ class IndexRoutes{
         this.router.get('/usuario/listProductos',indexController.obtenerTodosProductos);
         this.router.post('/usuario/addProducto',indexController.crearProducto);
         this.router.get('/usuario/listProductos/detalleProducto/:id', indexController.obtenerUnProducto);
+        this.router.get('/usuario/listProductos/ordenASC',indexController.obtenerProductosPrecioASC);
+        this.router.get('/usuario/listProductos/ordenDESC',indexController.obtenerProductosPrecioDESC);
+        this.router.post('/usuario/listProductos/porCategoria',indexController.obtenerProductosPorNomCategoria);
+        this.router.post('/usuario/listProductos/porPalabraClave',indexController.obtenerProductosPorPalabraClave);
 
         //CATEGORIA
         this.router.post('/admin/categorias/crearCategoria',indexControllerCategoria.crearCategoria);

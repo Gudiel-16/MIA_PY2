@@ -6,16 +6,17 @@
 <nav class="navbar navbar-light bg-light">
     <!--PARA BUSCAR PRODUCTO-->
     <form class="form-inline">
-      <input class="form-control mr-sm-2" type="search" placeholder="BUSCAR PRODUCTO" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">BUSCAR</button>
+      <input class="form-control mr-sm-2" [(ngModel)]="miPalClave" [ngModelOptions]="{standalone: true}" type="search" placeholder="BUSCAR PRODUCTO" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" (click)="buscarPorPalClave()">BUSCAR</button>
     </form>
     <!--PARA PRECIO-->
     <div class="form-inline">
-      <select class="form-control"> 
+      <select class="form-control" [(ngModel)]="tipoPrecio" [ngModelOptions]="{standalone: true}">
+        <option>TIPO DE ORDEN</option> 
         <option>Precio ASC</option>
         <option>Precio DESC</option>
       </select>
-      <button class="btn btn-success" style="margin-left: 25px;">                  
+      <button class="btn btn-success" style="margin-left: 25px;" (click)="buscarPorPrecio()">                  
         <i class="fas fa-search"></i>
         BUSCAR
       </button>
@@ -23,10 +24,11 @@
         
     <!--PARA BUSCAR CATEGORIA-->
     <div class="form-inline">
-      <select class="form-control"> 
+      <select class="form-control" [(ngModel)]="nomCatBuscar" [ngModelOptions]="{standalone: true}"> 
+        <option>SELEC CATEGORIA</option>
         <option *ngFor="let nomCat of misCategorias" >{{nomCat}}</option>
       </select>
-      <button class="btn btn-success" style="margin-left: 25px;">                  
+      <button class="btn btn-success" style="margin-left: 25px;" (click)="buscarPorCategoria()">                  
         <i class="fas fa-search"></i>
         BUSCAR
       </button>
@@ -34,24 +36,22 @@
   </nav>
 
 <!--LISTADO DE PRODUCTOS-->
-<div class="float-md-left col-md-4" *ngFor="let aja of misProductos" style="padding: 10px;">
+<div class="float-md-left col-md-3" *ngFor="let aja of misProductos" style="padding: 10px;">
     <div class="card text-center">
         <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
             {{aja[1]}}
-            <button [routerLink]="['detalleProducto',aja[0]]" class="btn btn-success"><!--redireccionamos a ruta, y pasamos ID-->                
-                <i class="fas fa-info-circle"></i>
-                DETALLE
-            </button>
+            <button [routerLink]="['detalleProducto',aja[0]]" class="btn btn-success" alt=""><!--redireccionamos a ruta, y pasamos ID-->                
+                <i class="fas fa-info-circle"></i></button>
         </div>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ353GaSlVQLX0q1YwAY__DxNUi0EYjy0TnMA&usqp=CAU" alt="">
+        <img [src]="aja[5]" class="card-img-top" alt="" style="height: 200px; width: auto;">
         
         <div class="card-body">
             <p>Precio: Q. {{aja[4]}}</p>
             <p>{{aja[6]}}</p>
         </div>
-        <a href="" class="btn btn-success btn-block">
+        <button href="" class="btn btn-success btn-block">
             AGREGAR A CARRO
-        </a>
+        </button>
     </div>
 </div>
 

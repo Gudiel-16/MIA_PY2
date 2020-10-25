@@ -17,6 +17,10 @@ export class ListProductosComponent implements OnInit {
   misProductos: any =[];
   misCategorias: any =[];
 
+  miPalClave:string="";
+  tipoPrecio:string="TIPO DE ORDEN";
+  nomCatBuscar:string="SELEC CATEGORIA";
+
   //variable tipo ProductosService
   constructor(private service:ProductosService) { }
 
@@ -26,6 +30,9 @@ export class ListProductosComponent implements OnInit {
       res=>{
         //lleno array de productos
         this.misProductos=res;
+        //console.log(this.misProductos[2][4]);
+        //const si=this.misProductos[2][4];
+       // console.log(si*2);
         //actualizo combobox de categorias
         this.service.getCategorias().subscribe(
           res=>{
@@ -33,10 +40,50 @@ export class ListProductosComponent implements OnInit {
           },
           err=>console.error(err)
         );
-        console.log(this.misProductos.rows)
       },
       err=>console.log(err)
     );
   }
+
+  buscarPorPalClave(){
+    if(this.miPalClave!=""){
+      this.service.getProductoPorPalabraClave(this.miPalClave).subscribe(
+        res=>{
+          this.misProductos=res;
+        },
+        err=>console.error(err)
+      );
+    }
+  }
+
+  buscarPorPrecio(){
+    if(this.tipoPrecio=="Precio ASC"){
+      this.service.getProductosPrecioASC().subscribe(
+        res=>{
+          this.misProductos=res;
+        },
+        err=>console.error(err)
+      );
+    }else if(this.tipoPrecio=="Precio DESC"){
+      this.service.getProductosPrecioDESC().subscribe(
+        res=>{
+          this.misProductos=res;
+        },
+        err=>console.error(err)
+      );
+    }
+  }
+
+  buscarPorCategoria(){
+    if(this.nomCatBuscar!="SELEC CATEGORIA"){
+      this.service.getProductoPorCategoria(this.nomCatBuscar).subscribe(
+        res=>{
+          this.misProductos=res;
+        },
+        err=>console.error(err)
+      );
+    }
+  }
+
 
 }

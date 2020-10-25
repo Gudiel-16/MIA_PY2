@@ -59,8 +59,51 @@ class IndexController {
             });
         });
     }
-    actualizarUsuario(req, res) {
-        res.json({ text: 'Acutalizando usuario...' + req.params.id });
+    obtenerProductosPrecioASC(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var autoCommit = false;
+            let sql = "select * from producto order by precio asc";
+            let cnn = yield oracledb.getConnection(keys_1.default.cns);
+            let result = yield cnn.execute(sql, [], { autoCommit });
+            cnn.release();
+            //console.log(result)
+            res.status(200).json(result.rows);
+        });
+    }
+    obtenerProductosPrecioDESC(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var autoCommit = false;
+            let sql = "select * from producto order by precio desc";
+            let cnn = yield oracledb.getConnection(keys_1.default.cns);
+            let result = yield cnn.execute(sql, [], { autoCommit });
+            cnn.release();
+            //console.log(result)
+            res.status(200).json(result.rows);
+        });
+    }
+    obtenerProductosPorNomCategoria(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var autoCommit = false;
+            const { nom_cat } = req.body;
+            let sql = "select * from producto where nom_cat=:nom_cat";
+            let cnn = yield oracledb.getConnection(keys_1.default.cns);
+            let result = yield cnn.execute(sql, [nom_cat], { autoCommit });
+            cnn.release();
+            //console.log(result)
+            res.status(200).json(result.rows);
+        });
+    }
+    obtenerProductosPorPalabraClave(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var autoCommit = false;
+            const { palab_clave } = req.body;
+            let sql = "select id_producto,nombre,descripcion, palab_clave,precio,nom_cat,id_c, instr(palab_clave,:palab_clave,1,1) from producto where instr(palab_clave,:palab_clave,1,1)=1";
+            let cnn = yield oracledb.getConnection(keys_1.default.cns);
+            let result = yield cnn.execute(sql, [palab_clave], { autoCommit });
+            cnn.release();
+            //console.log(result)
+            res.status(200).json(result.rows);
+        });
     }
 }
 exports.indexController = new IndexController();

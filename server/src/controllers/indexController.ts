@@ -48,8 +48,46 @@ class IndexController{
         });
     }
 
-    public actualizarUsuario(req :Request,res: Response){
-        res.json({text:'Acutalizando usuario...' + req.params.id });
+    public async obtenerProductosPrecioASC (req :Request,res: Response) {
+        var autoCommit=false;
+        let sql = "select * from producto order by precio asc";
+        let cnn = await oracledb.getConnection(keys.cns);
+        let result = await cnn.execute(sql, [], { autoCommit });
+        cnn.release();
+        //console.log(result)
+        res.status(200).json(result.rows);
+    }
+
+    public async obtenerProductosPrecioDESC (req :Request,res: Response) {
+        var autoCommit=false;
+        let sql = "select * from producto order by precio desc";
+        let cnn = await oracledb.getConnection(keys.cns);
+        let result = await cnn.execute(sql, [], { autoCommit });
+        cnn.release();
+        //console.log(result)
+        res.status(200).json(result.rows);
+    }
+
+    public async obtenerProductosPorNomCategoria (req :Request,res: Response) {
+        var autoCommit=false;
+        const { nom_cat } = req.body;
+        let sql = "select * from producto where nom_cat=:nom_cat";
+        let cnn = await oracledb.getConnection(keys.cns);
+        let result = await cnn.execute(sql, [nom_cat], { autoCommit });
+        cnn.release();
+        //console.log(result)
+        res.status(200).json(result.rows);
+    }
+
+    public async obtenerProductosPorPalabraClave (req :Request,res: Response) {
+        var autoCommit=false;
+        const { palab_clave } = req.body;
+        let sql = "select id_producto,nombre,descripcion, palab_clave,precio,nom_cat,id_c, instr(palab_clave,:palab_clave,1,1) from producto where instr(palab_clave,:palab_clave,1,1)=1";
+        let cnn = await oracledb.getConnection(keys.cns);
+        let result = await cnn.execute(sql, [palab_clave], { autoCommit });
+        cnn.release();
+        //console.log(result)
+        res.status(200).json(result.rows);
     }
 }
 

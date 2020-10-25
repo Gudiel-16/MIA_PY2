@@ -13,7 +13,8 @@
                     </div>
                     <div class="form-group">
                         <select class="form-control" [(ngModel)]="miProduct.nom_cat" [ngModelOptions]="{standalone: true}">
-                          <option>1</option>
+                            <option>SELEC CATEGORIA</option>
+                            <option *ngFor="let nomCat of misCategorias" >{{nomCat}}</option>
                         </select>
                     </div>                
                     <div class="form-group">
@@ -23,12 +24,9 @@
                         <textarea class="form-control" name="palab_clave" [(ngModel)]="miProduct.palab_clave" [ngModelOptions]="{standalone: true}" placeholder="Palabras Clave" rows="3"></textarea>
                     </div>
                     <div class="form-group">
-                        <input type="url" name="image" placeholder="Image" [(ngModel)]="miProduct.ruta" [ngModelOptions]="{standalone: true}" class="form-control">
+                        <input type="text" name="precio" [(ngModel)]="miPrecio" [ngModelOptions]="{standalone: true}" placeholder="Precio" class="form-control">
                     </div>
-                    <div class="form-group">
-                        <input type="text" name="precio" [(ngModel)]="miProduct.precio" [ngModelOptions]="{standalone: true}" placeholder="Precio" class="form-control">
-                    </div>
-                    <button class="btn btn-success btn-block" (click)="addNewProducto()">
+                    <button class="btn btn-success btn-block" (click)="addNewProducto(contenido)">
                         GUARDAR
                     </button>
                 </form>
@@ -40,12 +38,33 @@
 <!--PARA IR VISUALIZANDO COMO VAN QUEDANDO LOS DATOS-->
     <div class="col-md-4">
         <div class="card card-body text-center">
-            <h3>{{miProduct.nombre == '' ? 'Nombre' : miProduct.nombre}}</h3>
-            <p>{{miProduct.descripcion == '' ? 'Escribe Tu Descripcion' : miProduct.descripcion}}</p>
-            <img [src]="miProduct.ruta == '' ? '/assets/productoSinFoto.png' : miProduct.ruta" class="card-img-top"  alt="">
-            <p>{{miProduct.nom_cat == '' ? 'Categoria' : miProduct.nom_cat}}</p>
-            <p>{{miProduct.precio == null ? 'Q. 0.0' : miProduct.precio}}</p>
+            <h3>{{miProduct.nombre == '' ? 'NOMBRE' : miProduct.nombre}}</h3>
+            <p>{{miProduct.descripcion == '' ? 'DESCRIPCION' : miProduct.descripcion}}</p>
+            <input type="file" class="d-none" (change)="onPhotoSelected($event)" #photoInput><!--cuando de click en la imagen le pasamos un evento-->
+            <img [src]="photoSelecter || miProduct.ruta" class="img-fluid" alt="No Image" (click)="photoInput.click()"> <!--se ejecuta lo de arriba por el #-->  
+            <p>{{miProduct.nom_cat == '' ? 'CATEGORIA' : miProduct.nom_cat}}</p>
+            <p>{{miPrecio == 0 ? 'Q. 0.0' : miPrecio}}</p>
         </div>
     </div>
 
 </div>
+
+<ng-template #contenido let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">PRODUCTO GUARDADO</h5>
+      <button type="button" (click)="aceptar()" aria-label="Close" class="close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <img src="/assets/check.png" style="width: 200px; height: 140px;">
+        </div>
+        <div class="form-group col-md-6" style="padding-left: 15px; padding-top: 50px;">
+          Se ha guardado su producto correctamente
+        </div>
+        <button type="button" class="btn btn-outline-success btn-block" (click)="aceptar()">ACEPTAR</button>
+      </div>
+    </div>
+</ng-template>

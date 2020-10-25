@@ -112,6 +112,30 @@ export class ProductosService {
     return this.http.post(`${this.API_URI}/usuario/addProducto`,producto);
   }
 
+  getProductosPrecioASC(){
+    return this.http.get(`${this.API_URI}/usuario/listProductos/ordenASC`);
+  }
+
+  getProductosPrecioDESC(){
+    return this.http.get(`${this.API_URI}/usuario/listProductos/ordenDESC`);
+  }
+
+  getProductoPorCategoria(nom_cat){
+    return this.http.post(`${this.API_URI}/usuario/listProductos/porCategoria`,
+    {
+      "nom_cat":nom_cat
+    });
+  }
+
+  getProductoPorPalabraClave(palab_clave){
+    return this.http.post(`${this.API_URI}/usuario/listProductos/porPalabraClave`,
+    {
+      "palab_clave":palab_clave
+    });
+  }
+
+
+
   //CORREOS
   envCorreoConfirm(cliente : Cliente){
     return this.http.post(`${this.API_URI}/login/registro/envCorreoConfirm`,cliente);
