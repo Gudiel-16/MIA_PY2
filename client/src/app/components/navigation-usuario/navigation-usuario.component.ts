@@ -35,4 +35,8 @@ export class NavigationUsuarioComponent implements OnInit {
     this.router.navigate(['/usuario/addProducto']);
   }
 
+  carrito(){
+    this.router.navigate(['/usuario/carrito']);
+  }
+
 }

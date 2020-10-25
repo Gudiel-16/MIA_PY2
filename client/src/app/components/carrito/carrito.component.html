@@ -1,0 +1,24 @@
+<!--PARA QUE SIEMPRE SALGA LA BARRA DE NAVEGACION DE USUARIO-->
+<app-navigation-usuario></app-navigation-usuario>
+
+<table class="table table-bordered table-dark" style="margin-top: 40px;">
+    <thead>
+      <tr class="table-primary" style="color: black;">
+        <th scope="col">PRODUCTO</th>
+        <th scope="col">CANTIDAD</th>
+        <th scope="col">PRECIO</th>
+        <th scope="col">SUBTOTAL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="color: white;" *ngFor="let celda of misProductos">
+        <td>{{celda["nom_producto"]}}</td>
+        <td>{{celda["cantidad"]}}</td>
+        <td>{{celda["precio"]}}</td>
+        <td>{{celda["subtotal"]}}</td>
+      </tr>
+      <tr class="table-info" style="color: black; font-size: 24px;">
+          <td colspan="4">Total: {{total}}</td>
+      </tr>    
+    </tbody>
+  </table>

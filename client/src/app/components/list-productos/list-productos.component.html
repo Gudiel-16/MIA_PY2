@@ -44,13 +44,36 @@
                 <i class="fas fa-info-circle"></i></button>
         </div>        
         <div class="card-body">
-            <img [src]="aja[5]" class="card-img-top" alt="" style="height: 200px; width: 200px;">
+            <img [src]="aja[5]" class="card-img-top" alt="" style="max-height: 200px;">
             <p>Precio: Q. {{aja[4]}}</p>
             <p>{{aja[6]}}</p>
         </div>
-        <button href="" class="btn btn-success btn-block">
+        <button class="btn btn-success btn-block" (click)="abrirVentanaCantidad(contenido,aja[0],aja[4],aja[1])">
             AGREGAR A CARRO
         </button>
     </div>
 </div>
+
+<ng-template #contenido let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">CANTIDAD</h5>
+    <button type="button" (click)="aceptar()" aria-label="Close" class="close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <i class="fas fa-exclamation-triangle"></i>Porfavor ingrese un numero.
+      </div>
+      <div class="form-group col-md-12">
+        Ingrese cantidad:
+      </div>
+      <div class="form-group col-md-12">
+        <input [(ngModel)]="cantidadAdd" [ngModelOptions]="{standalone: true}" type="number" name="cantidad" placeholder="Cantidad" class="form-control">
+      </div>       
+      <button type="button" class="btn btn-outline-success btn-block" (click)="addCarrito()">AGREGAR</button>
+    </div>
+  </div>
+</ng-template>
 

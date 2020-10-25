@@ -1,7 +1,17 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 
+//ngBootstrap
+import { NgbModal,NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
+
 //importamos servicios
 import { ProductosService } from '../../services/productos.service'
+
+import { Cliente } from 'src/app/models/registroCliente';
+import { Carrito } from '../../models/carrito_Interface';
+
+interface HtmlInputEvent extends Event{
+  target: HTMLInputElement & EventTarget;
+}
 
 @Component({
   selector: 'app-list-productos',
@@ -20,29 +30,52 @@ export class ListProductosComponent implements OnInit {
   miPalClave:string="";
   tipoPrecio:string="TIPO DE ORDEN";
   nomCatBuscar:string="SELEC CATEGORIA";
+  cantidadAdd:number=1;
+
+  micarrito:Carrito={
+    cantidad:0,
+    precio:0,
+    subtotal:0,
+    id_producto:0,
+    id_c:0,
+    nom_producto:""
+  }
+
+  //para darle propiedades a ngBootstrap
+  ngModalOption:NgbModalOptions={};
 
   //variable tipo ProductosService
-  constructor(private service:ProductosService) { }
+  constructor(private service:ProductosService, private ngbModal:NgbModal) { }
 
   ngOnInit(): void {
-    //mando a llamar todos los productos
-    this.service.getProductos().subscribe(
-      res=>{
-        //lleno array de productos
-        this.misProductos=res;
-        //console.log(this.misProductos[2][4]);
-        //const si=this.misProductos[2][4];
-       // console.log(si*2);
-        //actualizo combobox de categorias
-        this.service.getCategorias().subscribe(
-          res=>{
-            this.misCategorias=res
-          },
-          err=>console.error(err)
-        );
-      },
-      err=>console.log(err)
-    );
+
+    let d_json=this.service.getClienteLS();
+    //obtengo el id del cliente
+    if(d_json){
+      let cliente:Cliente=d_json;
+      this.micarrito.id_c=cliente.id_c;
+
+      //mando a llamar todos los productos
+      this.service.getProductos().subscribe(
+        res=>{
+          //lleno array de productos
+          this.misProductos=res;
+          //console.log(this.misProductos[2][4]);
+          //const si=this.misProductos[2][4];
+        // console.log(si*2);
+          //actualizo combobox de categorias
+          this.service.getCategorias().subscribe(
+            res=>{
+              this.misCategorias=res
+            },
+            err=>console.error(err)
+          );
+        },
+        err=>console.log(err)
+      );      
+    }else{
+      console.log("err");
+    }
   }
 
   buscarPorPalClave(){
@@ -85,5 +118,32 @@ export class ListProductosComponent implements OnInit {
     }
   }
 
+  abrirVentanaCantidad(contenido,id_producto,precio,nom_producto){
+    //obtengo precio e id del producto y lo guardo
+    this.micarrito.precio=precio;
+    this.micarrito.id_producto=id_producto;
+    this.micarrito.nom_producto=nom_producto;
+
+    //muestro mensaje por pantalla
+    this.ngModalOption.backdrop='static';
+    this.ngModalOption.keyboard=true;
+    this.ngModalOption.centered=true;
+    this.ngbModal.open(contenido,this.ngModalOption);  
+  }
+
+  addCarrito(){
+
+    //guardo la cantidad ingresada por el usuario, y calculo el subtotal para guardarlo
+    this.micarrito.cantidad=this.cantidadAdd;
+    let sub=this.micarrito.cantidad*this.micarrito.precio;
+    this.micarrito.subtotal=sub;
+    //envio a LS
+    this.service.addCarritoLS(this.micarrito);
+    this.aceptar();
+  }
+
+  aceptar(){
+    this.ngbModal.dismissAll(); //cerrar model
+  }
 
 }

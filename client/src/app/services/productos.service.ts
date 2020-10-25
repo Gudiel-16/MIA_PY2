@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { Producto } from '../models/listProductos'
 import { Cliente } from '../models/registroCliente'
 import { Reaccion } from '../models/reaccion_Interface';
+import { Carrito } from '../models/carrito_Interface';
 import { Administrador } from '../models/admin_Interface';
 import { isNullOrUndefined } from 'util';
 import { map } from 'rxjs/operators'
@@ -288,6 +289,25 @@ export class ProductosService {
   deleteLSRecPass(){
     //borramos y direccionamos
     localStorage.removeItem('usuarioRecPass');
+  }
+
+  //CARRITO LS
+  addCarritoLS(carrito:Carrito){
+    let carro;
+    carro=this.getCarritoLS();
+    carro.push(carrito);
+    localStorage.setItem('carrito',JSON.stringify(carro));
+  }
+
+  getCarritoLS(){
+    let carroLS;
+    let carrito=localStorage.getItem('carrito');
+    if(!isNullOrUndefined(carrito)){
+      carroLS=JSON.parse(localStorage.getItem('carrito'));
+    }else{
+      carroLS=[];
+    }
+    return carroLS;
   }
 
 }

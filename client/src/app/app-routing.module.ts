@@ -13,6 +13,7 @@ import { NavigationAdminComponent } from './components/navigation-admin/navigati
 import { PerfilAdminComponent } from './components/perfil-admin/perfil-admin.component';
 import { RecuperarPasswordComponent } from './components/recuperar-password/recuperar-password.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
+import { CarritoComponent } from './components/carrito/carrito.component'
 
 //para verificar si esta logueado o no, no deja pasar a otras paginas si no lo esta
 import { OutsGuard } from './guards/outs.guard'
@@ -73,6 +74,10 @@ const routes: Routes = [
   {
     path:'usuario/addProducto',
     component: AddProductoComponent
+  },
+  {
+    path:'usuario/carrito',
+    component: CarritoComponent
   },
   {
     path:'usuario/listProductos/detalleProducto/:id',
