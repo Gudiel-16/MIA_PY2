@@ -310,4 +310,8 @@ export class ProductosService {
     return carroLS;
   }
 
+  deleteCarritoLS(){
+    localStorage.removeItem('carrito');
+  }
+
 }

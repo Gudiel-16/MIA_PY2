@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/listProductos';
 
+//ngBootstrap
+import { NgbModal,NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
+
 //importamos para tener acceso a las rutas
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -9,6 +12,7 @@ import { ProductosService } from '../../services/productos.service'
 
 import { Cliente } from 'src/app/models/registroCliente';
 import { Reaccion } from '../../models/reaccion_Interface'
+import { Carrito } from '../../models/carrito_Interface';
 
 @Component({
   selector: 'app-detalle-producto',
@@ -36,12 +40,27 @@ export class DetalleProductoComponent implements OnInit {
     id_c:0
   }
 
+  micarrito:Carrito={
+    cantidad:0,
+    precio:0,
+    subtotal:0,
+    id_producto:0,
+    id_c:0,
+    nom_producto:"",
+    id_vendedor:0
+  }
+
+  //para darle propiedades a ngBootstrap
+  ngModalOption:NgbModalOptions={};
   misProductos: any =[];
 
   cantMegusta:number=0;
   cantNomegusta:number=0;
 
-  constructor(private service:ProductosService, private router:Router, private activedRoute: ActivatedRoute  ) { }
+  //cantidad de productos que ingresa el usuario al agregar al carro
+  cantidadAdd:number=1;
+
+  constructor(private service:ProductosService, private router:Router, private activedRoute: ActivatedRoute, private ngbModal:NgbModal) { }
 
   ngOnInit(): void {
 
@@ -54,6 +73,7 @@ export class DetalleProductoComponent implements OnInit {
       //guardo id de Cliente
       let cliente:Cliente=d_json;
       this.miReaccion.id_c=cliente.id_c;
+      this.micarrito.id_c=cliente.id_c;
 
         //si contiene un id
         if (params.id){
@@ -258,6 +278,35 @@ export class DetalleProductoComponent implements OnInit {
       },
       err=>console.error(err)
     );   
+  }
+
+  abrirVentanaCantidad(contenido){
+    //obtengo precio e id del producto y lo guardo
+    this.micarrito.precio=this.miProduct.precio;
+    this.micarrito.id_producto=this.miProduct.id_producto;
+    this.micarrito.nom_producto=this.miProduct.nombre;
+    this.micarrito.id_vendedor=this.miProduct.id_c;
+
+    //muestro mensaje por pantalla
+    this.ngModalOption.backdrop='static';
+    this.ngModalOption.keyboard=true;
+    this.ngModalOption.centered=true;
+    this.ngbModal.open(contenido,this.ngModalOption);  
+  }
+
+  addCarrito(){
+
+    //guardo la cantidad ingresada por el usuario, y calculo el subtotal para guardarlo
+    this.micarrito.cantidad=this.cantidadAdd;
+    let sub=this.micarrito.cantidad*this.micarrito.precio;
+    this.micarrito.subtotal=sub;
+    //envio a LS
+    this.service.addCarritoLS(this.micarrito);
+    this.aceptar();
+  }
+
+  aceptar(){
+    this.ngbModal.dismissAll(); //cerrar model
   }
 
 }

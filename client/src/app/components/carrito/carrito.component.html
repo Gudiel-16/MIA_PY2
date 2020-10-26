@@ -1,7 +1,20 @@
 <!--PARA QUE SIEMPRE SALGA LA BARRA DE NAVEGACION DE USUARIO-->
 <app-navigation-usuario></app-navigation-usuario>
 
-<table class="table table-bordered table-dark" style="margin-top: 40px;">
+<form>
+  <div class="form-group col-md-4">
+    <button type="button" class="btn btn-outline-danger btn-block" style="margin: 15px;" (click)="comprar()">COMPRAR</button>
+  </div>
+  <div class="form-group col-md-4">
+    <button type="button" class="btn btn-outline-danger btn-block" style="margin: 15px;" (click)="limpiar()">LIMPIAR</button>
+  </div>
+</form>
+
+<div class="alert alert-danger" role="alert" *ngIf="alert">
+  CREDITOS INSUFICIENTES
+</div>
+
+<table class="table table-bordered table-dark">
     <thead>
       <tr class="table-primary" style="color: black;">
         <th scope="col">PRODUCTO</th>
@@ -18,7 +31,9 @@
         <td>{{celda["subtotal"]}}</td>
       </tr>
       <tr class="table-info" style="color: black; font-size: 24px;">
-          <td colspan="4">Total: {{total}}</td>
+          <td colspan="4">Total: Q. {{total}}</td>
       </tr>    
     </tbody>
-  </table>
+</table>
+
+

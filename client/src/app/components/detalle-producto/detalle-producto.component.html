@@ -58,7 +58,7 @@
                 <button class="btn btn-outline-info btn-block">
                     <i class="fas fa-comment-alt"></i> COMENTARIO
                 </button>
-                <button class="btn btn-outline-info btn-block">
+                <button class="btn btn-outline-info btn-block" (click)="abrirVentanaCantidad(contenido)">
                     <i class="far fa-plus-square"></i> AGREGAR A CARRO
                 </button>            
             </form>
@@ -66,3 +66,26 @@
     </div>
 
 </div>
+
+<ng-template #contenido let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">CANTIDAD</h5>
+      <button type="button" (click)="aceptar()" aria-label="Close" class="close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <i class="fas fa-exclamation-triangle"></i>Porfavor ingrese un numero.
+        </div>
+        <div class="form-group col-md-12">
+          Ingrese cantidad:
+        </div>
+        <div class="form-group col-md-12">
+          <input [(ngModel)]="cantidadAdd" [ngModelOptions]="{standalone: true}" type="number" name="cantidad" placeholder="Cantidad" class="form-control">
+        </div>       
+        <button type="button" class="btn btn-outline-success btn-block" (click)="addCarrito()">AGREGAR</button>
+      </div>
+    </div>
+  </ng-template>

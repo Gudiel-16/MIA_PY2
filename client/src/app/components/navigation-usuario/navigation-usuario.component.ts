@@ -20,6 +20,7 @@ export class NavigationUsuarioComponent implements OnInit {
 
   cerrarSecion(){
     this.service.logoutLS();
+    this.service.deleteCarritoLS();
     this.router.navigate(['/login']); //si no esta logueado me redirije a login para que meta sus datos
   }
 

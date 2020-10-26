@@ -38,7 +38,8 @@ export class ListProductosComponent implements OnInit {
     subtotal:0,
     id_producto:0,
     id_c:0,
-    nom_producto:""
+    nom_producto:"",
+    id_vendedor:0
   }
 
   //para darle propiedades a ngBootstrap
@@ -118,11 +119,12 @@ export class ListProductosComponent implements OnInit {
     }
   }
 
-  abrirVentanaCantidad(contenido,id_producto,precio,nom_producto){
+  abrirVentanaCantidad(contenido,id_producto,precio,nom_producto,id_vended){
     //obtengo precio e id del producto y lo guardo
     this.micarrito.precio=precio;
     this.micarrito.id_producto=id_producto;
     this.micarrito.nom_producto=nom_producto;
+    this.micarrito.id_vendedor=id_vended;
 
     //muestro mensaje por pantalla
     this.ngModalOption.backdrop='static';
