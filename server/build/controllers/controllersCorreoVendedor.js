@@ -8,16 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.indexControllerCorreoVendedor = void 0;
 //obtengo la base de datos
 //import BD from '../database'
 const oracledb = require('oracledb');
+//credenciales de conexion de base de datos
+const keys_1 = __importDefault(require("../keys"));
 const nodemailer = require('nodemailer');
 class IndexControllerCorreoVendedor {
     enviarCorreoVendedor(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { fecha, correo, nombre, filas, total } = req.body;
+            const { fecha, correo, nombre, filas, total, creditos, id_c } = req.body;
             const Present = '<table class="egt" style="background-color:black ; width: 500px;">\
                 <tr>\
                 <td colspan="4" style="font-size: 30px; font-family: Georgia, \'Times New Roman\', Times, serif; text-align: center; border-bottom: dashed; border-color: white; color: white;">\
@@ -73,7 +78,14 @@ class IndexControllerCorreoVendedor {
                 html: Present
             });
             console.log("message sent", info.messageId);
-            res.status(201).send({ msg: "Correo Enviado" });
+            console.log("aaaaaaaaaaaaa " + creditos);
+            console.log("aaaaaaaaaaaaa " + id_c);
+            var autoCommit = true;
+            let sql = "update cliente set creditos=:creditos where id_c=:id_c";
+            let cnn = yield oracledb.getConnection(keys_1.default.cns);
+            let result = yield cnn.execute(sql, [creditos, id_c], { autoCommit });
+            cnn.release();
+            res.status(201).send({ msg: "Correo a Vendedor Enviado y actualizacion de Credit" });
         });
     }
 }

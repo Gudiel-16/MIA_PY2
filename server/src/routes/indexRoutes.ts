@@ -33,6 +33,7 @@ class IndexRoutes{
         this.router.post('/usuario/returnDatosRecuperarPass',indexControllerCliente.datosClienteRecuperarPass);
         this.router.put('/usuario/updatePassCliente',indexControllerCliente.actualizarPassCliente);
         this.router.post('/usuario/returnCorreo',indexControllerCliente.obtenerCorreo);
+        this.router.put('/usuario/updateCreditos',indexControllerCliente.actualizarCreditosCliente);
 
         //PRODUCTO
         this.router.get('/usuario/listProductos',indexController.obtenerTodosProductos);

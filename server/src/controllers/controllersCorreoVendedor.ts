@@ -12,7 +12,7 @@ class IndexControllerCorreoVendedor{
 
     public async enviarCorreoVendedor(req :Request,res: Response){
 
-        const {fecha,correo,nombre,filas,total}=req.body;
+        const {fecha,correo,nombre,filas,total,creditos,id_c}=req.body;
 
         const Present='<table class="egt" style="background-color:black ; width: 500px;">\
                 <tr>\
@@ -72,7 +72,14 @@ class IndexControllerCorreoVendedor{
 
         console.log("message sent",info.messageId);
 
-        res.status(201).send({msg:"Correo Enviado"});
+        var autoCommit=true;
+
+        let sql= "update cliente set creditos=:creditos where id_c=:id_c";
+        let cnn = await oracledb.getConnection(keys.cns);
+        let result = await cnn.execute(sql, [creditos,id_c], { autoCommit });
+        cnn.release();
+
+        res.status(201).send({msg:"Correo a Vendedor Enviado y actualizacion de Credit"});
 
     }
 }

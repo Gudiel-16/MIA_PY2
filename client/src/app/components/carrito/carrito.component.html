@@ -3,7 +3,7 @@
 
 <form>
   <div class="form-group col-md-4">
-    <button type="button" class="btn btn-outline-danger btn-block" style="margin: 15px;" (click)="comprar()">COMPRAR</button>
+    <button type="button" class="btn btn-outline-danger btn-block" style="margin: 15px;" (click)="comprar(contenido)">COMPRAR</button>
   </div>
   <div class="form-group col-md-4">
     <button type="button" class="btn btn-outline-danger btn-block" style="margin: 15px;" (click)="limpiar()">LIMPIAR</button>
@@ -35,5 +35,25 @@
       </tr>    
     </tbody>
 </table>
+
+<ng-template #contenido let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">PRODUCTOS COMPRADOS</h5>
+    <button type="button" (click)="aceptar()" aria-label="Close" class="close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <img src="/assets/check.png" style="width: 200px; height: 140px;">
+      </div>
+      <div class="form-group col-md-6" style="padding-left: 15px; padding-top: 50px;">
+        Su compra ha sido realizado con exito.
+      </div>
+      <button type="button" class="btn btn-outline-success btn-block" (click)="aceptar()">ACEPTAR</button>
+    </div>
+  </div>
+</ng-template>
 
 

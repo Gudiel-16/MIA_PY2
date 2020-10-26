@@ -6,6 +6,9 @@ import { ProductosService } from '../../services/productos.service'
 //ngBootstrap
 import { NgbModal,NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
 
+//importamos para tener acceso a las rutas
+import { Router } from '@angular/router';
+
 import { Cliente } from 'src/app/models/registroCliente';
 import { map } from 'rxjs/operators';
 import { promise } from 'protractor';
@@ -27,9 +30,10 @@ export class CarritoComponent implements OnInit {
   //por si no hay creditos suficintes
   alert=false;
 
-  //correo al que se le enviara los productos vendidos
+  //Datos del vendedor
   correoVendedor:string="";
   nombreVendedor:string="";
+  creditosVendedor:number=0;
 
   filasHTMLComprador:string="";
   filasHTML:string="";
@@ -53,7 +57,7 @@ export class CarritoComponent implements OnInit {
   //para darle propiedades a ngBootstrap
   ngModalOption:NgbModalOptions={};
 
-  constructor(private service:ProductosService, private ngbModal:NgbModal) { }
+  constructor(private service:ProductosService, private ngbModal:NgbModal,private router:Router) { }
 
   ngOnInit(): void {
 
@@ -90,12 +94,36 @@ export class CarritoComponent implements OnInit {
     this.alert=false;
   }
 
+  comprar(contenido){
 
-  /*comprar(){
+    this.comprarr((yaEjecuto)=>{
+      
+      let fecha=new Date();
+      let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear();
+      let updateCreditos=this.miClient.creditos-this.total;
+      this.service.updateCreditosCliente(updateCreditos,this.miClient.id_c).subscribe(
+        res=>{
+          this.service.envCorreoAComprador(fechaa,this.miClient.correo,this.miClient.nombre,this.filasHTMLComprador,this.total).subscribe(
+            res=>{
+              console.log(res);
+              this.ngModalOption.backdrop='static';
+              this.ngModalOption.keyboard=true;
+              this.ngModalOption.centered=true;
+              this.ngbModal.open(contenido,this.ngModalOption);  
+            },
+            err=>console.error(err)
+          );  
+        },
+        err=>console.error(err)
+      );        
+    });
+  }
+
+  comprarr(done){
 
     let creditos=this.miClient.creditos;
     
-    if(creditos<this.total){
+    if(creditos>this.total){
 
       for(let celda of this.misProductos){
         //json que ingresaremos
@@ -117,38 +145,63 @@ export class CarritoComponent implements OnInit {
     }else{
       this.alert=true;
     }
-    
-    for(let [key,value] of this.miMap){
-      //console.log(key);
-        this.service.getCorreoCliente(key).subscribe(
-        res=>{
-          this.correoVendedor=res["correo"];
-          this.nombreVendedor=res["nombre"];
-          let arr=value;
-          for(let celda in arr){
-            //console.log(value[celda]);
-            let fila=value[celda];
-            this.concFilahtml(fila["nom_producto"],fila["precio"],fila["cantidad"],fila["subtotal"])
-          }
-          //enviar correo
-          let fecha=new Date();
-          let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear();
-          console.log(this.filasHTML);
-          this.service.envCorreoAVendedor(fechaa,this.correoVendedor,this.nombreVendedor,this.filasHTML,this.total).subscribe(
-            res=>{              
-              console.log(res);
-            },
-            err=>console.error(err)
-          );
-          this.filasHTML="";
-          
-        },
-        err=>console.error(err)
-      );      
+
+    if(creditos>this.total){
+      let cont=0;
+      for(let [key,value] of this.miMap){
+        //console.log(key);
+          this.service.getCorreoCliente(key).subscribe(
+          res=>{
+            this.correoVendedor=res["correo"];
+            this.nombreVendedor=res["nombre"];
+            this.creditosVendedor=res["creditos"];
+            let arr=value;
+            let totalVendedor=0;
+            for(let celda in arr){
+              //console.log(value[celda]);
+              let fila=value[celda];
+              this.concFilahtml(fila["nom_producto"],fila["precio"],fila["cantidad"],fila["subtotal"]);
+              totalVendedor=totalVendedor+fila["subtotal"];
+            }
+            let updateCredit=this.creditosVendedor+totalVendedor;
+            let idVendedor=key;
+            //enviar correo
+            let fecha=new Date();
+            let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear();
+            //console.log(this.filasHTML);            
+
+            this.service.envCorreoAVendedor(fechaa,this.correoVendedor,this.nombreVendedor,this.filasHTML,totalVendedor,updateCredit,idVendedor).subscribe(
+              res=>{
+                console.log(res);
+                cont=cont+1;  
+                if(cont==this.miMap.size){
+                  done("YA EJECUTO!");
+                }
+              },
+              err=>console.error(err)
+            );              
+            
+            this.filasHTML="";
+            
+          },
+          err=>console.error(err)
+        );        
+      }
     }
-    console.log(this.miMap);
     
-  }*/
+  }
+
+  actualizarCreditosCliente(updateCredit,key){
+    console.log("UPDATE");
+    console.log(updateCredit);
+    console.log(key);
+    this.service.updateCreditosCliente(updateCredit,key).subscribe(
+      res=>{
+        console.log(res);
+      },
+      err=>console.error(err)
+    );
+  }
 
   getKey(id_v){
     //sera array a retornar
@@ -192,5 +245,12 @@ export class CarritoComponent implements OnInit {
     </tr>';
   }
 
+  aceptar(){
+    //this.service.deleteCarritoLS();
+    //this.misProductos=[];
+    //this.total=0;
+    this.ngbModal.dismissAll(); //cerrar model
+    //this.router.navigate(['usuario/listProductos']);
+  }
 
 }

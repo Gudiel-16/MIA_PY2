@@ -98,6 +98,14 @@ export class ProductosService {
     });    
   }
 
+  updateCreditosCliente(creditos,id_c){
+    return this.http.put(`${this.API_URI}/usuario/updateCreditos`,
+    {
+      "creditos":creditos,
+      "id_c":id_c
+    });
+  }
+
   loginUsuario(correo,pass){
     return this.http.post(`${this.API_URI}/login/ingresar`,
     {
@@ -216,18 +224,20 @@ export class ProductosService {
     });
   }
 
-  envCorreoAVendedor(fecha,correo,nombre,filas,total){
+  envCorreoAVendedor(fecha,correo,nombre,filas,total,creditos,id_c){
     return this.http.post(`${this.API_URI}/carrito/envCorreoAVendedor`,
     {
       "fecha":fecha,
       "correo":correo,
       "nombre":nombre,
       "filas":filas,
-      "total":total
+      "total":total,
+      "creditos":creditos,
+      "id_c":id_c
     });
   }
 
-  envCorreoACOMPRADOR(fecha,correo,nombre,filas,total){
+  envCorreoAComprador(fecha,correo,nombre,filas,total){
     return this.http.post(`${this.API_URI}/carrito/envCorreoAComprador`,
     {
       "fecha":fecha,

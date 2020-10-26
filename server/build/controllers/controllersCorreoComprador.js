@@ -73,7 +73,7 @@ class IndexControllerCorreoComprador {
                 html: Present
             });
             console.log("message sent", info.messageId);
-            res.status(201).send({ msg: "Correo Enviado" });
+            res.status(201).send({ msg: "Correo a Comprador Enviado" });
         });
     }
 }

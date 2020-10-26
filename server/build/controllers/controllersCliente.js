@@ -163,7 +163,7 @@ class IndexControllerCliente {
             var autoCommit = false;
             const { id_c } = req.body;
             console.log(req.body);
-            let sql = "select correo,nombre from cliente where id_c=:id_c";
+            let sql = "select correo,nombre,creditos from cliente where id_c=:id_c";
             let cnn = yield oracledb.getConnection(keys_1.default.cns);
             let result = yield cnn.execute(sql, [id_c], { autoCommit });
             cnn.release();
@@ -171,12 +171,24 @@ class IndexControllerCliente {
             if (result.rows.length > 0) {
                 res.status(201).json({
                     "correo": result.rows[0][0],
-                    "nombre": result.rows[0][1]
+                    "nombre": result.rows[0][1],
+                    "creditos": result.rows[0][2]
                 });
             }
             else {
                 res.status(201).json({ msg: false });
             }
+        });
+    }
+    actualizarCreditosCliente(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var autoCommit = true;
+            const { creditos, id_c } = req.body; //req.body, recibe un cuerpo de msj (un json)
+            let sql = "update cliente set creditos=:creditos where id_c=:id_c";
+            let cnn = yield oracledb.getConnection(keys_1.default.cns);
+            let result = yield cnn.execute(sql, [creditos, id_c], { autoCommit });
+            cnn.release();
+            res.status(201).send({ msg: "Creditos Usuario Actualizado" });
         });
     }
 }
