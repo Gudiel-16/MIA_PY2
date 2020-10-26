@@ -91,6 +91,13 @@ export class ProductosService {
     });
   }
 
+  getCorreoCliente(id_c){
+    return this.http.post(`${this.API_URI}/usuario/returnCorreo`,
+    {
+      "id_c":id_c
+    });    
+  }
+
   loginUsuario(correo,pass){
     return this.http.post(`${this.API_URI}/login/ingresar`,
     {
@@ -206,6 +213,28 @@ export class ProductosService {
     return this.http.post(`${this.API_URI}/login/envCorreoRecPass`,
     {
       "correo":correo
+    });
+  }
+
+  envCorreoAVendedor(fecha,correo,nombre,filas,total){
+    return this.http.post(`${this.API_URI}/carrito/envCorreoAVendedor`,
+    {
+      "fecha":fecha,
+      "correo":correo,
+      "nombre":nombre,
+      "filas":filas,
+      "total":total
+    });
+  }
+
+  envCorreoACOMPRADOR(fecha,correo,nombre,filas,total){
+    return this.http.post(`${this.API_URI}/carrito/envCorreoAComprador`,
+    {
+      "fecha":fecha,
+      "correo":correo,
+      "nombre":nombre,
+      "filas":filas,
+      "total":total
     });
   }
 

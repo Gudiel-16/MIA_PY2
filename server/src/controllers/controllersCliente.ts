@@ -155,6 +155,28 @@ class IndexControllerCliente{
 
         res.status(201).send({msg:"Password Usuario Actualizado"});
     }
+
+    public async obtenerCorreo (req :Request,res: Response) {
+        var autoCommit=false;
+        const { id_c } = req.body; 
+        console.log(req.body);
+        let sql = "select correo,nombre from cliente where id_c=:id_c";
+        let cnn = await oracledb.getConnection(keys.cns);
+        let result = await cnn.execute(sql, [id_c], { autoCommit });
+        cnn.release();
+
+        //si existe
+        if(result.rows.length>0){
+            res.status(201).json(
+                {
+                    "correo":result.rows[0][0],
+                    "nombre":result.rows[0][1]                    
+                }
+            );
+        }else{
+            res.status(201).json({msg:false});
+        }
+    }
 }
 
 export const indexControllerCliente= new IndexControllerCliente();

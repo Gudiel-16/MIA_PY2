@@ -6,7 +6,9 @@ import {indexControllerCorreoConfirm} from '../controllers/controllersCorreoConf
 import {indexControllerAdmin} from '../controllers/controllersAdmin'
 import {indexControllerCorreoRecupPass} from "../controllers/controllersCorreoRecupPass";
 import { indexControllerCategoria } from '../controllers/controllersCategoria';
-import { indexControllerReaccion } from '../controllers/controllersReaccion'
+import { indexControllerReaccion } from '../controllers/controllersReaccion';
+import { indexControllerCorreoVendedor } from '../controllers/controllersCorreoVendedor';
+import { indexControllerCorreoComprador } from "../controllers/controllersCorreoComprador";
 
 class IndexRoutes{
     public router: Router = Router();
@@ -30,6 +32,7 @@ class IndexRoutes{
         this.router.put('/usuario/updateDateCliente',indexControllerCliente.actualizarDatosCliente);
         this.router.post('/usuario/returnDatosRecuperarPass',indexControllerCliente.datosClienteRecuperarPass);
         this.router.put('/usuario/updatePassCliente',indexControllerCliente.actualizarPassCliente);
+        this.router.post('/usuario/returnCorreo',indexControllerCliente.obtenerCorreo);
 
         //PRODUCTO
         this.router.get('/usuario/listProductos',indexController.obtenerTodosProductos);
@@ -57,6 +60,8 @@ class IndexRoutes{
         //ENVIO DE CORREO
         this.router.post('/login/registro/envCorreoConfirm',indexControllerCorreoConfirm.enviarCorreoDeConfirmacion);
         this.router.post('/login/envCorreoRecPass',indexControllerCorreoRecupPass.enviarCorreoRecPass);
+        this.router.post('/carrito/envCorreoAVendedor',indexControllerCorreoVendedor.enviarCorreoVendedor);
+        this.router.post('/carrito/envCorreoAComprador',indexControllerCorreoComprador.enviarCorreoComprador);
         
     }
 }

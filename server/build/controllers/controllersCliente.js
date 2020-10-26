@@ -158,5 +158,26 @@ class IndexControllerCliente {
             res.status(201).send({ msg: "Password Usuario Actualizado" });
         });
     }
+    obtenerCorreo(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var autoCommit = false;
+            const { id_c } = req.body;
+            console.log(req.body);
+            let sql = "select correo,nombre from cliente where id_c=:id_c";
+            let cnn = yield oracledb.getConnection(keys_1.default.cns);
+            let result = yield cnn.execute(sql, [id_c], { autoCommit });
+            cnn.release();
+            //si existe
+            if (result.rows.length > 0) {
+                res.status(201).json({
+                    "correo": result.rows[0][0],
+                    "nombre": result.rows[0][1]
+                });
+            }
+            else {
+                res.status(201).json({ msg: false });
+            }
+        });
+    }
 }
 exports.indexControllerCliente = new IndexControllerCliente();

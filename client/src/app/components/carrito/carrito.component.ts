@@ -8,6 +8,7 @@ import { NgbModal,NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
 
 import { Cliente } from 'src/app/models/registroCliente';
 import { map } from 'rxjs/operators';
+import { promise } from 'protractor';
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -20,9 +21,18 @@ interface HtmlInputEvent extends Event{
 })
 export class CarritoComponent implements OnInit {
 
+  //guardaremos los productos que tiene cada vendedor
   miMap=new Map<number,object>();
 
+  //por si no hay creditos suficintes
   alert=false;
+
+  //correo al que se le enviara los productos vendidos
+  correoVendedor:string="";
+  nombreVendedor:string="";
+
+  filasHTMLComprador:string="";
+  filasHTML:string="";
 
   miClient: Cliente={
     id_c:1,
@@ -80,11 +90,12 @@ export class CarritoComponent implements OnInit {
     this.alert=false;
   }
 
-  comprar(){
+
+  /*comprar(){
 
     let creditos=this.miClient.creditos;
     
-    if(creditos>this.total){
+    if(creditos<this.total){
 
       for(let celda of this.misProductos){
         //json que ingresaremos
@@ -106,9 +117,38 @@ export class CarritoComponent implements OnInit {
     }else{
       this.alert=true;
     }
-
-    //console.log(this.miMap);
-  }
+    
+    for(let [key,value] of this.miMap){
+      //console.log(key);
+        this.service.getCorreoCliente(key).subscribe(
+        res=>{
+          this.correoVendedor=res["correo"];
+          this.nombreVendedor=res["nombre"];
+          let arr=value;
+          for(let celda in arr){
+            //console.log(value[celda]);
+            let fila=value[celda];
+            this.concFilahtml(fila["nom_producto"],fila["precio"],fila["cantidad"],fila["subtotal"])
+          }
+          //enviar correo
+          let fecha=new Date();
+          let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear();
+          console.log(this.filasHTML);
+          this.service.envCorreoAVendedor(fechaa,this.correoVendedor,this.nombreVendedor,this.filasHTML,this.total).subscribe(
+            res=>{              
+              console.log(res);
+            },
+            err=>console.error(err)
+          );
+          this.filasHTML="";
+          
+        },
+        err=>console.error(err)
+      );      
+    }
+    console.log(this.miMap);
+    
+  }*/
 
   getKey(id_v){
     //sera array a retornar
@@ -127,5 +167,30 @@ export class CarritoComponent implements OnInit {
 
     return llave;
   }
+
+  async concFilahtml(nom_producto,precio,cantidad,subtotal){
+    this.filasHTML=this.filasHTML+ '<tr style="background-color:darkred; color: white;">\
+      <td style="padding: 10px; text-align: center;">'+nom_producto+'\
+      </td>\
+      <td style="padding: 10px; text-align: center;">'+precio+'\
+      </td>\
+      <td style="padding: 10px; text-align: center;">'+cantidad+'\
+      </td>\
+      <td style="padding: 10px; text-align: center;">'+subtotal+'\
+      </td>\
+      </tr>';
+
+    this.filasHTMLComprador=this.filasHTMLComprador+'<tr style="background-color:darkred; color: white;">\
+    <td style="padding: 10px; text-align: center;">'+nom_producto+'\
+    </td>\
+    <td style="padding: 10px; text-align: center;">'+precio+'\
+    </td>\
+    <td style="padding: 10px; text-align: center;">'+cantidad+'\
+    </td>\
+    <td style="padding: 10px; text-align: center;">'+subtotal+'\
+    </td>\
+    </tr>';
+  }
+
 
 }

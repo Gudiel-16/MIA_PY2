@@ -8,6 +8,8 @@ const controllersAdmin_1 = require("../controllers/controllersAdmin");
 const controllersCorreoRecupPass_1 = require("../controllers/controllersCorreoRecupPass");
 const controllersCategoria_1 = require("../controllers/controllersCategoria");
 const controllersReaccion_1 = require("../controllers/controllersReaccion");
+const controllersCorreoVendedor_1 = require("../controllers/controllersCorreoVendedor");
+const controllersCorreoComprador_1 = require("../controllers/controllersCorreoComprador");
 class IndexRoutes {
     constructor() {
         this.router = express_1.Router();
@@ -26,6 +28,7 @@ class IndexRoutes {
         this.router.put('/usuario/updateDateCliente', controllersCliente_1.indexControllerCliente.actualizarDatosCliente);
         this.router.post('/usuario/returnDatosRecuperarPass', controllersCliente_1.indexControllerCliente.datosClienteRecuperarPass);
         this.router.put('/usuario/updatePassCliente', controllersCliente_1.indexControllerCliente.actualizarPassCliente);
+        this.router.post('/usuario/returnCorreo', controllersCliente_1.indexControllerCliente.obtenerCorreo);
         //PRODUCTO
         this.router.get('/usuario/listProductos', indexController_1.indexController.obtenerTodosProductos);
         this.router.post('/usuario/addProducto', indexController_1.indexController.crearProducto);
@@ -49,6 +52,8 @@ class IndexRoutes {
         //ENVIO DE CORREO
         this.router.post('/login/registro/envCorreoConfirm', controllersCorreoConfirm_1.indexControllerCorreoConfirm.enviarCorreoDeConfirmacion);
         this.router.post('/login/envCorreoRecPass', controllersCorreoRecupPass_1.indexControllerCorreoRecupPass.enviarCorreoRecPass);
+        this.router.post('/carrito/envCorreoAVendedor', controllersCorreoVendedor_1.indexControllerCorreoVendedor.enviarCorreoVendedor);
+        this.router.post('/carrito/envCorreoAComprador', controllersCorreoComprador_1.indexControllerCorreoComprador.enviarCorreoComprador);
     }
 }
 const indexRoutes = new IndexRoutes();
