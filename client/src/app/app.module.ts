@@ -28,6 +28,7 @@ import { PerfilAdminComponent } from './components/perfil-admin/perfil-admin.com
 import { RecuperarPasswordComponent } from './components/recuperar-password/recuperar-password.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
+import { ComentariosComponent } from './components/comentarios/comentarios.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { CarritoComponent } from './components/carrito/carrito.component';
     PerfilAdminComponent,
     RecuperarPasswordComponent,
     CategoriasComponent,
-    CarritoComponent
+    CarritoComponent,
+    ComentariosComponent
   ],
   imports: [
     BrowserModule,

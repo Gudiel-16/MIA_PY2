@@ -61,7 +61,7 @@ export class CarritoComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //obtengo numero de creditos
+    //obtengo datos del comprador
     let d_json=this.service.getClienteLS();
     if(d_json){
       let cliente:Cliente=d_json;
@@ -96,6 +96,7 @@ export class CarritoComponent implements OnInit {
 
   comprar(contenido){
 
+    //se ejecutara primero esta funcion, luego que devuelva que ya termino (done) ejecuta lo de adentro
     this.comprarr((yaEjecuto)=>{
       
       let fecha=new Date();
@@ -147,34 +148,39 @@ export class CarritoComponent implements OnInit {
     }
 
     if(creditos>this.total){
+      //nos ayudara a saber si el for ya termino
       let cont=0;
       for(let [key,value] of this.miMap){
-        //console.log(key);
+          //obtengo los datos del cliente
           this.service.getCorreoCliente(key).subscribe(
           res=>{
+            //paso los datos a las variables globales
             this.correoVendedor=res["correo"];
             this.nombreVendedor=res["nombre"];
             this.creditosVendedor=res["creditos"];
             let arr=value;
+            //el total comprado al vendedor
             let totalVendedor=0;
+            //recorro el array para ir creando las filas html
             for(let celda in arr){
-              //console.log(value[celda]);
               let fila=value[celda];
               this.concFilahtml(fila["nom_producto"],fila["precio"],fila["cantidad"],fila["subtotal"]);
               totalVendedor=totalVendedor+fila["subtotal"];
             }
+            //operacion para actualizar los creditos y el id del vendedor
             let updateCredit=this.creditosVendedor+totalVendedor;
             let idVendedor=key;
-            //enviar correo
+            //obtengo fecha actual
             let fecha=new Date();
             let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear();
-            //console.log(this.filasHTML);            
-
+                       
+            //envio correo a vendedor, (aca mismo actualiza los creditos)
             this.service.envCorreoAVendedor(fechaa,this.correoVendedor,this.nombreVendedor,this.filasHTML,totalVendedor,updateCredit,idVendedor).subscribe(
               res=>{
                 console.log(res);
                 cont=cont+1;  
                 if(cont==this.miMap.size){
+                  //es como un return, para que se sepa que se termino de iterar
                   done("YA EJECUTO!");
                 }
               },
@@ -189,18 +195,6 @@ export class CarritoComponent implements OnInit {
       }
     }
     
-  }
-
-  actualizarCreditosCliente(updateCredit,key){
-    console.log("UPDATE");
-    console.log(updateCredit);
-    console.log(key);
-    this.service.updateCreditosCliente(updateCredit,key).subscribe(
-      res=>{
-        console.log(res);
-      },
-      err=>console.error(err)
-    );
   }
 
   getKey(id_v){

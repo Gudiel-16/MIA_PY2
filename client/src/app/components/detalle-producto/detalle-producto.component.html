@@ -55,7 +55,7 @@
                 <button class="btn btn-outline-info btn-block">
                     <i class="fas fa-comment-dots"></i> CHAT
                 </button>
-                <button class="btn btn-outline-info btn-block">
+                <button [routerLink]="['comentariosProducto',idProducto]" class="btn btn-outline-info btn-block">
                     <i class="fas fa-comment-alt"></i> COMENTARIO
                 </button>
                 <button class="btn btn-outline-info btn-block" (click)="abrirVentanaCantidad(contenido)">

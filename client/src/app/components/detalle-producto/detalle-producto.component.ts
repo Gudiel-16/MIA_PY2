@@ -60,6 +60,9 @@ export class DetalleProductoComponent implements OnInit {
   //cantidad de productos que ingresa el usuario al agregar al carro
   cantidadAdd:number=1;
 
+  //id que se le enviara a comentarios
+  idProducto:number=0;
+
   constructor(private service:ProductosService, private router:Router, private activedRoute: ActivatedRoute, private ngbModal:NgbModal) { }
 
   ngOnInit(): void {
@@ -67,7 +70,8 @@ export class DetalleProductoComponent implements OnInit {
     //obtengo los parametros que recibo, desde el 'boton detalle' que esta en 'lista productos'
     const params=this.activedRoute.snapshot.params;
     this.miReaccion.id_producto=params.id;
-
+    this.idProducto=params.id;
+    
     let d_json=this.service.getClienteLS();
     if(d_json){
       //guardo id de Cliente

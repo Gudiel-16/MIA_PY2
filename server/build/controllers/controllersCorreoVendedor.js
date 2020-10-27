@@ -78,8 +78,6 @@ class IndexControllerCorreoVendedor {
                 html: Present
             });
             console.log("message sent", info.messageId);
-            console.log("aaaaaaaaaaaaa " + creditos);
-            console.log("aaaaaaaaaaaaa " + id_c);
             var autoCommit = true;
             let sql = "update cliente set creditos=:creditos where id_c=:id_c";
             let cnn = yield oracledb.getConnection(keys_1.default.cns);
