@@ -11,6 +11,7 @@ import { Producto } from '../models/listProductos'
 import { Cliente } from '../models/registroCliente'
 import { Reaccion } from '../models/reaccion_Interface';
 import { Carrito } from '../models/carrito_Interface';
+import { Comentario } from '../models/comentario_Interface';
 import { Administrador } from '../models/admin_Interface';
 import { isNullOrUndefined } from 'util';
 import { map } from 'rxjs/operators'
@@ -114,6 +115,23 @@ export class ProductosService {
     },
     {headers:this.headers})
     .pipe(map(data=>data));    
+  }
+
+  //DETALLE CV
+  saveDetalle(detalle){
+    return this.http.post(`${this.API_URI}/usuario/insertarDCV`,detalle);
+  }
+
+  //COMENTARIO
+  getComentarios(id_producto){
+    return this.http.post(`${this.API_URI}/producto/obtenerComentarios`,
+    {
+      "id_producto":id_producto
+    });
+  }
+
+  saveComentario(comentario: Comentario){
+    return this.http.post(`${this.API_URI}/producto/insertarComentario`,comentario);
   }
 
   //METODOS PRODUCTO

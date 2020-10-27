@@ -63,7 +63,7 @@ export class AddProductoComponent implements OnInit {
       this.service.getCategorias().subscribe(
         res=>{
           this.misCategorias=res;
-          console.log(this.miProduct);
+          //console.log(this.miProduct);
         },
         err=>console.error(err)
       );

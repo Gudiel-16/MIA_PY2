@@ -29,7 +29,24 @@ class IndexController {
             let result = yield cnn.execute(sql, [], { autoCommit });
             cnn.release();
             //console.log(result)
-            res.status(200).json(result.rows);
+            //si existe
+            if (result.rows.length > 0) {
+                res.status(201).json({
+                    dataproduct: {
+                        "id_producto": result.rows[0][0],
+                        "nombre": result.rows[0][1],
+                        "descripcion": result.rows[0][2],
+                        "palab_clave": result.rows[0][3],
+                        "precio": result.rows[0][4],
+                        "ruta": result.rows[0][5],
+                        "nom_cat": result.rows[0][6],
+                        "id_c": result.rows[0][7]
+                    }
+                });
+            }
+            else {
+                res.status(201).json({ msg: false });
+            }
         });
     }
     obtenerTodosProductos(req, res) {

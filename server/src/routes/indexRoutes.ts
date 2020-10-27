@@ -5,10 +5,12 @@ import {indexControllerCliente} from '../controllers/controllersCliente';
 import {indexControllerCorreoConfirm} from '../controllers/controllersCorreoConfirm'
 import {indexControllerAdmin} from '../controllers/controllersAdmin'
 import {indexControllerCorreoRecupPass} from "../controllers/controllersCorreoRecupPass";
-import { indexControllerCategoria } from '../controllers/controllersCategoria';
-import { indexControllerReaccion } from '../controllers/controllersReaccion';
-import { indexControllerCorreoVendedor } from '../controllers/controllersCorreoVendedor';
-import { indexControllerCorreoComprador } from "../controllers/controllersCorreoComprador";
+import {indexControllerCategoria} from '../controllers/controllersCategoria';
+import {indexControllerReaccion} from '../controllers/controllersReaccion';
+import {indexControllerCorreoVendedor} from '../controllers/controllersCorreoVendedor';
+import {indexControllerCorreoComprador} from "../controllers/controllersCorreoComprador";
+import {indexControllerDetalleCV} from '../controllers/controllersDetalleCV';
+import {indexControllerComentario} from '../controllers/controllersComentario';
 
 class IndexRoutes{
     public router: Router = Router();
@@ -57,6 +59,13 @@ class IndexRoutes{
         this.router.post('/reaccion/usuarioyadionomegusta',indexControllerReaccion.siUsuarioYaDioNoMeGusta);
         this.router.put('/reaccion/megustaAnomegusta',indexControllerReaccion.deMegustaAnomegusta);
         this.router.put('/reaccion/nomegustaAmegusta',indexControllerReaccion.deNoMegustaAmegusta);
+
+        //DETALLE CV
+        this.router.post('/usuario/insertarDCV',indexControllerDetalleCV.crearDetalle);
+
+        //COMENTARIO
+        this.router.post('/producto/insertarComentario',indexControllerComentario.crearComentario);
+        this.router.post('/producto/obtenerComentarios',indexControllerComentario.obtenerComentarios);
 
         //ENVIO DE CORREO
         this.router.post('/login/registro/envCorreoConfirm',indexControllerCorreoConfirm.enviarCorreoDeConfirmacion);

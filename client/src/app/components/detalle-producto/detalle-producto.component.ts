@@ -8,7 +8,7 @@ import { NgbModal,NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
 import { Router, ActivatedRoute } from '@angular/router';
 
 //importamos servicio
-import { ProductosService } from '../../services/productos.service'
+import { ProductosService } from '../../services/productos.service';
 
 import { Cliente } from 'src/app/models/registroCliente';
 import { Reaccion } from '../../models/reaccion_Interface'
@@ -83,21 +83,9 @@ export class DetalleProductoComponent implements OnInit {
         if (params.id){
           this.service.getProducto(params.id).subscribe( //hago mi consulta
             res=>{
-              //obtengo todo el json
-              this.misProductos=res;
-              //obtengo la parte 'rows' del json
-              const fila=this.misProductos;
-              //converierto los valores en un array
-              const array=fila[0];
-              //asigno valores a interface
-              this.miProduct.id_producto=array[0];
-              this.miProduct.nombre=array[1];
-              this.miProduct.descripcion=array[2];
-              this.miProduct.palab_clave=array[3];
-              this.miProduct.precio=array[4];
-              this.miProduct.ruta=array[5];
-              this.miProduct.nom_cat=array[6];
-              this.miProduct.id_c=array[7];
+              //obtengo datos producto
+              this.miProduct=res["dataproduct"];
+
               //obtengo cantidad de megusta
               this.service.reac_cantidadMeGusta(params.id).subscribe(
                 resp=>{

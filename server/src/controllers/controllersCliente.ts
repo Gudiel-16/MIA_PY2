@@ -73,7 +73,7 @@ class IndexControllerCliente{
     public async datosPerfilCliente (req :Request,res: Response) {
         var autoCommit=false;
         const { id_c } = req.body; 
-        console.log(req.body);
+        //console.log(req.body);
         let sql = "select id_c, nombre, apellido, correo, pais, fech_nac, pass, image, creditos, confirmacion from cliente where id_c=:id_c";
         let cnn = await oracledb.getConnection(keys.cns);
         let result = await cnn.execute(sql, [id_c], { autoCommit });
@@ -116,7 +116,7 @@ class IndexControllerCliente{
     public async datosClienteRecuperarPass (req :Request,res: Response) {
         var autoCommit=false;
         const { correo } = req.body; 
-        console.log(req.body);
+        //console.log(req.body);
         let sql = "select id_c, nombre, apellido, correo, pais, fech_nac, pass, image, creditos, confirmacion from cliente where correo=:correo";
         let cnn = await oracledb.getConnection(keys.cns);
         let result = await cnn.execute(sql, [correo], { autoCommit });
@@ -159,7 +159,7 @@ class IndexControllerCliente{
     public async obtenerCorreo (req :Request,res: Response) {
         var autoCommit=false;
         const { id_c } = req.body; 
-        console.log(req.body);
+        //console.log(req.body);
         let sql = "select correo,nombre,creditos from cliente where id_c=:id_c";
         let cnn = await oracledb.getConnection(keys.cns);
         let result = await cnn.execute(sql, [id_c], { autoCommit });

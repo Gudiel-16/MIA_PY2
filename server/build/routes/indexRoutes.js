@@ -10,6 +10,8 @@ const controllersCategoria_1 = require("../controllers/controllersCategoria");
 const controllersReaccion_1 = require("../controllers/controllersReaccion");
 const controllersCorreoVendedor_1 = require("../controllers/controllersCorreoVendedor");
 const controllersCorreoComprador_1 = require("../controllers/controllersCorreoComprador");
+const controllersDetalleCV_1 = require("../controllers/controllersDetalleCV");
+const controllersComentario_1 = require("../controllers/controllersComentario");
 class IndexRoutes {
     constructor() {
         this.router = express_1.Router();
@@ -50,6 +52,11 @@ class IndexRoutes {
         this.router.post('/reaccion/usuarioyadionomegusta', controllersReaccion_1.indexControllerReaccion.siUsuarioYaDioNoMeGusta);
         this.router.put('/reaccion/megustaAnomegusta', controllersReaccion_1.indexControllerReaccion.deMegustaAnomegusta);
         this.router.put('/reaccion/nomegustaAmegusta', controllersReaccion_1.indexControllerReaccion.deNoMegustaAmegusta);
+        //DETALLE CV
+        this.router.post('/usuario/insertarDCV', controllersDetalleCV_1.indexControllerDetalleCV.crearDetalle);
+        //COMENTARIO
+        this.router.post('/producto/insertarComentario', controllersComentario_1.indexControllerComentario.crearComentario);
+        this.router.post('/producto/obtenerComentarios', controllersComentario_1.indexControllerComentario.obtenerComentarios);
         //ENVIO DE CORREO
         this.router.post('/login/registro/envCorreoConfirm', controllersCorreoConfirm_1.indexControllerCorreoConfirm.enviarCorreoDeConfirmacion);
         this.router.post('/login/envCorreoRecPass', controllersCorreoRecupPass_1.indexControllerCorreoRecupPass.enviarCorreoRecPass);

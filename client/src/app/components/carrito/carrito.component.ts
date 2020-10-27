@@ -10,6 +10,8 @@ import { NgbModal,NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
 import { Router } from '@angular/router';
 
 import { Cliente } from 'src/app/models/registroCliente';
+import { Detalle } from '../../models/detalle_Interface';
+
 import { map } from 'rxjs/operators';
 import { promise } from 'protractor';
 
@@ -51,8 +53,21 @@ export class CarritoComponent implements OnInit {
     confirmacion:0
   };
 
+  detalle:Detalle={
+    cantidad:0,
+    precio:0,
+    subtotal:0,
+    id_producto:0,
+    id_c:0
+  }
+
+  det
+
   misProductos: any =[];
   total:number=0;
+
+  //contendra los datos para ir insertando en tabla detalle CV
+  detalleCV:any=[];
 
   //para darle propiedades a ngBootstrap
   ngModalOption:NgbModalOptions={};
@@ -107,10 +122,28 @@ export class CarritoComponent implements OnInit {
           this.service.envCorreoAComprador(fechaa,this.miClient.correo,this.miClient.nombre,this.filasHTMLComprador,this.total).subscribe(
             res=>{
               console.log(res);
-              this.ngModalOption.backdrop='static';
-              this.ngModalOption.keyboard=true;
-              this.ngModalOption.centered=true;
-              this.ngbModal.open(contenido,this.ngModalOption);  
+              console.log(this.detalleCV);
+              let cont=0;
+              for(const cele in this.detalleCV){
+                console.log("aaaja");
+                console.log(this.detalleCV[cele]);
+                cont=cont+1;
+
+                this.service.saveDetalle(this.detalleCV[cele]).subscribe(
+                  res=>{
+                    console.log(res);
+                  },
+                  err=>console.error(err)
+                );
+                
+                if (cont==this.detalleCV.length){
+                  this.ngModalOption.backdrop='static';
+                  this.ngModalOption.keyboard=true;
+                  this.ngModalOption.centered=true;
+                  this.ngbModal.open(contenido,this.ngModalOption); 
+                }
+              }
+               
             },
             err=>console.error(err)
           );  
@@ -164,6 +197,13 @@ export class CarritoComponent implements OnInit {
             //recorro el array para ir creando las filas html
             for(let celda in arr){
               let fila=value[celda];
+              //insertamos en array detalle              
+              this.detalle.cantidad=fila["cantidad"];
+              this.detalle.precio=fila["precio"];
+              this.detalle.subtotal=fila["subtotal"];
+              this.detalle.id_producto=fila["id_producto"];
+              this.detalle.id_c=this.miClient.id_c;
+              this.detalleCV.push(this.detalle);
               this.concFilahtml(fila["nom_producto"],fila["precio"],fila["cantidad"],fila["subtotal"]);
               totalVendedor=totalVendedor+fila["subtotal"];
             }

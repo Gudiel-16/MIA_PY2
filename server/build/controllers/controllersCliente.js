@@ -80,7 +80,7 @@ class IndexControllerCliente {
         return __awaiter(this, void 0, void 0, function* () {
             var autoCommit = false;
             const { id_c } = req.body;
-            console.log(req.body);
+            //console.log(req.body);
             let sql = "select id_c, nombre, apellido, correo, pais, fech_nac, pass, image, creditos, confirmacion from cliente where id_c=:id_c";
             let cnn = yield oracledb.getConnection(keys_1.default.cns);
             let result = yield cnn.execute(sql, [id_c], { autoCommit });
@@ -121,7 +121,7 @@ class IndexControllerCliente {
         return __awaiter(this, void 0, void 0, function* () {
             var autoCommit = false;
             const { correo } = req.body;
-            console.log(req.body);
+            //console.log(req.body);
             let sql = "select id_c, nombre, apellido, correo, pais, fech_nac, pass, image, creditos, confirmacion from cliente where correo=:correo";
             let cnn = yield oracledb.getConnection(keys_1.default.cns);
             let result = yield cnn.execute(sql, [correo], { autoCommit });
@@ -162,7 +162,7 @@ class IndexControllerCliente {
         return __awaiter(this, void 0, void 0, function* () {
             var autoCommit = false;
             const { id_c } = req.body;
-            console.log(req.body);
+            //console.log(req.body);
             let sql = "select correo,nombre,creditos from cliente where id_c=:id_c";
             let cnn = yield oracledb.getConnection(keys_1.default.cns);
             let result = yield cnn.execute(sql, [id_c], { autoCommit });
