@@ -46,6 +46,7 @@ class IndexRoutes{
         this.router.get('/usuario/listProductos/ordenDESC',indexController.obtenerProductosPrecioDESC);
         this.router.post('/usuario/listProductos/porCategoria',indexController.obtenerProductosPorNomCategoria);
         this.router.post('/usuario/listProductos/porPalabraClave',indexController.obtenerProductosPorPalabraClave);
+        this.router.put('/producto/deleteProducto',indexController.deleteProducto);
 
         //CATEGORIA
         this.router.post('/admin/categorias/crearCategoria',indexControllerCategoria.crearCategoria);
@@ -71,6 +72,8 @@ class IndexRoutes{
         //DENUNCIA
         this.router.post('/producto/insertarDenuncia',indexControllerDenuncia.crearDenuncia);
         this.router.get('/producto/obtenerDenuncias',indexControllerDenuncia.obtenerDenuncias);
+        this.router.put('/producto/deleteProductoEnDenuncia',indexControllerDenuncia.deleteProductoEnDenuncia);
+        this.router.get('/producto/obtenerProductosBloqueados',indexControllerDenuncia.productosBloqueados);
 
         //ENVIO DE CORREO
         this.router.post('/login/registro/envCorreoConfirm',indexControllerCorreoConfirm.enviarCorreoDeConfirmacion);

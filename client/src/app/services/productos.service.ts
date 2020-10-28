@@ -144,6 +144,17 @@ export class ProductosService {
     return this.http.post(`${this.API_URI}/producto/insertarDenuncia`,denuncia);
   }
 
+  deleteProductoEnDenuncia(id_producto){
+    return this.http.put(`${this.API_URI}/producto/deleteProductoEnDenuncia`,
+    {
+      "id_producto":id_producto
+    });
+  }
+
+  getProductosBloqueados(){
+    return this.http.get(`${this.API_URI}/producto/obtenerProductosBloqueados`);
+  }
+
   //METODOS PRODUCTO
   getProductos(){
     return this.http.get(`${this.API_URI}/usuario/listProductos`);
@@ -176,6 +187,13 @@ export class ProductosService {
     return this.http.post(`${this.API_URI}/usuario/listProductos/porPalabraClave`,
     {
       "palab_clave":palab_clave
+    });
+  }
+
+  deleteProducto(id_producto){
+    return this.http.put(`${this.API_URI}/producto/deleteProducto`,
+    {
+      "id_producto":id_producto
     });
   }
 

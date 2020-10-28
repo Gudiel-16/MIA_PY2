@@ -1,0 +1,58 @@
+<!--PARA QUE SIEMPRE SALGA LA BARRA DE NAVEGACION DE USUARIO-->
+<app-navigation-admin></app-navigation-admin>
+
+<div class="row" style="margin-top: 20px;">
+    <div class="col-12 col-sm-12 col-md-12 order-2 order-sm-2 order-md-1">
+        <div class="card mb-3" *ngFor="let denun of misDenuncias">
+            <div class="row no-gutters">              
+              <div class="col-md-4">
+                <div class="card-body">
+                  <p class="card-title"><strong style="color: blue;">NOMBRE:    </strong>{{denun[0]}}<p>
+                  <p class="card-text"><strong style="color: blue;">DESCRIPCION:    </strong>{{denun[1]}}</p>
+                  <p class="card-text"><strong style="color: blue;">CATEGORIA:  </strong>{{denun[2]}}</p>
+                  <p class="card-text"><strong style="color: blue;">PRECIO: </strong>Q. {{denun[3]}}</p>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="card-body">
+                    <img style="margin-top: 15px;" src="{{denun[4]}}" class="card-img" alt="...">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card-body">
+                  <p class="card-title"><strong style="color: blue;">DENUNCIA:</strong></p>
+                  <p class="card-text">{{denun[5]}}</p>
+                  <p class="card-text"><small class="text-muted">{{denun[6]}}</small></p>
+                </div>
+              </div>              
+              <div class="col-md-2">
+                <div class="card-body">
+                    <button class="btn btn-danger btn-block" (click)="bloquearProducto(denun[7],contenido)">
+                        BLOQUEAR PRODUCTO
+                    </button>
+                </div>                
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #contenido let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">PRODUCTO BLOQUEADO</h5>
+      <button type="button" (click)="aceptar()" aria-label="Close" class="close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <img src="/assets/check.png" style="width: 200px; height: 140px;">
+        </div>
+        <div class="form-group col-md-6" style="padding-left: 15px; padding-top: 50px;">
+          Se ha bloqueado el producto correctamente
+        </div>
+        <button type="button" class="btn btn-outline-success btn-block" (click)="aceptar()">ACEPTAR</button>
+      </div>
+    </div>
+</ng-template>

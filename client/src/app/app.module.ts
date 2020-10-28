@@ -29,6 +29,8 @@ import { RecuperarPasswordComponent } from './components/recuperar-password/recu
 import { CategoriasComponent } from './components/categorias/categorias.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { ComentariosComponent } from './components/comentarios/comentarios.component';
+import { DenunciasComponent } from './components/denuncias/denuncias.component';
+import { ProductosBloqueadosComponent } from './components/productos-bloqueados/productos-bloqueados.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { ComentariosComponent } from './components/comentarios/comentarios.compo
     RecuperarPasswordComponent,
     CategoriasComponent,
     CarritoComponent,
-    ComentariosComponent
+    ComentariosComponent,
+    DenunciasComponent,
+    ProductosBloqueadosComponent
   ],
   imports: [
     BrowserModule,

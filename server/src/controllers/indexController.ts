@@ -108,6 +108,18 @@ class IndexController{
         //console.log(result)
         res.status(200).json(result.rows);
     }
+
+    public async deleteProducto(req :Request,res: Response){
+        var autoCommit=true;
+        const { id_producto } = req.body; 
+
+        let sql= "update producto set estado_detele=0 where id_producto=:id_producto"
+        let cnn = await oracledb.getConnection(keys.cns);
+        let result = await cnn.execute(sql, [id_producto], { autoCommit });
+        cnn.release();
+
+        res.status(201).send({msg:"Producto Eliminado"});
+    }
 }
 
 export const indexController= new IndexController();

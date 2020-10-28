@@ -41,6 +41,7 @@ class IndexRoutes {
         this.router.get('/usuario/listProductos/ordenDESC', indexController_1.indexController.obtenerProductosPrecioDESC);
         this.router.post('/usuario/listProductos/porCategoria', indexController_1.indexController.obtenerProductosPorNomCategoria);
         this.router.post('/usuario/listProductos/porPalabraClave', indexController_1.indexController.obtenerProductosPorPalabraClave);
+        this.router.put('/producto/deleteProducto', indexController_1.indexController.deleteProducto);
         //CATEGORIA
         this.router.post('/admin/categorias/crearCategoria', controllersCategoria_1.indexControllerCategoria.crearCategoria);
         this.router.get('/admin/categorias/listCategorias', controllersCategoria_1.indexControllerCategoria.obtenerCategorias);
@@ -61,6 +62,8 @@ class IndexRoutes {
         //DENUNCIA
         this.router.post('/producto/insertarDenuncia', controllersDenuncia_1.indexControllerDenuncia.crearDenuncia);
         this.router.get('/producto/obtenerDenuncias', controllersDenuncia_1.indexControllerDenuncia.obtenerDenuncias);
+        this.router.put('/producto/deleteProductoEnDenuncia', controllersDenuncia_1.indexControllerDenuncia.deleteProductoEnDenuncia);
+        this.router.get('/producto/obtenerProductosBloqueados', controllersDenuncia_1.indexControllerDenuncia.productosBloqueados);
         //ENVIO DE CORREO
         this.router.post('/login/registro/envCorreoConfirm', controllersCorreoConfirm_1.indexControllerCorreoConfirm.enviarCorreoDeConfirmacion);
         this.router.post('/login/envCorreoRecPass', controllersCorreoRecupPass_1.indexControllerCorreoRecupPass.enviarCorreoRecPass);

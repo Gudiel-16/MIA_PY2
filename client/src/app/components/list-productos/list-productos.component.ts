@@ -4,7 +4,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { NgbModal,NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
 
 //importamos servicios
-import { ProductosService } from '../../services/productos.service'
+import { ProductosService } from '../../services/productos.service';
 
 import { Cliente } from 'src/app/models/registroCliente';
 import { Carrito } from '../../models/carrito_Interface';

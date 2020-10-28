@@ -122,5 +122,16 @@ class IndexController {
             res.status(200).json(result.rows);
         });
     }
+    deleteProducto(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var autoCommit = true;
+            const { id_producto } = req.body;
+            let sql = "update producto set estado_detele=0 where id_producto=:id_producto";
+            let cnn = yield oracledb.getConnection(keys_1.default.cns);
+            let result = yield cnn.execute(sql, [id_producto], { autoCommit });
+            cnn.release();
+            res.status(201).send({ msg: "Producto Eliminado" });
+        });
+    }
 }
 exports.indexController = new IndexController();

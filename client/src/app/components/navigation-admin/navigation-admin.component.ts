@@ -23,7 +23,11 @@ export class NavigationAdminComponent implements OnInit {
   }
 
   denNot(){
+    this.router.navigate(['/admin/denuncias']);
+  }
 
+  productosBloqueados(){
+    this.router.navigate(['/admin/productosBloqueados']);
   }
 
   categorias(){

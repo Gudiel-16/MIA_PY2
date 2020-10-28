@@ -15,6 +15,8 @@ import { RecuperarPasswordComponent } from './components/recuperar-password/recu
 import { CategoriasComponent } from './components/categorias/categorias.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { ComentariosComponent } from './components/comentarios/comentarios.component';
+import { DenunciasComponent } from './components/denuncias/denuncias.component';
+import { ProductosBloqueadosComponent } from './components/productos-bloqueados/productos-bloqueados.component';
 
 //para verificar si esta logueado o no, no deja pasar a otras paginas si no lo esta
 import { OutsGuard } from './guards/outs.guard'
@@ -55,6 +57,16 @@ const routes: Routes = [
   {
     path:'admin/categorias',
     component: CategoriasComponent,
+    //canActivate:[OutsGuard] //esto hace que no entre un usuario, sino esta logueado
+  } ,
+  {
+    path:'admin/denuncias',
+    component: DenunciasComponent,
+    //canActivate:[OutsGuard] //esto hace que no entre un usuario, sino esta logueado
+  }  ,
+  {
+    path:'admin/productosBloqueados',
+    component: ProductosBloqueadosComponent,
     //canActivate:[OutsGuard] //esto hace que no entre un usuario, sino esta logueado
   }  
   ,

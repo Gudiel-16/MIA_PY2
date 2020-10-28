@@ -4,3 +4,5 @@ export interface Denuncia{
     id_producto?:number;
     id_c?:number;
 }
+
+

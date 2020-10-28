@@ -22,10 +22,20 @@ class IndexControllerDenuncia {
     obtenerDenuncias(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var autoCommit = false;
-            const { id_producto } = req.body;
-            let sql = "select CONCAT(CONCAT(cliente.nombre, ' '), cliente.apellido) \"nombre\", cliente.image, comentario.descripcion, comentario.fecha from comentario,cliente where cliente.id_c=comentario.id_c and comentario.id_producto=:id_producto order by comentario.id_com asc";
+            let sql = "select producto.nombre,producto.descripcion as \"DESCRIPRODUC\",producto.nom_cat,producto.precio,producto.ruta,denuncia.descripcion,denuncia.fecha,denuncia.id_producto from producto,denuncia where producto.id_producto=denuncia.id_producto and denuncia.estado_detele=1 order by denuncia.id_den asc";
             let cnn = yield oracledb.getConnection(keys_1.default.cns);
-            let result = yield cnn.execute(sql, [id_producto], { autoCommit });
+            let result = yield cnn.execute(sql, [], { autoCommit });
+            cnn.release();
+            //console.log(result)
+            res.status(200).json(result.rows);
+        });
+    }
+    productosBloqueados(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var autoCommit = false;
+            let sql = "select producto.nombre,producto.descripcion as \"DESCRIPRODUC\",producto.nom_cat,producto.precio,producto.ruta,denuncia.descripcion,denuncia.fecha,denuncia.id_producto from producto,denuncia where producto.id_producto=denuncia.id_producto and denuncia.estado_detele=0 order by denuncia.id_den asc";
+            let cnn = yield oracledb.getConnection(keys_1.default.cns);
+            let result = yield cnn.execute(sql, [], { autoCommit });
             cnn.release();
             //console.log(result)
             res.status(200).json(result.rows);
@@ -45,6 +55,17 @@ class IndexControllerDenuncia {
             res.status(200).json({
                 "Respuesta": "Denuncia Guardado"
             });
+        });
+    }
+    deleteProductoEnDenuncia(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var autoCommit = true;
+            const { id_producto } = req.body;
+            let sql = "update denuncia set estado_detele=0 where id_producto=:id_producto";
+            let cnn = yield oracledb.getConnection(keys_1.default.cns);
+            let result = yield cnn.execute(sql, [id_producto], { autoCommit });
+            cnn.release();
+            res.status(201).send({ msg: "Producto Eliminado" });
         });
     }
 }

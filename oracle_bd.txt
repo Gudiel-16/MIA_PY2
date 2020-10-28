@@ -203,6 +203,7 @@ update reaccion set megusta=0, nomegusta=1 where id_c=24 and id_producto=123;
 /* de nomegusta->megusta*/
 update reaccion set megusta=1, nomegusta=0 where id_c=1 and id_producto=123;
 
+select * from producto;
 select * from cliente;
 select * from administrador;
 select * from producto where producto.estado_detele=1;
@@ -216,6 +217,12 @@ select * from denuncia;
 select producto.nombre,producto.descripcion as "DESCRIPRODUC",producto.nom_cat,producto.precio,producto.ruta,denuncia.descripcion,denuncia.fecha,denuncia.id_producto
 from producto,denuncia
 where producto.id_producto=denuncia.id_producto and denuncia.estado_detele=1
+order by denuncia.id_den asc;
+
+/*productos bloqueados*/
+select producto.nombre,producto.descripcion as "DESCRIPRODUC",producto.nom_cat,producto.precio,producto.ruta,denuncia.descripcion,denuncia.fecha,denuncia.id_producto
+from producto,denuncia
+where producto.id_producto=denuncia.id_producto and denuncia.estado_detele=0
 order by denuncia.id_den asc;
 
 /*eliminar producto*/
@@ -237,3 +244,11 @@ delete from cliente where id_c=22;
 delete from cliente where id_c=23;
 
 COMMIT;
+
+
+
+
+
+
+
+

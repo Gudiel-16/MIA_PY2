@@ -10,10 +10,19 @@ class IndexControllerDenuncia{
 
     public async obtenerDenuncias (req :Request,res: Response) {
         var autoCommit=false;
-        const { id_producto } = req.body;
-        let sql = "select CONCAT(CONCAT(cliente.nombre, ' '), cliente.apellido) \"nombre\", cliente.image, comentario.descripcion, comentario.fecha from comentario,cliente where cliente.id_c=comentario.id_c and comentario.id_producto=:id_producto order by comentario.id_com asc";
+        let sql = "select producto.nombre,producto.descripcion as \"DESCRIPRODUC\",producto.nom_cat,producto.precio,producto.ruta,denuncia.descripcion,denuncia.fecha,denuncia.id_producto from producto,denuncia where producto.id_producto=denuncia.id_producto and denuncia.estado_detele=1 order by denuncia.id_den asc";
         let cnn = await oracledb.getConnection(keys.cns);
-        let result = await cnn.execute(sql, [id_producto], { autoCommit });
+        let result = await cnn.execute(sql, [], { autoCommit });
+        cnn.release();
+        //console.log(result)
+        res.status(200).json(result.rows);
+    }
+
+    public async productosBloqueados (req :Request,res: Response) {
+        var autoCommit=false;
+        let sql = "select producto.nombre,producto.descripcion as \"DESCRIPRODUC\",producto.nom_cat,producto.precio,producto.ruta,denuncia.descripcion,denuncia.fecha,denuncia.id_producto from producto,denuncia where producto.id_producto=denuncia.id_producto and denuncia.estado_detele=0 order by denuncia.id_den asc";
+        let cnn = await oracledb.getConnection(keys.cns);
+        let result = await cnn.execute(sql, [], { autoCommit });
         cnn.release();
         //console.log(result)
         res.status(200).json(result.rows);
@@ -36,6 +45,19 @@ class IndexControllerDenuncia{
             "Respuesta": "Denuncia Guardado"
         });
     }
+
+    public async deleteProductoEnDenuncia(req :Request,res: Response){
+        var autoCommit=true;
+        const { id_producto } = req.body; 
+
+        let sql= "update denuncia set estado_detele=0 where id_producto=:id_producto";
+        let cnn = await oracledb.getConnection(keys.cns);
+        let result = await cnn.execute(sql, [id_producto], { autoCommit });
+        cnn.release();
+
+        res.status(201).send({msg:"Producto Eliminado"});
+    }
+
 }
 
 export const indexControllerDenuncia= new IndexControllerDenuncia();
