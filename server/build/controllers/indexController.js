@@ -52,7 +52,7 @@ class IndexController {
     obtenerTodosProductos(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var autoCommit = false;
-            let sql = "select * from producto";
+            let sql = "select * from producto where producto.estado_detele=1";
             let cnn = yield oracledb.getConnection(keys_1.default.cns);
             let result = yield cnn.execute(sql, [], { autoCommit });
             cnn.release();

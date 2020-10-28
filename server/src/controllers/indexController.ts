@@ -41,7 +41,7 @@ class IndexController{
 
     public async obtenerTodosProductos (req :Request,res: Response) {
         var autoCommit=false;
-        let sql = "select * from producto";
+        let sql = "select * from producto where producto.estado_detele=1";
         let cnn = await oracledb.getConnection(keys.cns);
         let result = await cnn.execute(sql, [], { autoCommit });
         cnn.release();

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/listProductos';
 import { Cliente } from 'src/app/models/registroCliente';
 import { Comentario } from '../../models/comentario_Interface';
+import { Denuncia } from '../../models/denuncia_Inteface';
 
 //ngBootstrap
 import { NgbModal,NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
@@ -12,6 +13,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 //importamos servicio
 import { ProductosService } from '../../services/productos.service';
+
+interface HtmlInputEvent extends Event{
+  target: HTMLInputElement & EventTarget;
+}
 
 @Component({
   selector: 'app-comentarios',
@@ -38,6 +43,13 @@ export class ComentariosComponent implements OnInit {
     id_c:0
   }
 
+  miDenuncia:Denuncia={
+    descripcion:"",
+    fecha:"",
+    id_producto:0,
+    id_c:0
+  }
+
   //para darle propiedades a ngBootstrap
   ngModalOption:NgbModalOptions={};
   misComentarios: any =[];
@@ -53,6 +65,7 @@ export class ComentariosComponent implements OnInit {
     const params=this.activedRoute.snapshot.params;
     this.idProducto=params.id;
     this.miComent.id_producto=params.id;
+    this.miDenuncia.id_producto=params.id;
 
     let d_json=this.service.getClienteLS();
     if(d_json){
@@ -60,6 +73,7 @@ export class ComentariosComponent implements OnInit {
       let cliente:Cliente=d_json;
       this.idCliente=cliente.id_c;
       this.miComent.id_c=cliente.id_c;
+      this.miDenuncia.id_c=cliente.id_c;
 
         //si contiene un id
         if (params.id){
@@ -109,6 +123,35 @@ export class ComentariosComponent implements OnInit {
     }else{
       //alert
     }
+  }
+
+  denunciarProructo(contenido){
+    //mostramos msj en pantalla
+    this.ngModalOption.backdrop='static';
+    this.ngModalOption.keyboard=true;
+    this.ngModalOption.centered=true;
+    this.ngbModal.open(contenido,this.ngModalOption);  
+  }
+
+  ejecutar(contenidoRes){
+    if(this.miDenuncia.descripcion!=""){
+      let fecha=new Date();
+      let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear();
+      this.miDenuncia.fecha=fechaa;
+      this.service.saveDenuncia(this.miDenuncia).subscribe(
+        res=>{
+          this.ngModalOption.backdrop='static';
+          this.ngModalOption.keyboard=true;
+          this.ngModalOption.centered=true;
+          this.ngbModal.open(contenidoRes,this.ngModalOption); 
+        },
+        err=>console.error(err)
+      );
+    }
+  }
+
+  aceptar(){
+    this.ngbModal.dismissAll(); //cerrar model
   }
 
 }

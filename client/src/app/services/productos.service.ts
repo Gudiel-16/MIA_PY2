@@ -12,6 +12,7 @@ import { Cliente } from '../models/registroCliente'
 import { Reaccion } from '../models/reaccion_Interface';
 import { Carrito } from '../models/carrito_Interface';
 import { Comentario } from '../models/comentario_Interface';
+import { Denuncia } from '../models/denuncia_Inteface';
 import { Administrador } from '../models/admin_Interface';
 import { isNullOrUndefined } from 'util';
 import { map } from 'rxjs/operators'
@@ -132,6 +133,15 @@ export class ProductosService {
 
   saveComentario(comentario: Comentario){
     return this.http.post(`${this.API_URI}/producto/insertarComentario`,comentario);
+  }
+
+  //DENUNCIA
+  getDenuncias(){
+    return this.http.get(`${this.API_URI}/producto/obtenerDenuncias`);
+  }
+
+  saveDenuncia(denuncia: Denuncia){
+    return this.http.post(`${this.API_URI}/producto/insertarDenuncia`,denuncia);
   }
 
   //METODOS PRODUCTO

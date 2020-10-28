@@ -11,6 +11,7 @@ import {indexControllerCorreoVendedor} from '../controllers/controllersCorreoVen
 import {indexControllerCorreoComprador} from "../controllers/controllersCorreoComprador";
 import {indexControllerDetalleCV} from '../controllers/controllersDetalleCV';
 import {indexControllerComentario} from '../controllers/controllersComentario';
+import {indexControllerDenuncia} from '../controllers/controllersDenuncia';
 
 class IndexRoutes{
     public router: Router = Router();
@@ -66,6 +67,10 @@ class IndexRoutes{
         //COMENTARIO
         this.router.post('/producto/insertarComentario',indexControllerComentario.crearComentario);
         this.router.post('/producto/obtenerComentarios',indexControllerComentario.obtenerComentarios);
+
+        //DENUNCIA
+        this.router.post('/producto/insertarDenuncia',indexControllerDenuncia.crearDenuncia);
+        this.router.get('/producto/obtenerDenuncias',indexControllerDenuncia.obtenerDenuncias);
 
         //ENVIO DE CORREO
         this.router.post('/login/registro/envCorreoConfirm',indexControllerCorreoConfirm.enviarCorreoDeConfirmacion);

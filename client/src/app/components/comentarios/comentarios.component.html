@@ -29,10 +29,50 @@
             <p>{{miProduct.nom_cat == '' ? 'CATEGORIA' : miProduct.nom_cat}}</p>
             <p>{{miProduct.precio == 0 ? 'Q. 0.0' : miProduct.precio}}</p>
         </div>
-        <button type="button" class="btn btn-outline-danger btn-block">DENUNCIAR PRODUCTO  <i style="font-size: 15px;" class="fas fa-radiation-alt"></i></button>
+        <button type="button" class="btn btn-outline-danger btn-block" (click)="denunciarProructo(contenido)">DENUNCIAR PRODUCTO  <i style="font-size: 15px;" class="fas fa-radiation-alt"></i></button>
       </div>
     </div>
 </div>
+
+<ng-template #contenido let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">DENUNCIA DE PRODUCTO</h5>
+    <button type="button" (click)="aceptar()" aria-label="Close" class="close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <i class="fas fa-exclamation-triangle"></i>Porfavor ingresar el motivo del porque la denuncia:
+      </div>
+      <div class="form-group col-md-12">
+        <input [(ngModel)]="miDenuncia.descripcion" [ngModelOptions]="{standalone: true}" type="text" name="denuncia" placeholder="Denuncia" class="form-control">
+      </div>       
+      <button type="button" class="btn btn-outline-danger btn-block" (click)="ejecutar(contenidoRes)">DENUNCIAR  <i style="font-size: 15px;" class="fas fa-radiation-alt"></i></button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #contenidoRes let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">DENUNCIA GUARDADA</h5>
+    <button type="button" (click)="aceptar()" aria-label="Close" class="close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <img src="/assets/check.png" style="width: 200px; height: 140px;">
+      </div>
+      <div class="form-group col-md-6" style="padding-left: 5px; padding-top: 40px;">
+        Muchas gracias por denunciar, la denuncia se ha guardado correctamente.
+      </div>
+      <button type="button" class="btn btn-outline-success btn-block" (click)="aceptar()">ACEPTAR</button>
+    </div>
+  </div>
+</ng-template>
 
 
 
