@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 //importamos servicios
-import { ProductosService } from '../../services/productos.service'
+import { ProductosService } from '../../services/productos.service';
 
 //ngBootstrap
 import { NgbModal,NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";

@@ -31,6 +31,7 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 import { ComentariosComponent } from './components/comentarios/comentarios.component';
 import { DenunciasComponent } from './components/denuncias/denuncias.component';
 import { ProductosBloqueadosComponent } from './components/productos-bloqueados/productos-bloqueados.component';
+import { ReporteBitacoraComponent } from './components/reporte-bitacora/reporte-bitacora.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ProductosBloqueadosComponent } from './components/productos-bloqueados/
     CarritoComponent,
     ComentariosComponent,
     DenunciasComponent,
-    ProductosBloqueadosComponent
+    ProductosBloqueadosComponent,
+    ReporteBitacoraComponent
   ],
   imports: [
     BrowserModule,

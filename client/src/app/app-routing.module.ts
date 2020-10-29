@@ -17,6 +17,7 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 import { ComentariosComponent } from './components/comentarios/comentarios.component';
 import { DenunciasComponent } from './components/denuncias/denuncias.component';
 import { ProductosBloqueadosComponent } from './components/productos-bloqueados/productos-bloqueados.component';
+import { ReporteBitacoraComponent } from './components/reporte-bitacora/reporte-bitacora.component';
 
 //para verificar si esta logueado o no, no deja pasar a otras paginas si no lo esta
 import { OutsGuard } from './guards/outs.guard'
@@ -99,6 +100,10 @@ const routes: Routes = [
   {
     path:'usuario/listProductos/detalleProducto/:id/comentariosProducto/:id',
     component: ComentariosComponent
+  },
+  {
+    path:'admin/reporteBitacora',
+    component: ReporteBitacoraComponent
   }    
 
 ];

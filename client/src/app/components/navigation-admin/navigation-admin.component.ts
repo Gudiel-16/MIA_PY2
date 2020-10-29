@@ -36,8 +36,8 @@ export class NavigationAdminComponent implements OnInit {
     this.router.navigate(['/admin/categorias']);
   }
 
-  reportes(){
-
+  reportesBit(){
+    this.router.navigate(['admin/reporteBitacora']);    
   }
 
   cerrarSecion(){

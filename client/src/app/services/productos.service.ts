@@ -304,6 +304,15 @@ export class ProductosService {
     });
   }
 
+  //REPORTES
+  getBitacoraASC(){
+    return this.http.get(`${this.API_URI}/reporte/bitacoraASC`);
+  }
+
+  getBitacoraDESC(){
+    return this.http.get(`${this.API_URI}/reporte/bitacoraDESC`);
+  }
+
   //LOCALSTORAGE
 
   setAdminLS(admin:Administrador){

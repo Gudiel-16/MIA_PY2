@@ -10,7 +10,16 @@
           <a class="nav-link" (click)="denNot()">Denuncias</a>
           <a class="nav-link" (click)="productosBloqueados()">Bloqueos</a>
           <a class="nav-link" (click)="categorias()">Categorias</a>
-          <a class="nav-link" (click)="reportes()">Reportes</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Reportes
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" (click)="reportesBit()">Reporte Bitacora</a>
+              <a class="dropdown-item">Top 10 de productos mas vendidos</a>
+              <a class="dropdown-item">Top 10 de productos que más me gusta han tenido</a>
+            </div>
+          </li>        
           <a class="nav-link" (click)="cerrarSecion()">Cerrar Sesion</a>
         </div>
       </div>
