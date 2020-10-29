@@ -30,6 +30,9 @@ export class CategoriasComponent implements OnInit {
   nomNewCat:string="";
 
   misCategorias: any =[];
+
+  idAdmin:number=0;
+  correoAdmin:string="";
   
   ngOnInit(): void {
     //obtengo categorias cuando entro a la pagina
@@ -40,23 +43,36 @@ export class CategoriasComponent implements OnInit {
       },
       err=>console.error(err)
     );
-  }
-
-  addCategoria(contenido){
 
     let d_json=this.service.getAdminLS();
     //si no es nulo
     if(d_json){
       let admin:Administrador=d_json;  
-        //si ingreso nombre
-        if(this.nomNewCat!=""){
-          //guardamos
-          this.service.saveCategoria(admin.id_ad,this.nomNewCat).subscribe(
+      this.idAdmin=admin.id_ad;
+      this.correoAdmin=admin.correo;
+    }else{
+      console.log("err");
+    }
+  }
+
+  addCategoria(contenido){
+
+    //si ingreso nombre
+    if(this.nomNewCat!=""){
+      //guardamos
+      this.service.saveCategoria(this.idAdmin,this.nomNewCat).subscribe(
+        res=>{
+          //acutalizamos combobox
+          this.service.getCategorias().subscribe(
             res=>{
-              //acutalizamos combobox
-              this.service.getCategorias().subscribe(
+              this.misCategorias=res;
+
+              //guardo en bitacora
+              let fecha=new Date();
+              let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
+              this.service.saveBitacora(this.correoAdmin,"Agrego una nueva categoria",fechaa).subscribe(
                 res=>{
-                  this.misCategorias=res;
+                  console.log(res);
                   this.ngModalOption.backdrop='static';
                   this.ngModalOption.keyboard=true;
                   this.ngModalOption.centered=true;
@@ -68,11 +84,12 @@ export class CategoriasComponent implements OnInit {
             },
             err=>console.error(err)
           );
-        }          
+        },
+        err=>console.error(err)
+      );
+    }          
         
-    }else{
-      console.log("err");
-    }
+    
   }
 
   aceptar(){

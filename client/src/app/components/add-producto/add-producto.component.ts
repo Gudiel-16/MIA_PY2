@@ -48,6 +48,8 @@ export class AddProductoComponent implements OnInit {
   misCategorias: any =[];
   nomCatBuscar:string="SELEC CATEGORIA";
 
+  correoCliente:string="";
+
   //instanciamos
   constructor(private _uploadService:UploadService, private service:ProductosService, private router:Router, private ngbModal:NgbModal ) { }
 
@@ -58,6 +60,7 @@ export class AddProductoComponent implements OnInit {
     if(d_json){
       let cliente:Cliente=d_json;
       this.miProduct.id_c=cliente.id_c;
+      this.correoCliente=cliente.correo;
 
       //actualizo combobox de categorias
       this.service.getCategorias().subscribe(
@@ -123,12 +126,19 @@ export class AddProductoComponent implements OnInit {
               this.service.saveProducto(this.miProduct).subscribe(
                 resp=>{               
                     console.log(resp);
-                    //mostramos msj en pantalla
-                    this.ngModalOption.backdrop='static';
-                    this.ngModalOption.keyboard=true;
-                    this.ngModalOption.centered=true;
-                    this.ngbModal.open(contenido,this.ngModalOption);  
-                                                  
+                    let fecha=new Date();
+                    let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
+                    this.service.saveBitacora(this.correoCliente,"Inserto un nuevo producto",fechaa).subscribe(
+                      res=>{
+                        //mostramos msj en pantalla
+                        this.ngModalOption.backdrop='static';
+                        this.ngModalOption.keyboard=true;
+                        this.ngModalOption.centered=true;
+                        this.ngbModal.open(contenido,this.ngModalOption);  
+
+                      },
+                      err=>console.error(err)
+                    );                                                  
                 },
                 errr=>console.error(errr)
               );

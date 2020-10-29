@@ -61,8 +61,6 @@ export class CarritoComponent implements OnInit {
     id_c:0
   }
 
-  det
-
   misProductos: any =[];
   total:number=0;
 
@@ -115,7 +113,7 @@ export class CarritoComponent implements OnInit {
     this.comprarr((yaEjecuto)=>{
       
       let fecha=new Date();
-      let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear();
+      let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
       let updateCreditos=this.miClient.creditos-this.total;
       this.service.updateCreditosCliente(updateCreditos,this.miClient.id_c).subscribe(
         res=>{
@@ -141,6 +139,7 @@ export class CarritoComponent implements OnInit {
                   this.ngModalOption.keyboard=true;
                   this.ngModalOption.centered=true;
                   this.ngbModal.open(contenido,this.ngModalOption); 
+                  this.limpiar();
                 }
               }
                
@@ -212,7 +211,7 @@ export class CarritoComponent implements OnInit {
             let idVendedor=key;
             //obtengo fecha actual
             let fecha=new Date();
-            let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear();
+            let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
                        
             //envio correo a vendedor, (aca mismo actualiza los creditos)
             this.service.envCorreoAVendedor(fechaa,this.correoVendedor,this.nombreVendedor,this.filasHTML,totalVendedor,updateCredit,idVendedor).subscribe(

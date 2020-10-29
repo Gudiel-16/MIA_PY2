@@ -72,7 +72,14 @@ class IndexControllerCorreoComprador{
 
         console.log("message sent",info.messageId);
 
-        res.status(201).send({msg:"Correo a Comprador Enviado"});
+        var autoCommit=true;
+        const descripcion:String="Ha comprado productos";
+        let sql2= "insert into bitacora(correo,descripcion,fecha) values(:correo,:descripcion,:fecha)";
+        let cnn2 = await oracledb.getConnection(keys.cns);
+        let result2 = await cnn2.execute(sql2, [correo,descripcion,fecha], { autoCommit });
+        cnn2.release();
+
+        res.status(201).send({msg:"Correo a Comprador Enviado, se guardo en bitacora"});
 
     }
 }

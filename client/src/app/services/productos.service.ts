@@ -294,6 +294,16 @@ export class ProductosService {
     });
   }
 
+  //BITACORA
+  saveBitacora(correo,descripcin,fecha){
+    return this.http.post(`${this.API_URI}/bitacora/insertar`,
+    {
+      "correo":correo,
+      "descripcion":descripcin,
+      "fecha":fecha
+    });
+  }
+
   //LOCALSTORAGE
 
   setAdminLS(admin:Administrador){

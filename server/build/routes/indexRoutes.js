@@ -13,6 +13,7 @@ const controllersCorreoComprador_1 = require("../controllers/controllersCorreoCo
 const controllersDetalleCV_1 = require("../controllers/controllersDetalleCV");
 const controllersComentario_1 = require("../controllers/controllersComentario");
 const controllersDenuncia_1 = require("../controllers/controllersDenuncia");
+const controllersBitacora_1 = require("../controllers/controllersBitacora");
 class IndexRoutes {
     constructor() {
         this.router = express_1.Router();
@@ -69,6 +70,8 @@ class IndexRoutes {
         this.router.post('/login/envCorreoRecPass', controllersCorreoRecupPass_1.indexControllerCorreoRecupPass.enviarCorreoRecPass);
         this.router.post('/carrito/envCorreoAVendedor', controllersCorreoVendedor_1.indexControllerCorreoVendedor.enviarCorreoVendedor);
         this.router.post('/carrito/envCorreoAComprador', controllersCorreoComprador_1.indexControllerCorreoComprador.enviarCorreoComprador);
+        //BITACORA
+        this.router.post('/bitacora/insertar', controllersBitacora_1.indexControllerBitacora.insertar);
     }
 }
 const indexRoutes = new IndexRoutes();

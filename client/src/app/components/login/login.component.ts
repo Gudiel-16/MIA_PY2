@@ -43,9 +43,20 @@ export class LoginComponent implements OnInit {
       this.service.loginAdmin(this.miCorreo,this.miPass).subscribe((res)=>{
         //si es true
         if(res['msg']){
+
           let datosUser:Administrador=res['datauser']; //informacion del admin
           this.service.setAdminLS(datosUser); //guardo en localStorage (LS)
-          this.router.navigate(['admin']); //navego a admin
+
+          //guardo en bitacora
+          let fecha=new Date();
+          let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
+          this.service.saveBitacora(this.miCorreo,"Inicio Sesion",fechaa).subscribe(
+            res=>{              
+              this.router.navigate(['admin']); //navego a admin            
+            },
+            err=>console.error(err)
+          );   
+          
         }else{
           //no existe o no se a confirmado
         }  
@@ -57,7 +68,17 @@ export class LoginComponent implements OnInit {
         if(res['msg']){
           let datosUser:Cliente=res['datauser']; //informacion del cliente
           this.service.setClienteLS(datosUser); //guardo en localStorage (LS)
-          this.router.navigate(['usuario']); //navego a usuario
+
+          //guardo en bitacora
+          let fecha=new Date();
+          let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
+          this.service.saveBitacora(this.miCorreo,"Inicio Sesion",fechaa).subscribe(
+            res=>{
+              this.router.navigate(['usuario']); //navego a usuario          
+            },
+            err=>console.error(err)
+          );  
+          
         }else{
           //no existe o no se a confirmado
         }  

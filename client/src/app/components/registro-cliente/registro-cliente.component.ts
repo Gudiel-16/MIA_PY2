@@ -38,7 +38,7 @@ export class RegistroClienteComponent implements OnInit {
     pais:'',
     fech_nac:'',
     pass:'',
-    image:'',
+    image:'https://res.cloudinary.com/gudiel16/image/upload/v1603579987/testing_angular_cloudinary/sinFoto_epcdyw.png',
     creditos:10000,
     confirmacion:0
   };
@@ -68,21 +68,17 @@ export class RegistroClienteComponent implements OnInit {
      //validamos que los campos esten llenos
      if (this.miClient.nombre!='' && this.miClient.apellido!='' && this.miClient.correo!='' 
      && this.miClient.pais!='' && this.miClient.fech_nac!=''){
-         //para guardar imagen en cloudinary
-        //metemos credenciales y enviamos image
-        const data=new FormData();
-        data.append('file',this.file);
-        data.append('upload_preset','angular_cloudinary');
-        data.append('cloud_name','gudiel16'); 
 
-        this._uploadService.uploadImage(data).subscribe( 
-          res=>{
-            //console.log(res.secure_url); //ruta a guardar en base de datos
-            this.miClient.image=res.secure_url;
+      if(this.file==null){
 
-            //guardamos en base de datos
-            this.service.saveCliente(this.miClient).subscribe(
-              resp=>{
+        //guardamos en base de datos
+        this.service.saveCliente(this.miClient).subscribe(
+          resp=>{
+
+            let fecha=new Date();
+            let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
+            this.service.saveBitacora(this.miClient.correo,"Se registro en el sistema",fechaa).subscribe(
+              res=>{
                 //enviamos correo
                 this.service.envCorreoConfirm(this.miClient).subscribe(
                   resp=>{
@@ -97,13 +93,63 @@ export class RegistroClienteComponent implements OnInit {
                     this.ngbModal.open(contenido,this.ngModalOption);
                   },
                   errr=>console.log(errr)
-                );                
+                );  
+              },
+              err=>console.error(err)
+
+            );                          
+          },
+          errr=>console.error(errr)
+        );
+
+      }else{
+        //para guardar imagen en cloudinary
+        //metemos credenciales y enviamos image
+        const data=new FormData();
+        data.append('file',this.file);
+        data.append('upload_preset','angular_cloudinary');
+        data.append('cloud_name','gudiel16'); 
+
+        this._uploadService.uploadImage(data).subscribe( 
+          res=>{
+            //console.log(res.secure_url); //ruta a guardar en base de datos
+            this.miClient.image=res.secure_url;
+
+            //guardamos en base de datos
+            this.service.saveCliente(this.miClient).subscribe(
+              resp=>{
+                let fecha=new Date();
+                let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
+                this.service.saveBitacora(this.miClient.correo,"Se registro en el sistema",fechaa).subscribe(
+                  res=>{
+                    //enviamos correo
+                    this.service.envCorreoConfirm(this.miClient).subscribe(
+                      resp=>{
+                        console.log(resp);
+                        //guardamos en storage
+                        let user:Cliente=this.miClient;
+                        this.service.setClienteLSConfirm(user);
+                        //mostramos msj en pantalla
+                        this.ngModalOption.backdrop='static';
+                        this.ngModalOption.keyboard=true;
+                        this.ngModalOption.centered=true;
+                        this.ngbModal.open(contenido,this.ngModalOption);
+                      },
+                      errr=>console.log(errr)
+                    );  
+                  },
+                  err=>console.error(err)
+
+                );                 
               },
               errr=>console.error(errr)
             );
           },
           err=>console.error(err)
-        )        
+        );    
+      }
+
+             
 
     }else{
       //elert error

@@ -160,8 +160,10 @@ Despues de crear cuenta:
 
 
 
-En 'server'->'src'->'index.ts' definimos las rutas creadas en carpeta 'routes'
-
+//Para bitacora:
+    en controllersCorreoVendedor y controllersCorreoComprador:
+        se hace la actualizacion de creditos
+        se guarda en bitacora
 
 
 

@@ -79,7 +79,13 @@ class IndexControllerCorreoVendedor{
         let result = await cnn.execute(sql, [creditos,id_c], { autoCommit });
         cnn.release();
 
-        res.status(201).send({msg:"Correo a Vendedor Enviado y actualizacion de Credit"});
+        const descripcion:String="Ha vendido productos";
+        let sql2= "insert into bitacora(correo,descripcion,fecha) values(:correo,:descripcion,:fecha)";
+        let cnn2 = await oracledb.getConnection(keys.cns);
+        let result2 = await cnn2.execute(sql2, [correo,descripcion,fecha], { autoCommit });
+        cnn2.release();
+
+        res.status(201).send({msg:"Correo a Vendedor Enviado y actualizacion de Creditos, se guardo en bitacora"});
 
     }
 }

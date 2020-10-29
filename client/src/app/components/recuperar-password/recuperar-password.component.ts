@@ -47,11 +47,21 @@ export class RecuperarPasswordComponent implements OnInit {
           //acuatlizamos cliente
           this.service.updatePassCliente(cliente).subscribe(
             res=>{
-              this.ngModalOption.backdrop='static';
-              this.ngModalOption.keyboard=true;
-              this.ngModalOption.centered=true;
-              this.ngbModal.open(contenido,this.ngModalOption); 
-              this.service.deleteLSRecPass();
+              this.service.deleteLSRecPass(); 
+              
+              //guardo en bitacora
+              let fecha=new Date();
+              let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
+              this.service.saveBitacora(cliente.correo,"Recupero Password",fechaa).subscribe(
+                res=>{
+                  this.ngModalOption.backdrop='static';
+                  this.ngModalOption.keyboard=true;
+                  this.ngModalOption.centered=true;
+                  this.ngbModal.open(contenido,this.ngModalOption);                    
+
+                },
+                err=>console.error(err)
+              );                
             },
             err=>console.error(err)
           );          

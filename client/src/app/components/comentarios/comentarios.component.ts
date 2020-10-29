@@ -56,6 +56,7 @@ export class ComentariosComponent implements OnInit {
 
   idCliente:number=0;
   idProducto:number=0;
+  correoCliente:string="";
 
   constructor(private service:ProductosService, private router:Router, private activedRoute: ActivatedRoute, private ngbModal:NgbModal) { }
 
@@ -74,6 +75,7 @@ export class ComentariosComponent implements OnInit {
       this.idCliente=cliente.id_c;
       this.miComent.id_c=cliente.id_c;
       this.miDenuncia.id_c=cliente.id_c;
+      this.correoCliente=cliente.correo;
 
         //si contiene un id
         if (params.id){
@@ -114,6 +116,14 @@ export class ComentariosComponent implements OnInit {
             res=>{
               this.misComentarios=res;
               this.miComent.descripcion=""; //para que limpie campo
+
+              //guardo en bitacora
+              this.service.saveBitacora(this.correoCliente,"Agrego un nuevo comentario",fechaa).subscribe(
+                res=>{
+                },
+                err=>console.error(err)
+              ); 
+
             },
             err=>console.error(err)
           );
@@ -136,14 +146,21 @@ export class ComentariosComponent implements OnInit {
   ejecutar(contenidoRes){
     if(this.miDenuncia.descripcion!=""){
       let fecha=new Date();
-      let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear();
+      let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
       this.miDenuncia.fecha=fechaa;
       this.service.saveDenuncia(this.miDenuncia).subscribe(
         res=>{
-          this.ngModalOption.backdrop='static';
-          this.ngModalOption.keyboard=true;
-          this.ngModalOption.centered=true;
-          this.ngbModal.open(contenidoRes,this.ngModalOption); 
+          //guardo en bitacora
+          this.service.saveBitacora(this.correoCliente,"Realizo una denuncia",fechaa).subscribe(
+            res=>{
+              this.ngModalOption.backdrop='static';
+              this.ngModalOption.keyboard=true;
+              this.ngModalOption.centered=true;
+              this.ngbModal.open(contenidoRes,this.ngModalOption); 
+              
+            },
+            err=>console.error(err)
+          );           
         },
         err=>console.error(err)
       );

@@ -12,6 +12,7 @@ import {indexControllerCorreoComprador} from "../controllers/controllersCorreoCo
 import {indexControllerDetalleCV} from '../controllers/controllersDetalleCV';
 import {indexControllerComentario} from '../controllers/controllersComentario';
 import {indexControllerDenuncia} from '../controllers/controllersDenuncia';
+import {indexControllerBitacora} from '../controllers/controllersBitacora';
 
 class IndexRoutes{
     public router: Router = Router();
@@ -80,6 +81,9 @@ class IndexRoutes{
         this.router.post('/login/envCorreoRecPass',indexControllerCorreoRecupPass.enviarCorreoRecPass);
         this.router.post('/carrito/envCorreoAVendedor',indexControllerCorreoVendedor.enviarCorreoVendedor);
         this.router.post('/carrito/envCorreoAComprador',indexControllerCorreoComprador.enviarCorreoComprador);
+
+        //BITACORA
+        this.router.post('/bitacora/insertar',indexControllerBitacora.insertar);
         
     }
 }

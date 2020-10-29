@@ -8,11 +8,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.indexControllerCorreoComprador = void 0;
 //obtengo la base de datos
 //import BD from '../database'
 const oracledb = require('oracledb');
+//credenciales de conexion de base de datos
+const keys_1 = __importDefault(require("../keys"));
 const nodemailer = require('nodemailer');
 class IndexControllerCorreoComprador {
     enviarCorreoComprador(req, res) {
@@ -73,7 +78,13 @@ class IndexControllerCorreoComprador {
                 html: Present
             });
             console.log("message sent", info.messageId);
-            res.status(201).send({ msg: "Correo a Comprador Enviado" });
+            var autoCommit = true;
+            const descripcion = "Ha comprado productos";
+            let sql2 = "insert into bitacora(correo,descripcion,fecha) values(:correo,:descripcion,:fecha)";
+            let cnn2 = yield oracledb.getConnection(keys_1.default.cns);
+            let result2 = yield cnn2.execute(sql2, [correo, descripcion, fecha], { autoCommit });
+            cnn2.release();
+            res.status(201).send({ msg: "Correo a Comprador Enviado, se guardo en bitacora" });
         });
     }
 }

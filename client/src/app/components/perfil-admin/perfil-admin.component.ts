@@ -81,11 +81,21 @@ export class PerfilAdminComponent implements OnInit {
         this.service.updateDateAdmin(this.miAdmin).subscribe(
           resp=>{               
              console.log(resp);
-             //mostramos msj en pantalla
-             this.ngModalOption.backdrop='static';
-             this.ngModalOption.keyboard=true;
-             this.ngModalOption.centered=true;
-             this.ngbModal.open(contenido,this.ngModalOption);  
+
+             //guardo en bitacora
+             let fecha=new Date();
+             let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
+             this.service.saveBitacora(this.miAdmin.correo,"Actualizo sus datos",fechaa).subscribe(
+               res=>{
+                //mostramos msj en pantalla
+                this.ngModalOption.backdrop='static';
+                this.ngModalOption.keyboard=true;
+                this.ngModalOption.centered=true;
+                this.ngbModal.open(contenido,this.ngModalOption);   
+
+               },
+               err=>console.error(err)
+             );  
                                            
           },
           errr=>console.error(errr)
@@ -108,11 +118,21 @@ export class PerfilAdminComponent implements OnInit {
            this.service.updateDateAdmin(this.miAdmin).subscribe(
              resp=>{               
                 console.log(resp);
+                
+                //guardo en bitacora
+                let fecha=new Date();
+                let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
+                this.service.saveBitacora(this.miAdmin.correo,"Actualizo sus datos",fechaa).subscribe(
+                res=>{
                 //mostramos msj en pantalla
                 this.ngModalOption.backdrop='static';
                 this.ngModalOption.keyboard=true;
                 this.ngModalOption.centered=true;
-                this.ngbModal.open(contenido,this.ngModalOption);  
+                this.ngbModal.open(contenido,this.ngModalOption);   
+                
+               },
+               err=>console.error(err)
+             ); 
                                               
              },
              errr=>console.error(errr)

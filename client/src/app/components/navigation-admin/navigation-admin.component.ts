@@ -4,7 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 //importamos servicio
-import { ProductosService } from '../../services/productos.service'
+import { ProductosService } from '../../services/productos.service';
+
+import { Administrador } from 'src/app/models/admin_Interface';
 
 @Component({
   selector: 'app-navigation-admin',
@@ -39,8 +41,23 @@ export class NavigationAdminComponent implements OnInit {
   }
 
   cerrarSecion(){
-    this.service.logoutLS();
-    this.router.navigate(['/login']); //si no esta logueado me redirije a login para que meta sus datos
+    let d_json=this.service.getClienteLS();
+    if(d_json){
+      //datos admin
+      let admin:Administrador=d_json;
+      let fecha=new Date();
+      let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
+      //guardo en bitacora
+      this.service.saveBitacora(admin.correo,"Cerro Sesion",fechaa).subscribe(
+        res=>{
+          this.service.logoutLS();
+          this.router.navigate(['/login']);
+        },
+        err=>console.error(err)
+      ); 
+    }  
+
+    
   }
 
 }
