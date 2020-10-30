@@ -14,6 +14,7 @@ import {indexControllerComentario} from '../controllers/controllersComentario';
 import {indexControllerDenuncia} from '../controllers/controllersDenuncia';
 import {indexControllerBitacora} from '../controllers/controllersBitacora';
 import {indexControllerReportes} from '../controllers/controllersReportes';
+import {indexControllerChat} from '../controllers/controllersChat';
 
 class IndexRoutes{
     public router: Router = Router();
@@ -90,6 +91,8 @@ class IndexRoutes{
         this.router.get('/reporte/bitacoraASC',indexControllerReportes.bitacoraASC);
         this.router.get('/reporte/bitacoraDESC',indexControllerReportes.bitacoraDESC);
         
+        //CHAT
+        this.router.post('/chat/insertar',indexControllerChat.insertar);
     }
 }
 

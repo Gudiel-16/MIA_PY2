@@ -17,9 +17,12 @@ import { Producto } from 'src/app/models/listProductos';
 export class ChatComponent implements OnInit {
 
   usersChat={
-    id_c:0,
+    name:'',
+    image:'',
     text:'',
-    name:''
+    fecha:'',
+    id_producto:0,
+    id_c:0
   }
 
   miProduct: Producto={
@@ -46,7 +49,6 @@ export class ChatComponent implements OnInit {
     confirmacion:0
   };
 
-  idProducto:number=0;
   misMensajes;
   eventName:string="send-message";
 
@@ -55,7 +57,7 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     const id=this.activedRoute.snapshot.params.id;
-    this.idProducto=id;
+    this.usersChat.id_producto=id;
 
     this.service.listen('text-event').subscribe(
       res=>{
@@ -69,9 +71,10 @@ export class ChatComponent implements OnInit {
       let cliente:Cliente=d_json;
       this.service.getDatePerfil(cliente).subscribe(
         res=>{
-          this.miClient=res['datauser'];
-          this.usersChat.id_c=this.miClient.id_c;
+          this.miClient=res['datauser'];          
           this.usersChat.name=this.miClient.nombre;
+          this.usersChat.id_c=this.miClient.id_c;
+          this.usersChat.image=this.miClient.image;
         },
         err=>console.error(err)
       );
@@ -86,6 +89,9 @@ export class ChatComponent implements OnInit {
   }
 
   miMensaje(){
+    let fecha=new Date();
+    let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
+    this.usersChat.fecha=fechaa;
     this.service.emit(this.eventName,this.usersChat);
     this.usersChat.text="";
   }

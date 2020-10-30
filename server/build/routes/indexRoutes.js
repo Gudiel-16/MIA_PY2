@@ -15,6 +15,7 @@ const controllersComentario_1 = require("../controllers/controllersComentario");
 const controllersDenuncia_1 = require("../controllers/controllersDenuncia");
 const controllersBitacora_1 = require("../controllers/controllersBitacora");
 const controllersReportes_1 = require("../controllers/controllersReportes");
+const controllersChat_1 = require("../controllers/controllersChat");
 class IndexRoutes {
     constructor() {
         this.router = express_1.Router();
@@ -76,6 +77,8 @@ class IndexRoutes {
         //REPORTES
         this.router.get('/reporte/bitacoraASC', controllersReportes_1.indexControllerReportes.bitacoraASC);
         this.router.get('/reporte/bitacoraDESC', controllersReportes_1.indexControllerReportes.bitacoraDESC);
+        //CHAT
+        this.router.post('/chat/insertar', controllersChat_1.indexControllerChat.insertar);
     }
 }
 const indexRoutes = new IndexRoutes();

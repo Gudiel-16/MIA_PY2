@@ -6,6 +6,7 @@ import cors from 'cors';
 import indexRoutes from './routes/indexRoutes';
 
 import SocketIO  =require('socket.io');
+import {indexControllerChat} from './controllers/controllersChat';
 
 class Server{
 
@@ -49,6 +50,9 @@ class Server{
         io.on('connection',(socket)=>{            
             socket.on('send-message',(data)=>{
                 miMSJ.push(data);
+                indexControllerChat.insertar(data).then((res)=>{
+                    console.log(res);
+                });
                 socket.emit('text-event',miMSJ);
                 socket.broadcast.emit('text-event',miMSJ);
             });

@@ -8,6 +8,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
 const SocketIO = require("socket.io");
+const controllersChat_1 = require("./controllers/controllersChat");
 class Server {
     //se ejecuta al instanciar la clase, y devolvera objeto tipo express
     constructor() {
@@ -40,6 +41,9 @@ class Server {
         io.on('connection', (socket) => {
             socket.on('send-message', (data) => {
                 miMSJ.push(data);
+                controllersChat_1.indexControllerChat.insertar(data).then((res) => {
+                    console.log(res);
+                });
                 socket.emit('text-event', miMSJ);
                 socket.broadcast.emit('text-event', miMSJ);
             });
