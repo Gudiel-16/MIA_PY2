@@ -32,6 +32,7 @@ import { ComentariosComponent } from './components/comentarios/comentarios.compo
 import { DenunciasComponent } from './components/denuncias/denuncias.component';
 import { ProductosBloqueadosComponent } from './components/productos-bloqueados/productos-bloqueados.component';
 import { ReporteBitacoraComponent } from './components/reporte-bitacora/reporte-bitacora.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ReporteBitacoraComponent } from './components/reporte-bitacora/reporte-
     ComentariosComponent,
     DenunciasComponent,
     ProductosBloqueadosComponent,
-    ReporteBitacoraComponent
+    ReporteBitacoraComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

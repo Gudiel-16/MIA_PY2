@@ -1,0 +1,41 @@
+<!--PARA QUE SIEMPRE SALGA LA BARRA DE NAVEGACION DE USUARIO-->
+<app-navigation-usuario></app-navigation-usuario>
+
+<div class="row" style="margin-top: 50px;">
+    <div class="col-12 col-sm-12 col-md-8 order-2 order-sm-2 order-md-1">
+        <div>
+            <label for=""> USUARIO: {{usersChat.name}}</label>
+            <input type="text" class="form-control" (change)="miMensaje()" [(ngModel)]="usersChat.text" style="border: solid;" placeholder="TEXTO AQUI">
+            <p> Escribe tu texto y presiona enter para enviar...</p>
+        </div>
+        <div class="mt-3">
+            <div style="height: 300px; overflow-y: scroll; border:solid; border-width:2px;">
+                <div class="media" *ngFor="let a of misMensajes">
+                    <img src="{{miClient.image}}" style="width: 50px; height: 50px; border-radius: 50px; margin-left: 20px; margin-top: 20px;" class="mr-3" alt="...">
+                    <div class="media-body" style="padding-left: 5px; padding-top: 15px; padding-right: 15px;">
+                        <p style="background-color:#5DADE2; color: white; padding: 10px;">
+                            <strong style="color: black;">
+                                {{a.name}}:  
+                            </strong> 
+                            <br>{{a.text}}  
+                        </p>  
+                        <p style="text-align: right; color: black;">
+                            <small>20-20-20 : 4:16</small>
+                        </p>
+                    </div>                              
+                </div>
+            </div>        
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-4 order-1 order-sm-1 order-md-2" style="margin-bottom: 15px;" >
+        <div class="col-md-12">
+          <div class="card card-body text-center">
+              <h3>{{miProduct.nombre == '' ? 'NOMBRE' : miProduct.nombre}}</h3>
+              <p>{{miProduct.descripcion == '' ? 'DESCRIPCION' : miProduct.descripcion}}</p>
+              <img [src]="miProduct.ruta" class="card-img-top"  alt=""> <!--se ejecuta lo de arriba por el #-->  
+              <p>{{miProduct.nom_cat == '' ? 'CATEGORIA' : miProduct.nom_cat}}</p>
+              <p>{{miProduct.precio == 0 ? 'Q. 0.0' : miProduct.precio}}</p>
+          </div>
+        </div>
+     </div>
+</div>

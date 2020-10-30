@@ -6,6 +6,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 //importamos para tener acceso a las rutas
 import { Router } from '@angular/router';
 
+//socket
+import * as io from 'socket.io-client';
+
 //importamos interfaz
 import { Producto } from '../models/listProductos'
 import { Cliente } from '../models/registroCliente'
@@ -16,18 +19,23 @@ import { Denuncia } from '../models/denuncia_Inteface';
 import { Administrador } from '../models/admin_Interface';
 import { isNullOrUndefined } from 'util';
 import { map } from 'rxjs/operators'
-import { pipe } from 'rxjs';
+import { pipe,Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductosService {
 
+  socket:any;
+
   //guardamos direccion
   API_URI='http://localhost:3000'
 
   //creamos variable privada http
-  constructor(private http:HttpClient, private router:Router) { }
+  constructor(private http:HttpClient, private router:Router) { 
+    //para poner emitir nuestros eventos
+    this.socket=io(this.API_URI);
+  }
 
   //para que headers sean json
   headers:HttpHeaders=new HttpHeaders({
@@ -416,6 +424,19 @@ export class ProductosService {
 
   deleteCarritoLS(){
     localStorage.removeItem('carrito');
+  }
+
+  //SOCKET
+  listen(eventName:string){
+    return new Observable((Suscribir)=>{
+      this.socket.on(eventName,(data)=>{
+        Suscribir.next(data);
+      });
+    });
+  }
+
+  emit(eventName:string, data:any){
+    this.socket.emit(eventName,data);
   }
 
 }

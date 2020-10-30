@@ -52,7 +52,7 @@
     <div class="col-md-4">
         <div class="card card-body text-center">
             <form>                
-                <button class="btn btn-outline-info btn-block">
+                <button [routerLink]="['chatProducto',idProducto]" class="btn btn-outline-info btn-block">
                     <i class="fas fa-comment-dots"></i> CHAT
                 </button>
                 <button [routerLink]="['comentariosProducto',idProducto]" class="btn btn-outline-info btn-block">

@@ -149,7 +149,6 @@ Despues de crear cuenta:
     damos un nombre
     en 'Signing Mode' -> 'Unsigned'
     nombre de folder
-    
 
 //agregamos un 'guard' en angular, esto para que cuando no alla nada en 'localStorage' no nos deje avanzar a otras paginas
 //dentro de carpete 'client'
@@ -157,7 +156,16 @@ Despues de crear cuenta:
     
     //nos saldran varias opciones, escogemos CanActivate
 
+/////////////////////////////////////////////////////////////////SOCKET//////////////////////////////////////////////////
 
+Instalamos socket (en carpeta server):
+    npm i socket.io
+
+Instalamos otra dependencia de socket (en carpeta server):
+    npm i @types/socket.io -D 
+
+instalamos (en carpeta client):
+    npm i socket.io-client
 
 
 //Para bitacora:

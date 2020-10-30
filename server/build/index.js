@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
+const SocketIO = require("socket.io");
 class Server {
     //se ejecuta al instanciar la clase, y devolvera objeto tipo express
     constructor() {
@@ -28,8 +29,20 @@ class Server {
     }
     //para poder inicializar el servidor
     start() {
-        this.app.listen(this.app.get('port'), () => {
+        //array que para guardar msjs del socket
+        const miMSJ = [];
+        const serverWeb = this.app.listen(this.app.get('port'), () => {
             console.log("Ejecutando Server en port", this.app.get('port'));
+        });
+        //al socket le paso el servidor web
+        const io = SocketIO.listen(serverWeb);
+        //cada vez que alguien se conecte
+        io.on('connection', (socket) => {
+            socket.on('send-message', (data) => {
+                miMSJ.push(data);
+                socket.emit('text-event', miMSJ);
+                socket.broadcast.emit('text-event', miMSJ);
+            });
         });
     }
 }

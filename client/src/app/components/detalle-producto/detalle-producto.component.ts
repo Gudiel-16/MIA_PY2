@@ -63,6 +63,9 @@ export class DetalleProductoComponent implements OnInit {
   //id que se le enviara a comentarios
   idProducto:number=0;
 
+  //id cliente
+  idCliente:number=0;
+
   constructor(private service:ProductosService, private router:Router, private activedRoute: ActivatedRoute, private ngbModal:NgbModal) { }
 
   ngOnInit(): void {
@@ -78,6 +81,7 @@ export class DetalleProductoComponent implements OnInit {
       let cliente:Cliente=d_json;
       this.miReaccion.id_c=cliente.id_c;
       this.micarrito.id_c=cliente.id_c;
+      this.idCliente=cliente.id_c;
 
         //si contiene un id
         if (params.id){
