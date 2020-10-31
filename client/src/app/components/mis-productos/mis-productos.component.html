@@ -1,0 +1,55 @@
+
+<!--PARA QUE SIEMPRE SALGA LA BARRA DE NAVEGACION DE USUARIO-->
+<app-navigation-usuario></app-navigation-usuario>
+
+<!--PARA BUSQUEDAS-->
+<nav class="navbar navbar-light bg-light">
+    <!--PARA BUSCAR PRODUCTO-->
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" [(ngModel)]="miPalClave" [ngModelOptions]="{standalone: true}" type="search" placeholder="BUSCAR PRODUCTO" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" (click)="buscarPorPalClave()">BUSCAR</button>
+    </form>
+    <!--PARA PRECIO-->
+    <div class="form-inline">
+      <select class="form-control" [(ngModel)]="tipoPrecio" [ngModelOptions]="{standalone: true}">
+        <option>TIPO DE ORDEN</option> 
+        <option>Precio ASC</option>
+        <option>Precio DESC</option>
+      </select>
+      <button class="btn btn-success" style="margin-left: 25px;" (click)="buscarPorPrecio()">                  
+        <i class="fas fa-search"></i>
+        BUSCAR
+      </button>
+    </div>  
+        
+    <!--PARA BUSCAR CATEGORIA-->
+    <div class="form-inline">
+      <select class="form-control" [(ngModel)]="nomCatBuscar" [ngModelOptions]="{standalone: true}"> 
+        <option>SELEC CATEGORIA</option>
+        <option *ngFor="let nomCat of misCategorias" >{{nomCat}}</option>
+      </select>
+      <button class="btn btn-success" style="margin-left: 25px;" (click)="buscarPorCategoria()">                  
+        <i class="fas fa-search"></i>
+        BUSCAR
+      </button>
+    </div>  
+</nav>
+
+<!--LISTADO DE PRODUCTOS-->
+<div class="float-md-left col-md-3" *ngFor="let aja of misProductos" style="padding: 10px;">
+    <div class="card text-center">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            {{aja[1]}}            
+        </div>        
+        <div class="card-body">
+            <img [src]="aja[5]" class="card-img-top" alt="" style="height: 200px; width: 200px;">
+            <p>Precio: Q. {{aja[4]}}</p>
+            <p>{{aja[6]}}</p>
+        </div>
+        <button [routerLink]="['detalleMiProducto',aja[0]]" class="btn btn-success" alt=""><!--redireccionamos a ruta, y pasamos ID-->                
+          <i class="fas fa-info-circle"></i>
+        </button>
+    </div>
+</div>
+
+

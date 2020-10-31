@@ -33,6 +33,10 @@ import { DenunciasComponent } from './components/denuncias/denuncias.component';
 import { ProductosBloqueadosComponent } from './components/productos-bloqueados/productos-bloqueados.component';
 import { ReporteBitacoraComponent } from './components/reporte-bitacora/reporte-bitacora.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { MisProductosComponent } from './components/mis-productos/mis-productos.component';
+import { DetalleMiProductoComponent } from './components/detalle-mi-producto/detalle-mi-producto.component';
+import { ComentariosMiProductoComponent } from './components/comentarios-mi-producto/comentarios-mi-producto.component';
+import { ChatMiProductoComponent } from './components/chat-mi-producto/chat-mi-producto.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +58,11 @@ import { ChatComponent } from './components/chat/chat.component';
     DenunciasComponent,
     ProductosBloqueadosComponent,
     ReporteBitacoraComponent,
-    ChatComponent
+    ChatComponent,
+    MisProductosComponent,
+    DetalleMiProductoComponent,
+    ComentariosMiProductoComponent,
+    ChatMiProductoComponent
   ],
   imports: [
     BrowserModule,

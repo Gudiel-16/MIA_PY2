@@ -18,7 +18,9 @@ class IndexControllerChat{
             text:'',
             fecha:'',
             id_producto:0,
-            id_c:0
+            id_c_Aenviar:0,
+            id_c:0,
+            bandera:0
         }
         usersChat=data;
         const nombre=usersChat.name;
@@ -29,12 +31,12 @@ class IndexControllerChat{
         const id_c=usersChat.id_c;
         
         // los : son porque reciben parametros
-        let sql = "insert into chat(nombre,image,texto,fecha,id_producto,id_c) values(:nombre,:image,:texto,:fecha,:id_producto,:id_c)";
+        /*let sql = "insert into chat(nombre,image,texto,fecha,id_producto,id_c) values(:nombre,:image,:texto,:fecha,:id_producto,:id_c)";
 
         let cnn=await oracledb.getConnection(keys.cns);
         await cnn.execute(sql,[nombre,image,texto,fecha,id_producto,id_c],{autoCommit});
-        cnn.release();
-        
+        cnn.release();*/
+        console.log(data);
         return "Se guardo en Chat";
     }
 

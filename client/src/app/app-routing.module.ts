@@ -19,6 +19,10 @@ import { DenunciasComponent } from './components/denuncias/denuncias.component';
 import { ProductosBloqueadosComponent } from './components/productos-bloqueados/productos-bloqueados.component';
 import { ReporteBitacoraComponent } from './components/reporte-bitacora/reporte-bitacora.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { MisProductosComponent } from './components/mis-productos/mis-productos.component';
+import { DetalleMiProductoComponent } from './components/detalle-mi-producto/detalle-mi-producto.component';
+import { ComentariosMiProductoComponent } from './components/comentarios-mi-producto/comentarios-mi-producto.component';
+import { ChatMiProductoComponent } from './components/chat-mi-producto/chat-mi-producto.component';
 
 //para verificar si esta logueado o no, no deja pasar a otras paginas si no lo esta
 import { OutsGuard } from './guards/outs.guard'
@@ -87,6 +91,10 @@ const routes: Routes = [
     component: ListProductosComponent
   },
   {
+    path:'usuario/misProductos',
+    component: MisProductosComponent
+  },
+  {
     path:'usuario/addProducto',
     component: AddProductoComponent
   },
@@ -99,12 +107,24 @@ const routes: Routes = [
     component: DetalleProductoComponent
   },
   {
+    path:'usuario/misProductos/detalleMiProducto/:id',
+    component: DetalleMiProductoComponent
+  },
+  {
     path:'usuario/listProductos/detalleProducto/:id/comentariosProducto/:id',
     component: ComentariosComponent
   },
   {
+    path:'usuario/misProductos/detalleMiProducto/:id/comentariosMiProducto/:id',
+    component: ComentariosMiProductoComponent
+  },
+  {
     path:'usuario/listProductos/detalleProducto/:id/chatProducto/:id',
     component: ChatComponent
+  },
+  {
+    path:'usuario/misProductos/detalleMiProducto/:id/chatMiProducto/:id',
+    component: ChatMiProductoComponent
   },
   {
     path:'admin/reporteBitacora',

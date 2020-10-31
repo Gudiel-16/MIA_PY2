@@ -49,6 +49,10 @@ export class NavigationUsuarioComponent implements OnInit {
     this.router.navigate(['/usuario/listProductos']);
   }
 
+  misProductos(){
+    this.router.navigate(['/usuario/misProductos']);
+  }
+
   agregProductos(){
     this.router.navigate(['/usuario/addProducto']);
   }

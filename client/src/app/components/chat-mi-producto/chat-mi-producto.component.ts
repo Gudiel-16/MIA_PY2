@@ -10,11 +10,11 @@ import { Cliente } from 'src/app/models/registroCliente';
 import { Producto } from 'src/app/models/listProductos';
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  selector: 'app-chat-mi-producto',
+  templateUrl: './chat-mi-producto.component.html',
+  styleUrls: ['./chat-mi-producto.component.css']
 })
-export class ChatComponent implements OnInit {
+export class ChatMiProductoComponent implements OnInit {
 
   usersChat={
     name:'',
@@ -24,7 +24,7 @@ export class ChatComponent implements OnInit {
     id_producto:0,
     id_c_Aenviar:0,
     id_c:0,
-    bandera:0 //si es 0 lo envia un cliente
+    bandera:1 //si es 1 lo envia el dueno del producto
   }
 
   miProduct: Producto={
@@ -54,13 +54,12 @@ export class ChatComponent implements OnInit {
   misMensajes;
   eventName:string="send-message";
 
-
   constructor(private service:ProductosService, private router:Router, private activedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     const id=this.activedRoute.snapshot.params.id;
     this.usersChat.id_producto=id;
-
+    
     this.service.listen('text-event').subscribe(
       res=>{
         this.misMensajes=res;
@@ -85,7 +84,6 @@ export class ChatComponent implements OnInit {
     this.service.getProducto(id).subscribe( 
       res=>{
         this.miProduct=res["dataproduct"];
-        this.usersChat.id_c_Aenviar=this.miProduct.id_c;
       },
       err=>console.error(err)
     );

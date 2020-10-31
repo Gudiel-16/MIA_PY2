@@ -16,6 +16,7 @@ const controllersDenuncia_1 = require("../controllers/controllersDenuncia");
 const controllersBitacora_1 = require("../controllers/controllersBitacora");
 const controllersReportes_1 = require("../controllers/controllersReportes");
 const controllersChat_1 = require("../controllers/controllersChat");
+const controllersMisProductos_1 = require("../controllers/controllersMisProductos");
 class IndexRoutes {
     constructor() {
         this.router = express_1.Router();
@@ -37,7 +38,7 @@ class IndexRoutes {
         this.router.post('/usuario/returnCorreo', controllersCliente_1.indexControllerCliente.obtenerCorreo);
         this.router.put('/usuario/updateCreditos', controllersCliente_1.indexControllerCliente.actualizarCreditosCliente);
         //PRODUCTO
-        this.router.get('/usuario/listProductos', indexController_1.indexController.obtenerTodosProductos);
+        this.router.post('/usuario/listProductos', indexController_1.indexController.obtenerTodosProductos);
         this.router.post('/usuario/addProducto', indexController_1.indexController.crearProducto);
         this.router.get('/usuario/listProductos/detalleProducto/:id', indexController_1.indexController.obtenerUnProducto);
         this.router.get('/usuario/listProductos/ordenASC', indexController_1.indexController.obtenerProductosPrecioASC);
@@ -45,6 +46,9 @@ class IndexRoutes {
         this.router.post('/usuario/listProductos/porCategoria', indexController_1.indexController.obtenerProductosPorNomCategoria);
         this.router.post('/usuario/listProductos/porPalabraClave', indexController_1.indexController.obtenerProductosPorPalabraClave);
         this.router.put('/producto/deleteProducto', indexController_1.indexController.deleteProducto);
+        //MIS PRODUCTOS
+        this.router.post('/usuario/misProductos', controllersMisProductos_1.indexControllerMisProductos.obtenerTodosProductos);
+        this.router.get('/usuario/listProductos/detalleMiProducto/:id', controllersMisProductos_1.indexControllerMisProductos.obtenerUnProducto);
         //CATEGORIA
         this.router.post('/admin/categorias/crearCategoria', controllersCategoria_1.indexControllerCategoria.crearCategoria);
         this.router.get('/admin/categorias/listCategorias', controllersCategoria_1.indexControllerCategoria.obtenerCategorias);

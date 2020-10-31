@@ -12,13 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.indexController = void 0;
+exports.indexControllerMisProductos = void 0;
 //obtengo la base de datos
 //import BD from '../database'
 const oracledb = require('oracledb');
 //credenciales de conexion de base de datos
 const keys_1 = __importDefault(require("../keys"));
-class IndexController {
+class IndexControllerMisProductos {
     obtenerUnProducto(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             //res.json({text:'Usuario con ID' + req.params.id});
@@ -53,28 +53,12 @@ class IndexController {
         return __awaiter(this, void 0, void 0, function* () {
             var autoCommit = false;
             const { id_c } = req.body;
-            let sql = "select * from producto where estado_detele=1 and id_c != :id_c";
+            let sql = "select * from producto where estado_detele=1 and id_c=:id_c";
             let cnn = yield oracledb.getConnection(keys_1.default.cns);
             let result = yield cnn.execute(sql, [id_c], { autoCommit });
             cnn.release();
             //console.log(result)
             res.status(200).json(result.rows);
-        });
-    }
-    crearProducto(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            //son los valores que recibe para insertar, y son los nombres de los campos de nuestra tabla
-            var autoCommit = true;
-            const { id_producto, nombre, descripcion, palab_clave, ruta, precio, nom_cat, id_c } = req.body; //req.body, recibe un cuerpo de msj (un json)
-            // los : son porque reciben parametros
-            let sql = "insert into producto(nombre,descripcion,palab_clave,precio,ruta,nom_cat,id_c) values (:nombre,:descripcion,:palab_clave,:precio,:ruta,:nom_cat,:id_c)";
-            let cnn = yield oracledb.getConnection(keys_1.default.cns);
-            yield cnn.execute(sql, [nombre, descripcion, palab_clave, precio, ruta, nom_cat, id_c], { autoCommit });
-            cnn.release();
-            //devuelvo el dato que se inserto
-            res.status(200).json({
-                "Respuesta": "Producto Guardado"
-            });
         });
     }
     obtenerProductosPrecioASC(req, res) {
@@ -123,16 +107,5 @@ class IndexController {
             res.status(200).json(result.rows);
         });
     }
-    deleteProducto(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            var autoCommit = true;
-            const { id_producto } = req.body;
-            let sql = "update producto set estado_detele=0 where id_producto=:id_producto";
-            let cnn = yield oracledb.getConnection(keys_1.default.cns);
-            let result = yield cnn.execute(sql, [id_producto], { autoCommit });
-            cnn.release();
-            res.status(201).send({ msg: "Producto Eliminado" });
-        });
-    }
 }
-exports.indexController = new IndexController();
+exports.indexControllerMisProductos = new IndexControllerMisProductos();

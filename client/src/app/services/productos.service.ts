@@ -164,8 +164,18 @@ export class ProductosService {
   }
 
   //METODOS PRODUCTO
-  getProductos(){
-    return this.http.get(`${this.API_URI}/usuario/listProductos`);
+  getProductos(id_c){
+    return this.http.post(`${this.API_URI}/usuario/listProductos`,
+    {
+      "id_c":id_c
+    });
+  }
+
+  getMisProductos(id_c){
+    return this.http.post(`${this.API_URI}/usuario/misProductos`,
+    {
+      "id_c":id_c
+    });
   }
 
   getProducto(id:string){

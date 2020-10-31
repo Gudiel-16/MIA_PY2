@@ -15,6 +15,7 @@ import {indexControllerDenuncia} from '../controllers/controllersDenuncia';
 import {indexControllerBitacora} from '../controllers/controllersBitacora';
 import {indexControllerReportes} from '../controllers/controllersReportes';
 import {indexControllerChat} from '../controllers/controllersChat';
+import { indexControllerMisProductos } from '../controllers/controllersMisProductos';
 
 class IndexRoutes{
     public router: Router = Router();
@@ -42,7 +43,7 @@ class IndexRoutes{
         this.router.put('/usuario/updateCreditos',indexControllerCliente.actualizarCreditosCliente);
 
         //PRODUCTO
-        this.router.get('/usuario/listProductos',indexController.obtenerTodosProductos);
+        this.router.post('/usuario/listProductos',indexController.obtenerTodosProductos);
         this.router.post('/usuario/addProducto',indexController.crearProducto);
         this.router.get('/usuario/listProductos/detalleProducto/:id', indexController.obtenerUnProducto);
         this.router.get('/usuario/listProductos/ordenASC',indexController.obtenerProductosPrecioASC);
@@ -50,6 +51,10 @@ class IndexRoutes{
         this.router.post('/usuario/listProductos/porCategoria',indexController.obtenerProductosPorNomCategoria);
         this.router.post('/usuario/listProductos/porPalabraClave',indexController.obtenerProductosPorPalabraClave);
         this.router.put('/producto/deleteProducto',indexController.deleteProducto);
+
+        //MIS PRODUCTOS
+        this.router.post('/usuario/misProductos',indexControllerMisProductos.obtenerTodosProductos);
+        this.router.get('/usuario/listProductos/detalleMiProducto/:id', indexControllerMisProductos.obtenerUnProducto);
 
         //CATEGORIA
         this.router.post('/admin/categorias/crearCategoria',indexControllerCategoria.crearCategoria);

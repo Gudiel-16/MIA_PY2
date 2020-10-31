@@ -38,6 +38,7 @@ class Server{
     start(): void {
         //array que para guardar msjs del socket
         const miMSJ:any=[];
+        var idcaenv:number=0;
 
         const serverWeb=this.app.listen(this.app.get('port'), () => {
             console.log("Ejecutando Server en port",this.app.get('port'));
@@ -47,9 +48,17 @@ class Server{
         const io=SocketIO.listen(serverWeb);
 
         //cada vez que alguien se conecte
-        io.on('connection',(socket)=>{            
+        io.on('connection',(socket)=>{
+            console.log("Usuario Conectado")            
             socket.on('send-message',(data)=>{
                 miMSJ.push(data);
+                //lo envia el dueno del producto
+                if(data["bandera"]==1){
+                    data["id_c_Aenviar"]=idcaenv;
+                //lo envia un cliente
+                }else if(data["bandera"]==0){
+                    idcaenv=data["id_c"];
+                }
                 indexControllerChat.insertar(data).then((res)=>{
                     console.log(res);
                 });
