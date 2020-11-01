@@ -28,6 +28,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private service:ProductosService, private router:Router, private ngbModal:NgbModal ) { }
 
+  alert:boolean=false;
+  
   ngOnInit(): void {
   }
 
@@ -52,13 +54,14 @@ export class LoginComponent implements OnInit {
           let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
           this.service.saveBitacora(this.miCorreo,"Inicio Sesion",fechaa).subscribe(
             res=>{              
+              this.alert=false;
               this.router.navigate(['admin']); //navego a admin            
             },
             err=>console.error(err)
           );   
           
         }else{
-          //no existe o no se a confirmado
+          this.alert=true;
         }  
       });
 
@@ -74,13 +77,14 @@ export class LoginComponent implements OnInit {
           let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
           this.service.saveBitacora(this.miCorreo,"Inicio Sesion",fechaa).subscribe(
             res=>{
+              this.alert=false;
               this.router.navigate(['usuario']); //navego a usuario          
             },
             err=>console.error(err)
           );  
           
         }else{
-          //no existe o no se a confirmado
+          this.alert=true;
         }  
       });
     }

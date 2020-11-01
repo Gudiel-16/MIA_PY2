@@ -30,6 +30,8 @@ export class PerfilUsuarioComponent implements OnInit {
   file:File;
   photoSelecter:string | ArrayBuffer;
 
+  alert:boolean=false;
+
   miClient: Cliente={
     id_c:1,
     nombre:'',
@@ -93,6 +95,7 @@ export class PerfilUsuarioComponent implements OnInit {
              let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
              this.service.saveBitacora(this.miClient.correo,"Actualizo sus datos",fechaa).subscribe(
                res=>{
+                 this.alert=false;
                 //mostramos msj en pantalla
                 this.ngModalOption.backdrop='static';
                 this.ngModalOption.keyboard=true;
@@ -128,6 +131,7 @@ export class PerfilUsuarioComponent implements OnInit {
                 let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
                 this.service.saveBitacora(this.miClient.correo,"Actualizo sus datos",fechaa).subscribe(
                res=>{
+                 this.alert=false;
                 //mostramos msj en pantalla
                 this.ngModalOption.backdrop='static';
                 this.ngModalOption.keyboard=true;
@@ -149,7 +153,7 @@ export class PerfilUsuarioComponent implements OnInit {
              
 
    }else{
-     //elert error
+     this.alert=true;
    }
  }
 

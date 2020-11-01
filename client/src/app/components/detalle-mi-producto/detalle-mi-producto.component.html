@@ -42,14 +42,16 @@
             <form>
                 <input type="file" class="d-none" (change)="onPhotoSelected($event)" #photoInput><!--cuando de click en la imagen le pasamos un evento-->
                 <img [src]="photoSelecter || miProduct.ruta" class="img-fluid" alt="No Image" (click)="photoInput.click()">
-                <button class="btn btn-outline-success" style="margin: 10px;" (click)="updatemegusta()">
-                    <i class="fas fa-thumbs-up"></i>
-                    <label> {{cantMegusta}}</label>
-                </button>
-                <button class="btn btn-outline-danger" style="margin: 10px;" (click)="updateNomegusta()">
-                    <i class="fas fa-thumbs-down"></i>
-                    <label> {{cantNomegusta}}</label>
-                </button>          
+                <div class="form-group">
+                    <button class="btn btn-outline-success" style="margin: 10px;" (click)="updatemegusta()">
+                        <i class="fas fa-thumbs-up"></i>
+                        <label> {{cantMegusta}}</label>
+                    </button>
+                    <button class="btn btn-outline-danger" style="margin: 10px;" (click)="updateNomegusta()">
+                        <i class="fas fa-thumbs-down"></i>
+                        <label> {{cantNomegusta}}</label>
+                    </button>  
+                </div>                        
             </form>
         </div>
     </div>

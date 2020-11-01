@@ -40,7 +40,11 @@
                 </div>  
             </div>
         </div>
-        <p></p>           
+        <div class="form-group col-md-12">
+          <div class="alert alert-danger" role="alert" *ngIf="alert" style="text-align: center;">
+              NO SE PUDO CREAR LA CUENTA
+          </div>
+        </div>           
         <button type="submit" class="btn btn-outline-primary btn-block" (click)="addNewCliente(contenido)">REGISTRARSE</button>
       </form>
 </div>

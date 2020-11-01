@@ -43,7 +43,12 @@
                 <p>Para actualizar foto, click encima de la misma</p>
                 <button class="btn btn-outline-info btn-block" (click)="updateAdmin(contenido)">
                     <i class="fas fa-edit"></i> MODIFICAR DATOS
-                </button>                     
+                </button>
+                <div class="form-group">
+                    <div class="alert alert-danger" role="alert" *ngIf="alert">
+                        NO SE PUEDE ACTUALIZAR LOS DATOS
+                    </div>
+                </div>                     
             </form>
         </div>
     </div>

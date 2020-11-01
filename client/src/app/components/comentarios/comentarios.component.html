@@ -4,6 +4,11 @@
 <form>
   <div class="form-group col-md-12" style="margin-top: 20px;">      
       <input type="text" class="form-control" [(ngModel)]="miComent.descripcion" [ngModelOptions]="{standalone: true}"  placeholder="NUEVO COMENTARIO" style="margin-bottom: 5px;">
+      <div class="form-group">
+        <div class="alert alert-danger" role="alert" *ngIf="alert">
+            DEBE ESCRIBIR UN COMENTARIO
+        </div>
+      </div> 
       <button type="button" class="btn btn-outline-success btn-block" style="margin-bottom: 5px;" (click)="addComentario()">AGREGAR COMENTARIO  <i class="fas fa-plus-circle"></i></button>      
   </div>
 </form>
@@ -48,7 +53,12 @@
       </div>
       <div class="form-group col-md-12">
         <input [(ngModel)]="miDenuncia.descripcion" [ngModelOptions]="{standalone: true}" type="text" name="denuncia" placeholder="Denuncia" class="form-control">
-      </div>       
+      </div>   
+      <div class="form-group col-md-12">
+        <div class="alert alert-danger" role="alert" *ngIf="alert2">
+            DEBE ESCRIBIR SU DENUNCIA
+        </div>
+      </div>     
       <button type="button" class="btn btn-outline-danger btn-block" (click)="ejecutar(contenidoRes)">DENUNCIAR  <i style="font-size: 15px;" class="fas fa-radiation-alt"></i></button>
     </div>
   </div>

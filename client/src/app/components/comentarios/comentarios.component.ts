@@ -25,6 +25,9 @@ interface HtmlInputEvent extends Event{
 })
 export class ComentariosComponent implements OnInit {
 
+  alert:boolean=false;
+  alert2:boolean=false;
+
   miProduct: Producto={
     id_producto:0,
     nombre:'',
@@ -120,6 +123,7 @@ export class ComentariosComponent implements OnInit {
               //guardo en bitacora
               this.service.saveBitacora(this.correoCliente,"Agrego un nuevo comentario",fechaa).subscribe(
                 res=>{
+                  this.alert=false;
                 },
                 err=>console.error(err)
               ); 
@@ -131,7 +135,7 @@ export class ComentariosComponent implements OnInit {
         err=>console.error(err)
       );
     }else{
-      //alert
+      this.alert=true;
     }
   }
 
@@ -153,6 +157,7 @@ export class ComentariosComponent implements OnInit {
           //guardo en bitacora
           this.service.saveBitacora(this.correoCliente,"Realizo una denuncia",fechaa).subscribe(
             res=>{
+              this.alert2=false;
               this.ngModalOption.backdrop='static';
               this.ngModalOption.keyboard=true;
               this.ngModalOption.centered=true;
@@ -164,6 +169,8 @@ export class ComentariosComponent implements OnInit {
         },
         err=>console.error(err)
       );
+    }else{
+      this.alert2=true;
     }
   }
 

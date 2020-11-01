@@ -29,6 +29,8 @@ export class RegistroClienteComponent implements OnInit {
   file:File;
   photoSelecter:string | ArrayBuffer;
 
+  alert:boolean=false;
+
   //id_c no importa el valor, es autoincrement en oracle.
   miClient: Cliente={
     id_c:1,
@@ -86,6 +88,8 @@ export class RegistroClienteComponent implements OnInit {
                     //guardamos en storage
                     let user:Cliente=this.miClient;
                     this.service.setClienteLSConfirm(user);
+                    //
+                    this.alert=false;
                     //mostramos msj en pantalla
                     this.ngModalOption.backdrop='static';
                     this.ngModalOption.keyboard=true;
@@ -129,6 +133,8 @@ export class RegistroClienteComponent implements OnInit {
                         //guardamos en storage
                         let user:Cliente=this.miClient;
                         this.service.setClienteLSConfirm(user);
+                        //
+                        this.alert=false;
                         //mostramos msj en pantalla
                         this.ngModalOption.backdrop='static';
                         this.ngModalOption.keyboard=true;
@@ -152,7 +158,7 @@ export class RegistroClienteComponent implements OnInit {
              
 
     }else{
-      //elert error
+      this.alert=true;
     }
   }
 

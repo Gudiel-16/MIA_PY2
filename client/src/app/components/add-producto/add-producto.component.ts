@@ -30,6 +30,8 @@ export class AddProductoComponent implements OnInit {
   file:File;
   photoSelecter:string | ArrayBuffer;
 
+  alert:boolean=false;
+
   miProduct: Producto={
     id_producto:0,
     nombre:'',
@@ -130,6 +132,7 @@ export class AddProductoComponent implements OnInit {
                     let fechaa=fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear()+' : '+fecha.getHours()+':'+fecha.getMinutes();
                     this.service.saveBitacora(this.correoCliente,"Inserto un nuevo producto",fechaa).subscribe(
                       res=>{
+                        this.alert=false;
                         //mostramos msj en pantalla
                         this.ngModalOption.backdrop='static';
                         this.ngModalOption.keyboard=true;
@@ -146,7 +149,10 @@ export class AddProductoComponent implements OnInit {
             err=>console.error(err)
           );   
         }
-    }    
+
+    } else{
+      this.alert=true;
+    }   
   }
 
   aceptar(){

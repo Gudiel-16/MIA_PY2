@@ -14,7 +14,9 @@
           <label class="form-check-label" for="exampleCheck1">Seleccione si es Administrador</label>
         </div>
         <div class="form-group">
-          
+          <div class="alert alert-danger" role="alert" *ngIf="alert">
+            CORREO O PASSWORD INCORRECTOS
+          </div>
         </div>
         <button type="submit" class="btn btn-primary btn-block" (click)="ingresar()">LOGIN</button>
         <button type="submit" class="btn btn-primary btn-block" (click)="registro()" >REGISTRARSE</button>

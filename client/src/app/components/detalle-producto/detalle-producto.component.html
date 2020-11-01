@@ -37,14 +37,16 @@
         <div class="card card-body text-center">
             <form>
                 <img [src]="miProduct.ruta == '' ? '/assets/productoSinFoto.png' : miProduct.ruta" class="card-img-top"  alt="">
-                <button class="btn btn-outline-success" style="margin: 10px;" (click)="updatemegusta()">
-                    <i class="fas fa-thumbs-up"></i>
-                    <label> {{cantMegusta}}</label>
-                </button>
-                <button class="btn btn-outline-danger" style="margin: 10px;" (click)="updateNomegusta()">
-                    <i class="fas fa-thumbs-down"></i>
-                    <label> {{cantNomegusta}}</label>
-                </button>          
+                <div class="form-group">
+                    <button class="btn btn-outline-success" style="margin: 10px;" (click)="updatemegusta()">
+                        <i class="fas fa-thumbs-up"></i>
+                        <label> {{cantMegusta}}</label>
+                    </button>
+                    <button class="btn btn-outline-danger" style="margin: 10px;" (click)="updateNomegusta()">
+                        <i class="fas fa-thumbs-down"></i>
+                        <label> {{cantNomegusta}}</label>
+                    </button>   
+                </div>                       
             </form>
         </div>
     </div>

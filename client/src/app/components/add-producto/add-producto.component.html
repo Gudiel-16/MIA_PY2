@@ -29,6 +29,11 @@
                     <button class="btn btn-success btn-block" (click)="addNewProducto(contenido)">
                         GUARDAR
                     </button>
+                    <div class="form-group" style="margin-top: 5px;">
+                        <div class="alert alert-danger" role="alert" *ngIf="alert">
+                            NO SE PUDO AGREGAR EL PRODUCTO
+                        </div>
+                    </div>  
                 </form>
             </div>
         </div>
@@ -64,7 +69,7 @@
         <div class="form-group col-md-6" style="padding-left: 15px; padding-top: 50px;">
           Se ha guardado su producto correctamente
         </div>
-        <button type="button" class="btn btn-outline-success btn-block" (click)="aceptar()">ACEPTAR</button>
+        <button type="button" class="btn btn-outline-success btn-block" (click)="aceptar()">ACEPTAR</button>         
       </div>
     </div>
 </ng-template>
