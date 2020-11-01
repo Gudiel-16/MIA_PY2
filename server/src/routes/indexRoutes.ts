@@ -15,7 +15,8 @@ import {indexControllerDenuncia} from '../controllers/controllersDenuncia';
 import {indexControllerBitacora} from '../controllers/controllersBitacora';
 import {indexControllerReportes} from '../controllers/controllersReportes';
 import {indexControllerChat} from '../controllers/controllersChat';
-import { indexControllerMisProductos } from '../controllers/controllersMisProductos';
+import {indexControllerMisProductos} from '../controllers/controllersMisProductos';
+import {indexControllerCorreoBloqueo} from '../controllers/controllersCorreoBloqueo';
 
 class IndexRoutes{
     public router: Router = Router();
@@ -44,17 +45,22 @@ class IndexRoutes{
 
         //PRODUCTO
         this.router.post('/usuario/listProductos',indexController.obtenerTodosProductos);
-        this.router.post('/usuario/addProducto',indexController.crearProducto);
+        this.router.post('/usuario/adSdProducto',indexController.crearProducto);
         this.router.get('/usuario/listProductos/detalleProducto/:id', indexController.obtenerUnProducto);
-        this.router.get('/usuario/listProductos/ordenASC',indexController.obtenerProductosPrecioASC);
-        this.router.get('/usuario/listProductos/ordenDESC',indexController.obtenerProductosPrecioDESC);
+        this.router.post('/usuario/listProductos/ordenASC',indexController.obtenerProductosPrecioASC);
+        this.router.post('/usuario/listProductos/ordenDESC',indexController.obtenerProductosPrecioDESC);
         this.router.post('/usuario/listProductos/porCategoria',indexController.obtenerProductosPorNomCategoria);
         this.router.post('/usuario/listProductos/porPalabraClave',indexController.obtenerProductosPorPalabraClave);
         this.router.put('/producto/deleteProducto',indexController.deleteProducto);
+        this.router.put('/producto/updateProducto',indexController.actualizarDatosProducto);
 
         //MIS PRODUCTOS
         this.router.post('/usuario/misProductos',indexControllerMisProductos.obtenerTodosProductos);
         this.router.get('/usuario/listProductos/detalleMiProducto/:id', indexControllerMisProductos.obtenerUnProducto);
+        this.router.post('/usuario/misProductos/ordenASC',indexControllerMisProductos.obtenerProductosPrecioASC);
+        this.router.post('/usuario/misProductos/ordenDESC',indexControllerMisProductos.obtenerProductosPrecioDESC);
+        this.router.post('/usuario/misProductos/porCategoria',indexControllerMisProductos.obtenerProductosPorNomCategoria);
+        this.router.post('/usuario/misProductos/porPalabraClave',indexControllerMisProductos.obtenerProductosPorPalabraClave);
 
         //CATEGORIA
         this.router.post('/admin/categorias/crearCategoria',indexControllerCategoria.crearCategoria);
@@ -88,6 +94,7 @@ class IndexRoutes{
         this.router.post('/login/envCorreoRecPass',indexControllerCorreoRecupPass.enviarCorreoRecPass);
         this.router.post('/carrito/envCorreoAVendedor',indexControllerCorreoVendedor.enviarCorreoVendedor);
         this.router.post('/carrito/envCorreoAComprador',indexControllerCorreoComprador.enviarCorreoComprador);
+        this.router.post('/bloqueo/envCorreDeBloqueo',indexControllerCorreoBloqueo.enviarCorreoBloqueo);
 
         //BITACORA
         this.router.post('/bitacora/insertar',indexControllerBitacora.insertar);

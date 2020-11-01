@@ -60,7 +60,7 @@ export class ChatMiProductoComponent implements OnInit {
     const id=this.activedRoute.snapshot.params.id;
     this.usersChat.id_producto=id;
     
-    this.service.listen('text-event').subscribe(
+    this.service.listen('text-event-2').subscribe(
       res=>{
         this.misMensajes=res;
       },

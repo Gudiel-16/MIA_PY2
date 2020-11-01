@@ -27,7 +27,11 @@
                     <label style="color: navy;">Precio Q.</label>
                     <div class="form-group">
                         <input type="text" name="precio" [(ngModel)]="miProduct.precio" [ngModelOptions]="{standalone: true}" placeholder="Precio" class="form-control">
-                    </div>                    
+                    </div>    
+                    <label style="color: navy;">Categoria nueva:</label>
+                    <select class="form-control" [(ngModel)]="miProduct.nom_cat" [ngModelOptions]="{standalone: true}"> 
+                        <option *ngFor="let nomCat of misCategorias" >{{nomCat}}</option>
+                    </select>                
                 </form>
             </div>
         </div>
@@ -36,7 +40,8 @@
     <div class="col-md-4">
         <div class="card card-body text-center">
             <form>
-                <img [src]="miProduct.ruta == '' ? '/assets/productoSinFoto.png' : miProduct.ruta" class="card-img-top"  alt="">
+                <input type="file" class="d-none" (change)="onPhotoSelected($event)" #photoInput><!--cuando de click en la imagen le pasamos un evento-->
+                <img [src]="photoSelecter || miProduct.ruta" class="img-fluid" alt="No Image" (click)="photoInput.click()">
                 <button class="btn btn-outline-success" style="margin: 10px;" (click)="updatemegusta()">
                     <i class="fas fa-thumbs-up"></i>
                     <label> {{cantMegusta}}</label>
@@ -58,8 +63,8 @@
                 <button [routerLink]="['comentariosMiProducto',idProducto]" class="btn btn-outline-info btn-block">
                     <i class="fas fa-comment-alt"></i> COMENTARIO
                 </button>
-                <button class="btn btn-outline-info btn-block">
-                    <i class="far fa-plus-square"></i> EDITAR
+                <button class="btn btn-outline-info btn-block" (click)="editar(contenido)">
+                    <i class="fas fa-edit"></i>  EDITAR
                 </button>            
             </form>
         </div>
@@ -67,3 +72,22 @@
 
 </div>
 
+<ng-template #contenido let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">DATOS ACTUALIZADOS</h5>
+      <button type="button" (click)="aceptar()" aria-label="Close" class="close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <img src="/assets/check.png" style="width: 200px; height: 140px;">
+        </div>
+        <div class="form-group col-md-6" style="padding-left: 15px; padding-top: 50px;">
+          Se han actualizado datos de producto correctamente.
+        </div>
+        <button type="button" class="btn btn-outline-success btn-block" (click)="aceptar()">ACEPTAR</button>
+      </div>
+    </div>
+</ng-template>

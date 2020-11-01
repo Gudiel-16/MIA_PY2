@@ -64,6 +64,7 @@ export class ChatComponent implements OnInit {
     this.service.listen('text-event').subscribe(
       res=>{
         this.misMensajes=res;
+        //console.log(res);
       },
       err=>console.error(err)
     );

@@ -8,11 +8,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.indexControllerChat = void 0;
 //obtengo la base de datos
 //import BD from '../database'
 const oracledb = require('oracledb');
+//credenciales de conexion de base de datos
+const keys_1 = __importDefault(require("../keys"));
 class IndexControllerChat {
     insertar(data) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -34,15 +39,63 @@ class IndexControllerChat {
             const texto = usersChat.text;
             const fecha = usersChat.fecha;
             const id_producto = usersChat.id_producto;
+            const id_c_Aenviar = usersChat.id_c_Aenviar;
             const id_c = usersChat.id_c;
             // los : son porque reciben parametros
-            /*let sql = "insert into chat(nombre,image,texto,fecha,id_producto,id_c) values(:nombre,:image,:texto,:fecha,:id_producto,:id_c)";
-    
-            let cnn=await oracledb.getConnection(keys.cns);
-            await cnn.execute(sql,[nombre,image,texto,fecha,id_producto,id_c],{autoCommit});
-            cnn.release();*/
+            let sql = "insert into chat(nombre,image,texto,fecha,id_producto,id_c_Aenviar,id_c) values(:nombre,:image,:texto,:fecha,:id_producto,:id_c_Aenviar,:id_c)";
+            let cnn = yield oracledb.getConnection(keys_1.default.cns);
+            yield cnn.execute(sql, [nombre, image, texto, fecha, id_producto, id_c_Aenviar, id_c], { autoCommit });
+            cnn.release();
             console.log(data);
             return "Se guardo en Chat";
+        });
+    }
+    datosParaCliente(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var autoCommit = false;
+            let usersChat = {
+                name: '',
+                image: '',
+                text: '',
+                fecha: '',
+                id_producto: 0,
+                id_c_Aenviar: 0,
+                id_c: 0,
+                bandera: 0
+            };
+            usersChat = data;
+            const id_producto = usersChat.id_producto;
+            const id_c_Aenviar = usersChat.id_c_Aenviar;
+            const id_c = usersChat.id_c;
+            let sql = "select * from chat where id_producto=:id_producto and ((id_c_aenviar=:id_c_aenviar and id_c=:id_c) or (id_c_aenviar=:id_c and id_c=:id_c_aenviar)) order by id_chat asc";
+            let cnn = yield oracledb.getConnection(keys_1.default.cns);
+            let result = yield cnn.execute(sql, [id_producto, id_c_Aenviar, id_c], { autoCommit });
+            cnn.release();
+            //console.log(result)
+            return result.rows;
+        });
+    }
+    datosParaVendedor(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var autoCommit = false;
+            let usersChat = {
+                name: '',
+                image: '',
+                text: '',
+                fecha: '',
+                id_producto: 0,
+                id_c_Aenviar: 0,
+                id_c: 0,
+                bandera: 0
+            };
+            usersChat = data;
+            const id_producto = usersChat.id_producto;
+            let sql = "select * from chat where id_producto=:id_producto order by id_chat asc";
+            let cnn = yield oracledb.getConnection(keys_1.default.cns);
+            let result = yield cnn.execute(sql, [id_producto], { autoCommit });
+            cnn.release();
+            //console.log(result)
+            return result.rows;
         });
     }
 }

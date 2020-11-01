@@ -186,25 +186,63 @@ export class ProductosService {
     return this.http.post(`${this.API_URI}/usuario/addProducto`,producto);
   }
 
-  getProductosPrecioASC(){
-    return this.http.get(`${this.API_URI}/usuario/listProductos/ordenASC`);
-  }
-
-  getProductosPrecioDESC(){
-    return this.http.get(`${this.API_URI}/usuario/listProductos/ordenDESC`);
-  }
-
-  getProductoPorCategoria(nom_cat){
-    return this.http.post(`${this.API_URI}/usuario/listProductos/porCategoria`,
+  getProductosPrecioASC(id_c){
+    return this.http.post(`${this.API_URI}/usuario/listProductos/ordenASC`,
     {
-      "nom_cat":nom_cat
+      "id_c":id_c
     });
   }
 
-  getProductoPorPalabraClave(palab_clave){
+  getProductosPrecioDESC(id_c){
+    return this.http.post(`${this.API_URI}/usuario/listProductos/ordenDESC`,
+    {
+      "id_c":id_c
+    });
+  }
+
+  getProductoPorCategoria(nom_cat,id_c){
+    return this.http.post(`${this.API_URI}/usuario/listProductos/porCategoria`,
+    {
+      "nom_cat":nom_cat,
+      "id_c":id_c
+    });
+  }
+
+  getProductoPorPalabraClave(palab_clave,id_c){
     return this.http.post(`${this.API_URI}/usuario/listProductos/porPalabraClave`,
     {
-      "palab_clave":palab_clave
+      "palab_clave":palab_clave,
+      "id_c":id_c
+    });
+  }
+
+  getMiProductosPrecioASC(id_c){
+    return this.http.post(`${this.API_URI}/usuario/misProductos/ordenASC`,
+    {
+      "id_c":id_c
+    });
+  }
+
+  getMiProductosPrecioDESC(id_c){
+    return this.http.post(`${this.API_URI}/usuario/misProductos/ordenDESC`,
+    {
+      "id_c":id_c
+    });
+  }
+
+  getMiProductoPorCategoria(nom_cat,id_c){
+    return this.http.post(`${this.API_URI}/usuario/misProductos/porCategoria`,
+    {
+      "nom_cat":nom_cat,
+      "id_c":id_c
+    });
+  }
+
+  getMiProductoPorPalabraClave(palab_clave,id_c){
+    return this.http.post(`${this.API_URI}/usuario/misProductos/porPalabraClave`,
+    {
+      "palab_clave":palab_clave,
+      "id_c":id_c
     });
   }
 
@@ -213,6 +251,10 @@ export class ProductosService {
     {
       "id_producto":id_producto
     });
+  }
+
+  updateProducto(producto : Producto){
+    return this.http.put(`${this.API_URI}/producto/updateProducto`,producto);
   }
 
 
@@ -309,6 +351,18 @@ export class ProductosService {
       "nombre":nombre,
       "filas":filas,
       "total":total
+    });
+  }
+
+  envCorreoBloqueo(fecha,correo,nombreClient,nombreProduct,precio,image){
+    return this.http.post(`${this.API_URI}/bloqueo/envCorreDeBloqueo`,
+    {
+      "fecha":fecha,
+      "correo":correo,
+      "nombreClient":nombreClient,
+      "nombreProduct":nombreProduct,
+      "precio":precio,
+      "image":image
     });
   }
 

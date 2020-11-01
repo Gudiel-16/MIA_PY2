@@ -70,9 +70,10 @@ class IndexController{
 
     public async obtenerProductosPrecioASC (req :Request,res: Response) {
         var autoCommit=false;
-        let sql = "select * from producto order by precio asc";
+        const { id_c } = req.body; 
+        let sql = "select * from producto where id_c != :id_c order by precio asc";
         let cnn = await oracledb.getConnection(keys.cns);
-        let result = await cnn.execute(sql, [], { autoCommit });
+        let result = await cnn.execute(sql, [id_c], { autoCommit });
         cnn.release();
         //console.log(result)
         res.status(200).json(result.rows);
@@ -80,9 +81,10 @@ class IndexController{
 
     public async obtenerProductosPrecioDESC (req :Request,res: Response) {
         var autoCommit=false;
-        let sql = "select * from producto order by precio desc";
+        const { id_c } = req.body; 
+        let sql = "select * from producto where id_c != :id_c order by precio desc";
         let cnn = await oracledb.getConnection(keys.cns);
-        let result = await cnn.execute(sql, [], { autoCommit });
+        let result = await cnn.execute(sql, [id_c], { autoCommit });
         cnn.release();
         //console.log(result)
         res.status(200).json(result.rows);
@@ -90,10 +92,10 @@ class IndexController{
 
     public async obtenerProductosPorNomCategoria (req :Request,res: Response) {
         var autoCommit=false;
-        const { nom_cat } = req.body;
-        let sql = "select * from producto where nom_cat=:nom_cat";
+        const { nom_cat,id_c } = req.body;
+        let sql = "select * from producto where id_c != :id_c and nom_cat=:nom_cat";
         let cnn = await oracledb.getConnection(keys.cns);
-        let result = await cnn.execute(sql, [nom_cat], { autoCommit });
+        let result = await cnn.execute(sql, [id_c,nom_cat], { autoCommit });
         cnn.release();
         //console.log(result)
         res.status(200).json(result.rows);
@@ -101,10 +103,10 @@ class IndexController{
 
     public async obtenerProductosPorPalabraClave (req :Request,res: Response) {
         var autoCommit=false;
-        const { palab_clave } = req.body;
-        let sql = "select id_producto,nombre,descripcion, palab_clave,precio,nom_cat,id_c, instr(palab_clave,:palab_clave,1,1) from producto where instr(palab_clave,:palab_clave,1,1)=1";
+        const { palab_clave,id_c } = req.body;
+        let sql = "select id_producto,nombre,descripcion, palab_clave,precio,ruta,nom_cat,id_c, instr(palab_clave,:palab_clave,1,1) from producto where instr(palab_clave,:palab_clave,1,1)=1 and id_c != :id_c";
         let cnn = await oracledb.getConnection(keys.cns);
-        let result = await cnn.execute(sql, [palab_clave], { autoCommit });
+        let result = await cnn.execute(sql, [palab_clave,palab_clave,id_c], { autoCommit });
         cnn.release();
         //console.log(result)
         res.status(200).json(result.rows);
@@ -120,6 +122,18 @@ class IndexController{
         cnn.release();
 
         res.status(201).send({msg:"Producto Eliminado"});
+    }
+
+    public async actualizarDatosProducto(req :Request,res: Response){
+        var autoCommit=true;
+        const { nombre, descripcion, palab_clave, precio, ruta, nom_cat, id_producto } = req.body; //req.body, recibe un cuerpo de msj (un json)
+
+        let sql= "update producto set nombre=:nombre, descripcion=:descripcion, palab_clave=:palab_clave, precio=:precio, ruta=:ruta, nom_cat=:nom_cat where id_producto=:id_producto"
+        let cnn = await oracledb.getConnection(keys.cns);
+        let result = await cnn.execute(sql, [nombre, descripcion, palab_clave, precio, ruta, nom_cat,id_producto], { autoCommit });
+        cnn.release();
+
+        res.status(201).send({msg:"Producto Actualizado"});
     }
 }
 

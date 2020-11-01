@@ -17,6 +17,7 @@ const controllersBitacora_1 = require("../controllers/controllersBitacora");
 const controllersReportes_1 = require("../controllers/controllersReportes");
 const controllersChat_1 = require("../controllers/controllersChat");
 const controllersMisProductos_1 = require("../controllers/controllersMisProductos");
+const controllersCorreoBloqueo_1 = require("../controllers/controllersCorreoBloqueo");
 class IndexRoutes {
     constructor() {
         this.router = express_1.Router();
@@ -39,16 +40,21 @@ class IndexRoutes {
         this.router.put('/usuario/updateCreditos', controllersCliente_1.indexControllerCliente.actualizarCreditosCliente);
         //PRODUCTO
         this.router.post('/usuario/listProductos', indexController_1.indexController.obtenerTodosProductos);
-        this.router.post('/usuario/addProducto', indexController_1.indexController.crearProducto);
+        this.router.post('/usuario/adSdProducto', indexController_1.indexController.crearProducto);
         this.router.get('/usuario/listProductos/detalleProducto/:id', indexController_1.indexController.obtenerUnProducto);
-        this.router.get('/usuario/listProductos/ordenASC', indexController_1.indexController.obtenerProductosPrecioASC);
-        this.router.get('/usuario/listProductos/ordenDESC', indexController_1.indexController.obtenerProductosPrecioDESC);
+        this.router.post('/usuario/listProductos/ordenASC', indexController_1.indexController.obtenerProductosPrecioASC);
+        this.router.post('/usuario/listProductos/ordenDESC', indexController_1.indexController.obtenerProductosPrecioDESC);
         this.router.post('/usuario/listProductos/porCategoria', indexController_1.indexController.obtenerProductosPorNomCategoria);
         this.router.post('/usuario/listProductos/porPalabraClave', indexController_1.indexController.obtenerProductosPorPalabraClave);
         this.router.put('/producto/deleteProducto', indexController_1.indexController.deleteProducto);
+        this.router.put('/producto/updateProducto', indexController_1.indexController.actualizarDatosProducto);
         //MIS PRODUCTOS
         this.router.post('/usuario/misProductos', controllersMisProductos_1.indexControllerMisProductos.obtenerTodosProductos);
         this.router.get('/usuario/listProductos/detalleMiProducto/:id', controllersMisProductos_1.indexControllerMisProductos.obtenerUnProducto);
+        this.router.post('/usuario/misProductos/ordenASC', controllersMisProductos_1.indexControllerMisProductos.obtenerProductosPrecioASC);
+        this.router.post('/usuario/misProductos/ordenDESC', controllersMisProductos_1.indexControllerMisProductos.obtenerProductosPrecioDESC);
+        this.router.post('/usuario/misProductos/porCategoria', controllersMisProductos_1.indexControllerMisProductos.obtenerProductosPorNomCategoria);
+        this.router.post('/usuario/misProductos/porPalabraClave', controllersMisProductos_1.indexControllerMisProductos.obtenerProductosPorPalabraClave);
         //CATEGORIA
         this.router.post('/admin/categorias/crearCategoria', controllersCategoria_1.indexControllerCategoria.crearCategoria);
         this.router.get('/admin/categorias/listCategorias', controllersCategoria_1.indexControllerCategoria.obtenerCategorias);
@@ -76,6 +82,7 @@ class IndexRoutes {
         this.router.post('/login/envCorreoRecPass', controllersCorreoRecupPass_1.indexControllerCorreoRecupPass.enviarCorreoRecPass);
         this.router.post('/carrito/envCorreoAVendedor', controllersCorreoVendedor_1.indexControllerCorreoVendedor.enviarCorreoVendedor);
         this.router.post('/carrito/envCorreoAComprador', controllersCorreoComprador_1.indexControllerCorreoComprador.enviarCorreoComprador);
+        this.router.post('/bloqueo/envCorreDeBloqueo', controllersCorreoBloqueo_1.indexControllerCorreoBloqueo.enviarCorreoBloqueo);
         //BITACORA
         this.router.post('/bitacora/insertar', controllersBitacora_1.indexControllerBitacora.insertar);
         //REPORTES

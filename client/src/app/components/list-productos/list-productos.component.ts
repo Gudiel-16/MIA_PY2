@@ -84,7 +84,7 @@ export class ListProductosComponent implements OnInit {
 
   buscarPorPalClave(){
     if(this.miPalClave!=""){
-      this.service.getProductoPorPalabraClave(this.miPalClave).subscribe(
+      this.service.getProductoPorPalabraClave(this.miPalClave,this.idCliente).subscribe(
         res=>{
           this.misProductos=res;
         },
@@ -95,14 +95,14 @@ export class ListProductosComponent implements OnInit {
 
   buscarPorPrecio(){
     if(this.tipoPrecio=="Precio ASC"){
-      this.service.getProductosPrecioASC().subscribe(
+      this.service.getProductosPrecioASC(this.idCliente).subscribe(
         res=>{
           this.misProductos=res;
         },
         err=>console.error(err)
       );
     }else if(this.tipoPrecio=="Precio DESC"){
-      this.service.getProductosPrecioDESC().subscribe(
+      this.service.getProductosPrecioDESC(this.idCliente).subscribe(
         res=>{
           this.misProductos=res;
         },
@@ -113,7 +113,7 @@ export class ListProductosComponent implements OnInit {
 
   buscarPorCategoria(){
     if(this.nomCatBuscar!="SELEC CATEGORIA"){
-      this.service.getProductoPorCategoria(this.nomCatBuscar).subscribe(
+      this.service.getProductoPorCategoria(this.nomCatBuscar,this.idCliente).subscribe(
         res=>{
           this.misProductos=res;
         },

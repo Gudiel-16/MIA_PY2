@@ -88,6 +88,7 @@ CREATE TABLE chat(
     texto varchar(1000) not null,
     fecha varchar(400) not null,
     id_producto integer not null,
+    id_c_Aenviar integer not null,
     id_c integer not null
 );
 
@@ -178,7 +179,7 @@ insert into denuncia(descripcion,fecha,id_producto,id_c) values(descripcion,fech
 
 insert into bitacora(correo,descripcion,fecha) values(correo,descripcion,fecha);
 
-insert into chat(nombre,image,texto,fecha,id_producto,id_c) values(nombre,image,texto,fecha,id_producto,id_c);
+insert into chat(nombre,image,texto,fecha,id_producto,id_c_Aenviar,id_c) values(nombre,image,texto,fecha,id_producto,id_c_Aenviar,id_c);
 
 update cliente set confirmacion=0 where correo='prueba@gmail.com' and pass='123';
 update cliente set nombre='a', apellido='b', pais='c', fech_nac='d', pass='e', image='f' where id_c=21;
@@ -199,7 +200,7 @@ update cliente set pass='aaa' where id_c=2;
 select * from producto order by precio asc;
 select * from producto order by precio desc;
 /*Buscar Palabra Clave*/
-select id_producto,nombre,descripcion, palab_clave,precio,nom_cat,id_c, instr(palab_clave,'negro',1,1) from producto where instr(palab_clave,'negro',1,1)=1;
+select id_producto,nombre,descripcion, palab_clave,precio,ruta,nom_cat,id_c, instr(palab_clave,'smart',1,1) from producto where instr(palab_clave,'smart',1,1)=1 and id_c != 24;
 /*Por categoria*/
 select * from producto where nom_cat='Celulares';
 /*actualizar creditos*/
@@ -237,14 +238,21 @@ update reaccion set megusta=1, nomegusta=0 where id_c=1 and id_producto=123;
 select * from producto;
 select * from cliente;
 select * from administrador;
-select * from producto where producto.estado_detele=1;
+select * from producto where estado_detele=1 and id_c!=24;
+select * from producto where estado_detele=1 and id_c=24;
 select nombre from categoria;
 select * from reaccion;
 select * from detalle_cv;
 select CONCAT(CONCAT(cliente.nombre, ' '), cliente.apellido) "nombre", cliente.image, comentario.descripcion, comentario.fecha from comentario,cliente where cliente.id_c=comentario.id_c and comentario.id_producto=123 order by comentario.id_com asc;
 select * from denuncia;
 select * from bitacora order by id_bit asc;
-select * from chat;
+select * from chat order by id_chat asc;
+
+/*para cliente*/
+select * from chat where id_producto=1 and ((id_c_aenviar=62 and id_c=24) or (id_c_aenviar=24 and id_c=62)) order by id_chat asc;
+
+/*para vendedor*/
+select * from chat where id_producto=1 order by id_chat asc;
 
 
 select producto.id_c, producto.nombre, chat.id_c, chat.nombre, chat.texto 
@@ -264,10 +272,10 @@ where producto.id_producto=denuncia.id_producto and denuncia.estado_detele=0
 order by denuncia.id_den asc;
 
 /*eliminar producto*/
-update producto set estado_detele=0 where id_producto=6;
+update producto set estado_detele=1 where id_producto!=66;
 
 /*elimina todas las denuncias con ese producto*/
-update denuncia set estado_detele=0 where id_producto=6;
+update denuncia set estado_detele=1 where id_producto!=66;
 
 /*
 drop table comentario;
@@ -281,7 +289,10 @@ delete from cliente where id_c=21;
 delete from cliente where id_c=22;
 delete from cliente where id_c=61;*/
 
+drop table chat;
+delete from chat where id_chat!=126;
 COMMIT;
+
 
 
 

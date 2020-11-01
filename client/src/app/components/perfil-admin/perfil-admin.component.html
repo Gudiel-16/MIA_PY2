@@ -37,10 +37,10 @@
     <div class="col-md-4">
         <div class="card card-body text-center">
             <form>
-                <label for="exampleInputEmail1">Foto de Perfil</label>
+                <h5>Foto de Perfil</h5>
                 <input type="file" class="d-none" (change)="onPhotoSelected($event)" #photoInput><!--cuando de click en la imagen le pasamos un evento-->
                 <img [src]="photoSelecter || miAdmin.image" class="img-fluid" alt="No Image" (click)="photoInput.click()"> <!--se ejecuta lo de arriba por el #-->  
-                <label for="exampleInputEmail1">Para actualizar foto, click encima de la misma</label>
+                <p>Para actualizar foto, click encima de la misma</p>
                 <button class="btn btn-outline-info btn-block" (click)="updateAdmin(contenido)">
                     <i class="fas fa-edit"></i> MODIFICAR DATOS
                 </button>                     

@@ -32,6 +32,7 @@ class Server {
     start() {
         //array que para guardar msjs del socket
         const miMSJ = [];
+        const miMSJ2 = [];
         var idcaenv = 0;
         const serverWeb = this.app.listen(this.app.get('port'), () => {
             console.log("Ejecutando Server en port", this.app.get('port'));
@@ -40,9 +41,9 @@ class Server {
         const io = SocketIO.listen(serverWeb);
         //cada vez que alguien se conecte
         io.on('connection', (socket) => {
-            console.log("Usuario Conectado");
             socket.on('send-message', (data) => {
                 miMSJ.push(data);
+                miMSJ2.push(data);
                 //lo envia el dueno del producto
                 if (data["bandera"] == 1) {
                     data["id_c_Aenviar"] = idcaenv;
@@ -52,10 +53,16 @@ class Server {
                     idcaenv = data["id_c"];
                 }
                 controllersChat_1.indexControllerChat.insertar(data).then((res) => {
-                    console.log(res);
+                    controllersChat_1.indexControllerChat.datosParaCliente(data).then((res) => {
+                        const datosCliente = res;
+                        controllersChat_1.indexControllerChat.datosParaVendedor(data).then((res) => {
+                            socket.emit('text-event', datosCliente);
+                            socket.emit('text-event-2', res);
+                            socket.broadcast.emit('text-event', datosCliente);
+                            socket.broadcast.emit('text-event-2', res); //dueno
+                        });
+                    });
                 });
-                socket.emit('text-event', miMSJ);
-                socket.broadcast.emit('text-event', miMSJ);
             });
         });
     }

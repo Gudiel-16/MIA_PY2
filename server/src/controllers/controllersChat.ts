@@ -28,16 +28,67 @@ class IndexControllerChat{
         const texto=usersChat.text;
         const fecha=usersChat.fecha;
         const id_producto=usersChat.id_producto;
+        const id_c_Aenviar=usersChat.id_c_Aenviar;
         const id_c=usersChat.id_c;
         
         // los : son porque reciben parametros
-        /*let sql = "insert into chat(nombre,image,texto,fecha,id_producto,id_c) values(:nombre,:image,:texto,:fecha,:id_producto,:id_c)";
+        let sql = "insert into chat(nombre,image,texto,fecha,id_producto,id_c_Aenviar,id_c) values(:nombre,:image,:texto,:fecha,:id_producto,:id_c_Aenviar,:id_c)";
 
         let cnn=await oracledb.getConnection(keys.cns);
-        await cnn.execute(sql,[nombre,image,texto,fecha,id_producto,id_c],{autoCommit});
-        cnn.release();*/
+        await cnn.execute(sql,[nombre,image,texto,fecha,id_producto,id_c_Aenviar,id_c],{autoCommit});
+        cnn.release();
         console.log(data);
         return "Se guardo en Chat";
+    }
+
+    public async datosParaCliente(data:any) {
+        var autoCommit=false;
+
+        let usersChat={
+            name:'',
+            image:'',
+            text:'',
+            fecha:'',
+            id_producto:0,
+            id_c_Aenviar:0,
+            id_c:0,
+            bandera:0
+        }
+        usersChat=data;
+        const id_producto=usersChat.id_producto;
+        const id_c_Aenviar=usersChat.id_c_Aenviar;
+        const id_c=usersChat.id_c;
+
+        let sql = "select * from chat where id_producto=:id_producto and ((id_c_aenviar=:id_c_aenviar and id_c=:id_c) or (id_c_aenviar=:id_c and id_c=:id_c_aenviar)) order by id_chat asc";
+        let cnn = await oracledb.getConnection(keys.cns);
+        let result = await cnn.execute(sql, [id_producto,id_c_Aenviar,id_c], { autoCommit });
+        cnn.release();
+        //console.log(result)
+        return result.rows;
+    }
+
+    public async datosParaVendedor(data:any) {
+        var autoCommit=false;
+
+        let usersChat={
+            name:'',
+            image:'',
+            text:'',
+            fecha:'',
+            id_producto:0,
+            id_c_Aenviar:0,
+            id_c:0,
+            bandera:0
+        }
+        usersChat=data;
+        const id_producto=usersChat.id_producto;
+
+        let sql = "select * from chat where id_producto=:id_producto order by id_chat asc";
+        let cnn = await oracledb.getConnection(keys.cns);
+        let result = await cnn.execute(sql, [id_producto], { autoCommit });
+        cnn.release();
+        //console.log(result)
+        return result.rows;
     }
 
 }

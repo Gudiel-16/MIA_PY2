@@ -9,7 +9,7 @@
 </form>
 
 <div class="row">
-  <div class="col-12 col-sm-12 col-md-6 order-2 order-sm-2 order-md-1">
+  <div class="col-12 col-sm-12 col-md-7 order-2 order-sm-2 order-md-1">
     <ul class="list-unstyled">
       <li class="media" style="border:solid; border-color:#E5E8E8; border-width: 1px; margin-bottom: 10px;" *ngFor="let coment of misComentarios">
         <img src="{{coment[1]}}" style="width: 60px; height: 60px; border-radius: 50px; margin-left: 20px; margin-top: 20px;" class="mr-3" alt="...">
@@ -20,7 +20,7 @@
       </li>     
     </ul>
     </div>
-    <div class="col-12 col-sm-12 col-md-6 order-1 order-sm-1 order-md-2" style="margin-bottom: 15px;" >
+    <div class="col-12 col-sm-12 col-md-4 order-1 order-sm-1 order-md-2" style="margin-bottom: 15px;" >
       <div class="col-md-12">
         <div class="card card-body text-center">
             <h3>{{miProduct.nombre == '' ? 'NOMBRE' : miProduct.nombre}}</h3>
@@ -29,7 +29,6 @@
             <p>{{miProduct.nom_cat == '' ? 'CATEGORIA' : miProduct.nom_cat}}</p>
             <p>{{miProduct.precio == 0 ? 'Q. 0.0' : miProduct.precio}}</p>
         </div>
-        <button type="button" class="btn btn-outline-danger btn-block" (click)="actualizar()">ACTUALIZAR <i style="font-size: 15px;" class="fas fa-radiation-alt"></i></button>
       </div>
     </div>
 </div>
