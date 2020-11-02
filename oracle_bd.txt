@@ -236,7 +236,7 @@ update reaccion set megusta=0, nomegusta=1 where id_c=24 and id_producto=123;
 update reaccion set megusta=1, nomegusta=0 where id_c=1 and id_producto=123;
 
 select * from producto;
-select * from cliente;
+select * from cliente order by id_c asc;
 select * from administrador;
 select * from producto where estado_detele=1 and id_c!=24;
 select * from producto where estado_detele=1 and id_c=24;
@@ -290,8 +290,66 @@ delete from cliente where id_c=22;
 delete from cliente where id_c=61;*/
 
 drop table chat;
-delete from chat where id_chat!=126;
+delete from cliente where id_c=3;
 COMMIT;
+
+/*USUARIOS PARA PRUEBA DE CONSULTAS*/
+insert into cliente(nombre,apellido,correo,pais,fech_nac,pass,image,creditos,confirmacion) values ('Evangelyne','Evangelyne','evan@gmail.com','Brasil','1990-01-01','abc','https://res.cloudinary.com/gudiel16/image/upload/v1603579987/testing_angular_cloudinary/sinFoto_epcdyw.png',10000,1);
+insert into cliente(nombre,apellido,correo,pais,fech_nac,pass,image,creditos,confirmacion) values ('Edna','Edna','edna@gmail.com','Argentina','1990-01-01','abc','https://res.cloudinary.com/gudiel16/image/upload/v1603579987/testing_angular_cloudinary/sinFoto_epcdyw.png',15000,1);
+insert into cliente(nombre,apellido,correo,pais,fech_nac,pass,image,creditos,confirmacion) values ('Liseth','Liseth','lis@gmail.com','Argentina','1990-01-01','abc','https://res.cloudinary.com/gudiel16/image/upload/v1603579987/testing_angular_cloudinary/sinFoto_epcdyw.png',11000,1);
+insert into cliente(nombre,apellido,correo,pais,fech_nac,pass,image,creditos,confirmacion) values ('Wendy','Wendy','wendy@gmail.com','Colombia','1990-01-01','abc','https://res.cloudinary.com/gudiel16/image/upload/v1603579987/testing_angular_cloudinary/sinFoto_epcdyw.png',7000,1);
+insert into cliente(nombre,apellido,correo,pais,fech_nac,pass,image,creditos,confirmacion) values ('Yolanda','Yolanda','yolanda@gmail.com','Peru','1990-01-01','abc','https://res.cloudinary.com/gudiel16/image/upload/v1603579987/testing_angular_cloudinary/sinFoto_epcdyw.png',1000,1);
+
+/*Top 10 de productos más vendidos*/
+select cliente.nombre "nombre vendedor", producto.nombre "nombre producto", count(producto.nombre) "cantidad vendida" from cliente 
+join producto on producto.id_c= cliente.id_c 
+join detalle_cv on detalle_cv.id_producto = producto.id_producto
+group by cliente.nombre, producto.nombre
+order by "cantidad vendida" desc; 
+
+/*Top 10 productos con más “no me gusta” han tenido*/
+
+
+/*Top 10 clientes con más y menos créditos:*/
+select * from 
+(
+select nombre,correo,fech_nac,creditos 
+from cliente
+order by creditos desc
+fetch first 10 rows only
+)
+union all
+select * from
+(
+select nombre,correo,fech_nac,creditos 
+from cliente
+order by creditos asc
+fetch first 10 rows only
+);
+
+/*Top 10 clientes que más denuncias han hecho:*/
+select cliente.nombre, cliente.correo, cliente.fech_nac, denuncia.id_c, count(denuncia.id_c) as "cantidad" from cliente join denuncia
+on cliente.id_c=denuncia.id_c
+group by cliente.nombre, cliente.correo, cliente.fech_nac, denuncia.id_c
+order by "cantidad" desc;
+
+/*Top 10 clientes que más publicaciones han hecho:*/
+select cliente.nombre, cliente.correo, cliente.creditos, producto.id_c, count(producto.id_c) as "cantidad" from cliente join producto
+on cliente.id_c=producto.id_c
+group by cliente.nombre, cliente.correo, cliente.creditos, producto.id_c
+order by "cantidad" desc
+fetch first 10 rows only;
+
+/*Top 10 de países con más crédito y productos a la venta*/
+select  cliente.pais, count(producto.id_c) as "cantidad producto", sum(cliente.creditos) "cantidad creditos", count(distinct cliente.id_c) "cantidad clientes" from cliente join producto
+on cliente.id_c=producto.id_c
+group by cliente.pais
+fetch first 10 rows only;
+
+
+
+
+
 
 
 
