@@ -176,10 +176,15 @@ instalamos (en carpeta client):
 
 
 en una terminal (accedemos a carpeta 'server'):
-    npm run build (tsc)
 en otra terminal (accedemos a carpeta 'server'):
-    export LD_LIBRARY_PATH=/usr/lib/oracle/18.5/client64/lib:$LD_LIBRARY_PATH
+    npm run build (tsc)
+    export LD_LIBRARY_PATH=/usr/lib/oracle/18.5/client64/lib/$LD_LIBRARY_PATH
     npm run dev (nodemon)
 
 en otra terminal (accedeos a carpeta 'client')
     ng serve 
+
+
+//problemas con cliente
+    https://better-coding.com/solved-njs-045-dpi-1047-64-bit-oracle-client-library-cannot-be-loaded/
+    sudo dnf install libnsl 
