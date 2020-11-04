@@ -23,6 +23,7 @@ import { MisProductosComponent } from './components/mis-productos/mis-productos.
 import { DetalleMiProductoComponent } from './components/detalle-mi-producto/detalle-mi-producto.component';
 import { ComentariosMiProductoComponent } from './components/comentarios-mi-producto/comentarios-mi-producto.component';
 import { ChatMiProductoComponent } from './components/chat-mi-producto/chat-mi-producto.component';
+import { BienvenidaClienteComponent } from './components/bienvenida-cliente/bienvenida-cliente.component';
 
 //para verificar si esta logueado o no, no deja pasar a otras paginas si no lo esta
 import { OutsGuard } from './guards/outs.guard'
@@ -78,8 +79,8 @@ const routes: Routes = [
   ,
   {
     path:'usuario',
-    component: NavigationUsuarioComponent,
-    canActivate:[OutsGuard] //esto hace que no entre un usuario, sino esta logueado
+    component: BienvenidaClienteComponent,
+    //canActivate:[OutsGuard] //esto hace que no entre un usuario, sino esta logueado
   },
   {
     path:'usuario/perfil',

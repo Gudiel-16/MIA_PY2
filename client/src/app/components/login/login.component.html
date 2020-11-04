@@ -1,26 +1,26 @@
-<div class="container" style="width: 600px; margin-top: 100px;">
-    <form>
+<div class="container" style="width: 600px; margin-top: 100px; background-image: url(https://images4.alphacoders.com/495/49586.jpg);">
+    <form style="padding: 35px;">
         <div class="form-group">
-          <label for="exampleInputEmail1">CORREO</label>
+          <label for="exampleInputEmail1" style="color: white;">CORREO</label>
           <input [(ngModel)]="miCorreo" [ngModelOptions]="{standalone: true}" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <small id="emailHelp" class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small>
+          <small id="emailHelp" class="form-text text-muted" style="color: white;">Nunca compartiremos su correo electrónico con nadie más.</small>
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">PASSWORD</label>
+          <label for="exampleInputPassword1" style="color: white;">PASSWORD</label>
           <input [(ngModel)]="miPass" [ngModelOptions]="{standalone: true}" type="password" class="form-control" id="exampleInputPassword1">
         </div>
         <div class="form-group form-check">
           <input type="checkbox" [(ngModel)]="micheck" [ngModelOptions]="{standalone: true}" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Seleccione si es Administrador</label>
+          <label class="form-check-label" for="exampleCheck1" style="color: white;">Seleccione si es Administrador</label>
         </div>
         <div class="form-group">
           <div class="alert alert-danger" role="alert" *ngIf="alert">
             CORREO O PASSWORD INCORRECTOS
           </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block" (click)="ingresar()">LOGIN</button>
-        <button type="submit" class="btn btn-primary btn-block" (click)="registro()" >REGISTRARSE</button>
-        <button type="submit" class="btn btn-primary btn-block" (click)="recPass(contenido)"> RECUPERAR PASSWORD</button>
+        <button type="submit" class="btn btn-outline-warning btn-block" (click)="ingresar()">INGRESAR</button>
+        <button type="submit" class="btn btn-outline-warning btn-block" (click)="registro()" >REGISTRARSE</button>
+        <button type="submit" class="btn btn-outline-warning btn-block" (click)="recPass(contenido)"> RECUPERAR PASSWORD</button>
     </form>
 </div>
 

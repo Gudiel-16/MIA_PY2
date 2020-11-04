@@ -37,6 +37,7 @@ import { MisProductosComponent } from './components/mis-productos/mis-productos.
 import { DetalleMiProductoComponent } from './components/detalle-mi-producto/detalle-mi-producto.component';
 import { ComentariosMiProductoComponent } from './components/comentarios-mi-producto/comentarios-mi-producto.component';
 import { ChatMiProductoComponent } from './components/chat-mi-producto/chat-mi-producto.component';
+import { BienvenidaClienteComponent } from './components/bienvenida-cliente/bienvenida-cliente.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { ChatMiProductoComponent } from './components/chat-mi-producto/chat-mi-p
     MisProductosComponent,
     DetalleMiProductoComponent,
     ComentariosMiProductoComponent,
-    ChatMiProductoComponent
+    ChatMiProductoComponent,
+    BienvenidaClienteComponent
   ],
   imports: [
     BrowserModule,
