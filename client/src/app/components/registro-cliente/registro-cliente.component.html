@@ -4,15 +4,15 @@
     <form>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <input type="text" class="form-control" [(ngModel)]="miClient.nombre" [ngModelOptions]="{standalone: true}" placeholder="Nombre">
+            <input type="text" class="form-control" [(ngModel)]="miClient.nombre" [ngModelOptions]="{standalone: true}" autocomplete="off" placeholder="Nombre">
           </div>
           <div class="form-group col-md-6">
-              <input type="text" class="form-control" [(ngModel)]="miClient.apellido" [ngModelOptions]="{standalone: true}"  placeholder="Apellido">
+              <input type="text" class="form-control" [(ngModel)]="miClient.apellido" [ngModelOptions]="{standalone: true}" autocomplete="off" placeholder="Apellido">
           </div>
         </div>
         <div class="form-row">
           <div class="form-group col-md-12">
-            <input type="email" class="form-control" [(ngModel)]="miClient.correo" [ngModelOptions]="{standalone: true}" placeholder="Correo">
+            <input type="email" class="form-control" [(ngModel)]="miClient.correo" [ngModelOptions]="{standalone: true}" autocomplete="off" placeholder="Correo">
           </div>
         </div>        
         <div class="form-row">            
@@ -25,7 +25,7 @@
         </div>       
         <div class="form-row">
           <div class="form-group col-md-6">
-            <input type="text" class="form-control" [(ngModel)]="miClient.pais" [ngModelOptions]="{standalone: true}" placeholder="Pais">
+            <input type="text" class="form-control" [(ngModel)]="miClient.pais" [ngModelOptions]="{standalone: true}" autocomplete="off" placeholder="Pais">
           </div> 
           <div class="form-group col-md-6">
             <input class="form-control" type="date" value="2020-11-06" [(ngModel)]="miClient.fech_nac" [ngModelOptions]="{standalone: true}" >

@@ -12,7 +12,7 @@
             
             <div class="card-body">
                 <div class="form-group">
-                    <input type="text" name="nombre" [(ngModel)]="nomNewCat" [ngModelOptions]="{standalone: true}" placeholder="Nombre" class="form-control">
+                    <input type="text" name="nombre" [(ngModel)]="nomNewCat" [ngModelOptions]="{standalone: true}" placeholder="Nombre" autocomplete="off" class="form-control">
                 </div>
             </div>
             <button class="btn btn-success btn-block" (click)="addCategoria(contenido)">

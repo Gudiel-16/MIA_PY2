@@ -65,7 +65,7 @@ class IndexController {
         return __awaiter(this, void 0, void 0, function* () {
             //son los valores que recibe para insertar, y son los nombres de los campos de nuestra tabla
             var autoCommit = true;
-            const { id_producto, nombre, descripcion, palab_clave, ruta, precio, nom_cat, id_c } = req.body; //req.body, recibe un cuerpo de msj (un json)
+            const { nombre, descripcion, palab_clave, ruta, precio, nom_cat, id_c } = req.body; //req.body, recibe un cuerpo de msj (un json)
             // los : son porque reciben parametros
             let sql = "insert into producto(nombre,descripcion,palab_clave,precio,ruta,nom_cat,id_c) values (:nombre,:descripcion,:palab_clave,:precio,:ruta,:nom_cat,:id_c)";
             let cnn = yield oracledb.getConnection(keys_1.default.cns);

@@ -40,7 +40,7 @@ class IndexRoutes {
         this.router.put('/usuario/updateCreditos', controllersCliente_1.indexControllerCliente.actualizarCreditosCliente);
         //PRODUCTO
         this.router.post('/usuario/listProductos', indexController_1.indexController.obtenerTodosProductos);
-        this.router.post('/usuario/adSdProducto', indexController_1.indexController.crearProducto);
+        this.router.post('/usuario/addProducto', indexController_1.indexController.crearProducto);
         this.router.get('/usuario/listProductos/detalleProducto/:id', indexController_1.indexController.obtenerUnProducto);
         this.router.post('/usuario/listProductos/ordenASC', indexController_1.indexController.obtenerProductosPrecioASC);
         this.router.post('/usuario/listProductos/ordenDESC', indexController_1.indexController.obtenerProductosPrecioDESC);

@@ -161,7 +161,7 @@ drop table cliente;*/
 
 delete from producto where id_producto=128;
 
-insert into administrador(nombre,apellido,correo,pais,fech_nac,pass,image) values('Christopher','Gudiel','admin@gmail.com','Guatemala','1990-01-01','admin','https://res.cloudinary.com/gudiel16/image/upload/v1603448091/testing_angular_cloudinary/mbal9b2dpdar125yqshe.jpg');
+insert into administrador(nombre,apellido,correo,pais,fech_nac,pass,image) values('Jesus','Nazaret','admin@gmail.com','Guatemala','1990-01-01','admin','https://res.cloudinary.com/gudiel16/image/upload/v1604542923/testing_angular_cloudinary/JESUS_c7anbf.jpg');
 
 insert into producto(nombre,descripcion,palab_clave,precio,ruta,nom_cat,id_c) values ('Huawei p40','Fallo en camara','negro,barato',2000,'pathImage','Celulares',1);
 insert into producto(nombre,descripcion,palab_clave,precio,ruta,nom_cat,id_c) values ('Huawei p30','Fallo en touch','negro,barato',3000.50,'pathImage','Celulares',1);
@@ -307,8 +307,19 @@ join detalle_cv on detalle_cv.id_producto = producto.id_producto
 group by cliente.nombre, producto.nombre
 order by "cantidad vendida" desc; 
 
-/*Top 10 productos con más “no me gusta” han tenido*/
+/*Top 10 de productos que más “me gusta” han tenido:*/
+select producto.nombre, count(reaccion.megusta) "cantidad" from producto
+inner join reaccion on reaccion.id_producto=producto.id_producto
+where reaccion.megusta=1
+group by producto.nombre
+order by "cantidad" desc;
 
+/*Top 10 productos con más “no me gusta” han tenido*/
+select producto.nombre, count(reaccion.nomegusta) "cantidad" from producto
+inner join reaccion on reaccion.id_producto=producto.id_producto
+where reaccion.nomegusta=1
+group by producto.nombre
+order by "cantidad" desc;
 
 /*Top 10 clientes con más y menos créditos:*/
 select * from 

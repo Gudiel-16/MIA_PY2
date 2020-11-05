@@ -45,7 +45,7 @@ class IndexRoutes{
 
         //PRODUCTO
         this.router.post('/usuario/listProductos',indexController.obtenerTodosProductos);
-        this.router.post('/usuario/adSdProducto',indexController.crearProducto);
+        this.router.post('/usuario/addProducto',indexController.crearProducto);
         this.router.get('/usuario/listProductos/detalleProducto/:id', indexController.obtenerUnProducto);
         this.router.post('/usuario/listProductos/ordenASC',indexController.obtenerProductosPrecioASC);
         this.router.post('/usuario/listProductos/ordenDESC',indexController.obtenerProductosPrecioDESC);

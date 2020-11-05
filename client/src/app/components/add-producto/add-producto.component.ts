@@ -157,7 +157,7 @@ export class AddProductoComponent implements OnInit {
 
   aceptar(){
     this.ngbModal.dismissAll(); //cerrar model
-    this.router.navigate(['usuario/listProductos']);
+    this.router.navigate(['usuario/misProductos']);
   }
 
 }
