@@ -1,0 +1,20 @@
+<!--PARA QUE SIEMPRE SALGA LA BARRA DE NAVEGACION DE USUARIO-->
+<app-navigation-admin></app-navigation-admin>
+
+
+<table class="table table-bordered table-dark" style="margin-top: 15px;">
+    <thead>    
+      <tr class="table-primary" style="color: black;">
+        <th scope="col">VENDEDOR</th>
+        <th scope="col">NOMBRE PRODUCTO</th>
+        <th scope="col">CANTIDAD</th>        
+      </tr>    
+    </thead>
+    <tbody>
+      <tr style="color: white;" *ngFor="let celda of misDatos">
+        <td>{{celda[0]}}</td>
+        <td>{{celda[1]}}</td>
+        <td>{{celda[2]}}</td>
+      </tr> 
+    </tbody>
+</table>

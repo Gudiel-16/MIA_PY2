@@ -40,6 +40,34 @@ export class NavigationAdminComponent implements OnInit {
     this.router.navigate(['admin/reporteBitacora']);    
   }
 
+  reporteProductosMasVendidos(){
+    this.router.navigate(['admin/reporteProductosMasVendidos']);    
+  }
+
+  reporteProductosMasMegusta(){
+    this.router.navigate(['admin/reporteProductosMasMegusta']);    
+  }
+
+  reporteProductosMasNoMegusta(){
+    this.router.navigate(['admin/reporteProductosMasNoMegusta']);    
+  }
+
+  reporteClienteMasMenosCredito(){
+    this.router.navigate(['admin/reporteClienteMasMenosCredito']);    
+  }
+
+  reporteClienteMasDenuncia(){
+    this.router.navigate(['admin/reporteClienteMasDenuncia']);    
+  }
+
+  reporteClienteMasPublicaciones(){
+    this.router.navigate(['admin/reporteClienteMasPublicaciones']);    
+  }
+
+  reportePaisesMasCreditoProducto(){
+    this.router.navigate(['admin/reportePaisesMasCreditoProducto']);    
+  }
+
   cerrarSecion(){
     let d_json=this.service.getClienteLS();
     if(d_json){

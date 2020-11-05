@@ -204,7 +204,7 @@ select id_producto,nombre,descripcion, palab_clave,precio,ruta,nom_cat,id_c, ins
 /*Por categoria*/
 select * from producto where nom_cat='Celulares';
 /*actualizar creditos*/
-update cliente set creditos=10000 where id_c=62;
+update cliente set pais='Espana' where id_c=27;
 COMMIT;
 
 /*PARA REACCION*/
@@ -242,7 +242,7 @@ select * from producto where estado_detele=1 and id_c!=24;
 select * from producto where estado_detele=1 and id_c=24;
 select nombre from categoria;
 select * from reaccion;
-select * from detalle_cv;
+select * from detalle_cv order by id_dcv asc;
 select CONCAT(CONCAT(cliente.nombre, ' '), cliente.apellido) "nombre", cliente.image, comentario.descripcion, comentario.fecha from comentario,cliente where cliente.id_c=comentario.id_c and comentario.id_producto=123 order by comentario.id_com asc;
 select * from denuncia;
 select * from bitacora order by id_bit asc;
@@ -290,7 +290,7 @@ delete from cliente where id_c=22;
 delete from cliente where id_c=61;*/
 
 drop table chat;
-delete from cliente where id_c=3;
+delete from detalle_cv where id_dcv!=343;
 COMMIT;
 
 /*USUARIOS PARA PRUEBA DE CONSULTAS*/
@@ -301,25 +301,29 @@ insert into cliente(nombre,apellido,correo,pais,fech_nac,pass,image,creditos,con
 insert into cliente(nombre,apellido,correo,pais,fech_nac,pass,image,creditos,confirmacion) values ('Yolanda','Yolanda','yolanda@gmail.com','Peru','1990-01-01','abc','https://res.cloudinary.com/gudiel16/image/upload/v1603579987/testing_angular_cloudinary/sinFoto_epcdyw.png',1000,1);
 
 /*Top 10 de productos más vendidos*/
-select cliente.nombre "nombre vendedor", producto.nombre "nombre producto", count(producto.nombre) "cantidad vendida" from cliente 
+select cliente.nombre "nombre vendedor", producto.nombre "nombre producto", sum(detalle_cv.cantidad) "cantidad vendida" from cliente 
 join producto on producto.id_c= cliente.id_c 
 join detalle_cv on detalle_cv.id_producto = producto.id_producto
 group by cliente.nombre, producto.nombre
 order by "cantidad vendida" desc; 
 
 /*Top 10 de productos que más “me gusta” han tenido:*/
-select producto.nombre, count(reaccion.megusta) "cantidad" from producto
+select cliente.nombre "nombre vendedor", producto.nombre, count(reaccion.megusta) "cantidad" from cliente
+inner join producto on producto.id_c=cliente.id_c
 inner join reaccion on reaccion.id_producto=producto.id_producto
 where reaccion.megusta=1
-group by producto.nombre
-order by "cantidad" desc;
+group by cliente.nombre,producto.nombre
+order by "cantidad" desc
+fetch first 10 rows only;
 
 /*Top 10 productos con más “no me gusta” han tenido*/
-select producto.nombre, count(reaccion.nomegusta) "cantidad" from producto
+select cliente.nombre "nombre vendedor",producto.nombre, count(reaccion.nomegusta) "cantidad" from cliente
+inner join producto on producto.id_c=cliente.id_c
 inner join reaccion on reaccion.id_producto=producto.id_producto
 where reaccion.nomegusta=1
-group by producto.nombre
-order by "cantidad" desc;
+group by cliente.nombre,producto.nombre
+order by "cantidad" desc
+fetch first 10 rows only;
 
 /*Top 10 clientes con más y menos créditos:*/
 select * from 
@@ -339,10 +343,11 @@ fetch first 10 rows only
 );
 
 /*Top 10 clientes que más denuncias han hecho:*/
-select cliente.nombre, cliente.correo, cliente.fech_nac, denuncia.id_c, count(denuncia.id_c) as "cantidad" from cliente join denuncia
+select cliente.nombre, cliente.correo, cliente.fech_nac, count(denuncia.id_c) as "cantidad" from cliente join denuncia
 on cliente.id_c=denuncia.id_c
-group by cliente.nombre, cliente.correo, cliente.fech_nac, denuncia.id_c
-order by "cantidad" desc;
+group by cliente.nombre, cliente.correo, cliente.fech_nac
+order by "cantidad" desc
+fetch first 10 rows only;
 
 /*Top 10 clientes que más publicaciones han hecho:*/
 select cliente.nombre, cliente.correo, cliente.creditos, producto.id_c, count(producto.id_c) as "cantidad" from cliente join producto
@@ -352,12 +357,23 @@ order by "cantidad" desc
 fetch first 10 rows only;
 
 /*Top 10 de países con más crédito y productos a la venta*/
-select  cliente.pais, count(producto.id_c) as "cantidad producto", sum(cliente.creditos) "cantidad creditos", count(distinct cliente.id_c) "cantidad clientes" from cliente join producto
-on cliente.id_c=producto.id_c
-group by cliente.pais
-fetch first 10 rows only;
+select "pais", sum("cantClient") as "cantidad clientes", sum("cantCredit") as "cantidad creditos", sum("cantProduct") as "cantidad productos" from
+(
+select  cliente.pais "pais", count(distinct cliente.id_c) "cantClient", cliente.creditos "cantCredit" , count(producto.id_c) "cantProduct" from cliente 
+inner join producto on cliente.id_c=producto.id_c
+group by cliente.pais, cliente.creditos
+fetch first 10 rows only
+)
+group by "pais"
+order by "cantidad creditos" desc;
 
 
+
+select producto.id_c, count(producto.id_c) from producto
+group by producto.id_c;
+
+select * from cliente order by id_c asc;
+select * from producto;
 
 
 

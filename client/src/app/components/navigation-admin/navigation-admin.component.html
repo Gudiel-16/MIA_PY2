@@ -15,9 +15,14 @@
               Reportes
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" (click)="reportesBit()">Reporte Bitacora</a>
-              <a class="dropdown-item">Top 10 de productos mas vendidos</a>
-              <a class="dropdown-item">Top 10 de productos que más me gusta han tenido</a>
+              <a class="dropdown-item" (click)="reportesBit()">Bitacora</a>
+              <a class="dropdown-item" (click)="reporteProductosMasVendidos()">Top 10 de productos mas vendidos</a>
+              <a class="dropdown-item" (click)="reporteProductosMasMegusta()">Top 10 de productos que más ME GUSTA han tenido</a>
+              <a class="dropdown-item" (click)="reporteProductosMasNoMegusta()">Top 10 de productos que más NO ME GUSTA han tenido</a>
+              <a class="dropdown-item" (click)="reporteClienteMasMenosCredito()">Top 10 de clientes con mas y menos creditos</a>
+              <a class="dropdown-item" (click)="reporteClienteMasDenuncia()">Top 10 clientes que más denuncias han hecho</a>
+              <a class="dropdown-item" (click)="reporteClienteMasPublicaciones()">Top 10 clientes que más publicaciones han hecho</a>
+              <a class="dropdown-item" (click)="reportePaisesMasCreditoProducto()">Top 10 de países con más crédito y productos a la venta</a>              
             </div>
           </li>        
           <a class="nav-link" (click)="cerrarSecion()">Cerrar Sesion</a>

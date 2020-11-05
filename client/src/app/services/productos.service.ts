@@ -385,6 +385,34 @@ export class ProductosService {
     return this.http.get(`${this.API_URI}/reporte/bitacoraDESC`);
   }
 
+  getProductosMasVendidos(){
+    return this.http.get(`${this.API_URI}/reporte/reporteProductosMasVendidos`);
+  }
+
+  getreporteProductosMasMegusta(){
+    return this.http.get(`${this.API_URI}/reporte/reporteProductosMasMegusta`);
+  }
+
+  getreporteProductosMasNoMegusta(){
+    return this.http.get(`${this.API_URI}/reporte/reporteProductosMasNoMegusta`);
+  }
+
+  getreporteClienteMasMenosCredito(){
+    return this.http.get(`${this.API_URI}/reporte/reporteClienteMasMenosCredito`);
+  }
+
+  getreporteClienteMasDenuncia(){
+    return this.http.get(`${this.API_URI}/reporte/reporteClienteMasDenuncia`);
+  }
+
+  getreporteClienteMasPublicaciones(){
+    return this.http.get(`${this.API_URI}/reporte/reporteClienteMasPublicaciones`);
+  }
+
+  getreportePaisesMasCreditoProducto(){
+    return this.http.get(`${this.API_URI}/reporte/reportePaisesMasCreditoProducto`);
+  }
+
   //LOCALSTORAGE
 
   setAdminLS(admin:Administrador){

@@ -102,6 +102,14 @@ class IndexRoutes{
         //REPORTES
         this.router.get('/reporte/bitacoraASC',indexControllerReportes.bitacoraASC);
         this.router.get('/reporte/bitacoraDESC',indexControllerReportes.bitacoraDESC);
+        this.router.get('/reporte/reporteProductosMasVendidos',indexControllerReportes.reporteProductosMasVendidos);
+        this.router.get('/reporte/reporteProductosMasMegusta',indexControllerReportes.reporteProductosMasMegusta);
+        this.router.get('/reporte/reporteProductosMasNoMegusta',indexControllerReportes.reporteProductosMasNoMegusta);
+        this.router.get('/reporte/reporteClienteMasMenosCredito',indexControllerReportes.reporteClienteMasMenosCredito);
+        this.router.get('/reporte/reporteClienteMasDenuncia',indexControllerReportes.reporteClienteMasDenuncia);
+        this.router.get('/reporte/reporteClienteMasPublicaciones',indexControllerReportes.reporteClienteMasPublicaciones);
+        this.router.get('/reporte/reportePaisesMasCreditoProducto',indexControllerReportes.reportePaisesMasCreditoProducto);
+        
         
         //CHAT
         this.router.post('/chat/insertar',indexControllerChat.insertar);

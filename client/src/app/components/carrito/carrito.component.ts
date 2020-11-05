@@ -64,9 +64,6 @@ export class CarritoComponent implements OnInit {
   misProductos: any =[];
   total:number=0;
 
-  //contendra los datos para ir insertando en tabla detalle CV
-  detalleCV:any=[];
-
   //para darle propiedades a ngBootstrap
   ngModalOption:NgbModalOptions={};
 
@@ -119,11 +116,18 @@ export class CarritoComponent implements OnInit {
         res=>{
           this.service.envCorreoAComprador(fechaa,this.miClient.correo,this.miClient.nombre,this.filasHTMLComprador,this.total).subscribe(
             res=>{
-              console.log(res);
-              console.log(this.detalleCV);
+              this.ingresarDCV((yaEjec)=>{
+                  this.ngModalOption.backdrop='static';
+                  this.ngModalOption.keyboard=true;
+                  this.ngModalOption.centered=true;
+                  this.ngbModal.open(contenido,this.ngModalOption); 
+                  this.limpiar();
+              });
+              //console.log(res);
+              /*console.log(this.detalleCV);
               let cont=0;
               for(const cele in this.detalleCV){
-                console.log("aaaja");
+                //console.log("aaaja");
                 console.log(this.detalleCV[cele]);
                 cont=cont+1;
 
@@ -141,7 +145,7 @@ export class CarritoComponent implements OnInit {
                   this.ngbModal.open(contenido,this.ngModalOption); 
                   this.limpiar();
                 }
-              }
+              }*/
                
             },
             err=>console.error(err)
@@ -202,7 +206,7 @@ export class CarritoComponent implements OnInit {
               this.detalle.subtotal=fila["subtotal"];
               this.detalle.id_producto=fila["id_producto"];
               this.detalle.id_c=this.miClient.id_c;
-              this.detalleCV.push(this.detalle);
+              //console.log(this.detalle);
               this.concFilahtml(fila["nom_producto"],fila["precio"],fila["cantidad"],fila["subtotal"]);
               totalVendedor=totalVendedor+fila["subtotal"];
             }
@@ -284,6 +288,38 @@ export class CarritoComponent implements OnInit {
     //this.total=0;
     this.ngbModal.dismissAll(); //cerrar model
     //this.router.navigate(['usuario/listProductos']);
+  }
+
+  ingresarDCV(done){
+    let cont=0;
+    for(let [key,value] of this.miMap){
+        
+      //paso los datos a las variables globales
+      let arr=value;
+      //recorro el array para ir creando las filas html
+      for(let celda in arr){
+        let fila=value[celda];
+        //insertamos en array detalle              
+        this.detalle.cantidad=fila["cantidad"];
+        this.detalle.precio=fila["precio"];
+        this.detalle.subtotal=fila["subtotal"];
+        this.detalle.id_producto=fila["id_producto"];
+        this.detalle.id_c=this.miClient.id_c;
+        //console.log(this.detalle);
+        this.service.saveDetalle(this.detalle).subscribe(
+          res=>{
+            console.log(res);
+          },
+          err=>console.error(err)
+        )          
+      }
+      
+      cont=cont+1;  
+      if(cont==this.miMap.size){
+        //es como un return, para que se sepa que se termino de iterar
+        done("YA EJECUTO!");
+      }      
+    }
   }
 
 }

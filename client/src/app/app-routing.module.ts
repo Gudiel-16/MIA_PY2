@@ -24,6 +24,13 @@ import { DetalleMiProductoComponent } from './components/detalle-mi-producto/det
 import { ComentariosMiProductoComponent } from './components/comentarios-mi-producto/comentarios-mi-producto.component';
 import { ChatMiProductoComponent } from './components/chat-mi-producto/chat-mi-producto.component';
 import { BienvenidaClienteComponent } from './components/bienvenida-cliente/bienvenida-cliente.component';
+import { ReporteProductosMasVendidosComponent } from './components/reporte-productos-mas-vendidos/reporte-productos-mas-vendidos.component';
+import { ReporteProductosMasMegustaComponent } from './components/reporte-productos-mas-megusta/reporte-productos-mas-megusta.component';
+import { ReporteProductosMasNomegustaComponent } from './components/reporte-productos-mas-nomegusta/reporte-productos-mas-nomegusta.component';
+import { ReporteClienteMasCreditoComponent } from './components/reporte-cliente-mas-credito/reporte-cliente-mas-credito.component';
+import { ReporteClienteMasDenunciasComponent } from './components/reporte-cliente-mas-denuncias/reporte-cliente-mas-denuncias.component';
+import { ReporteClienteMasPublicacionesComponent } from './components/reporte-cliente-mas-publicaciones/reporte-cliente-mas-publicaciones.component';
+import { ReportePaisesCreditoProductoComponent } from './components/reporte-paises-credito-producto/reporte-paises-credito-producto.component';
 
 //para verificar si esta logueado o no, no deja pasar a otras paginas si no lo esta
 import { OutsGuard } from './guards/outs.guard'
@@ -130,7 +137,35 @@ const routes: Routes = [
   {
     path:'admin/reporteBitacora',
     component: ReporteBitacoraComponent
-  }    
+  },
+  {
+    path:'admin/reporteProductosMasVendidos',
+    component: ReporteProductosMasVendidosComponent
+  },
+  {
+    path:'admin/reporteProductosMasMegusta',
+    component: ReporteProductosMasMegustaComponent
+  },
+  {
+    path:'admin/reporteProductosMasNoMegusta',
+    component: ReporteProductosMasNomegustaComponent
+  },
+  {
+    path:'admin/reporteClienteMasMenosCredito',
+    component: ReporteClienteMasCreditoComponent
+  },
+  {
+    path:'admin/reporteClienteMasDenuncia',
+    component: ReporteClienteMasDenunciasComponent
+  },
+  {
+    path:'admin/reporteClienteMasPublicaciones',
+    component: ReporteClienteMasPublicacionesComponent
+  },
+  {
+    path:'admin/reportePaisesMasCreditoProducto',
+    component: ReportePaisesCreditoProductoComponent
+  }
 
 ];
 

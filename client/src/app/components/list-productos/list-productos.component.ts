@@ -144,6 +144,7 @@ export class ListProductosComponent implements OnInit {
     this.micarrito.subtotal=sub;
     //envio a LS
     this.service.addCarritoLS(this.micarrito);
+    this.cantidadAdd=1;
     this.aceptar();
   }
 
