@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+//importamos servicios
+import { ProductosService } from '../../services/productos.service';
+
 @Component({
   selector: 'app-reporte-paises-credito-producto',
   templateUrl: './reporte-paises-credito-producto.component.html',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportePaisesCreditoProductoComponent implements OnInit {
 
-  constructor() { }
+  misDatos: any =[];
+
+  constructor(private service:ProductosService) { }
 
   ngOnInit(): void {
+    this.service.getreportePaisesMasCreditoProducto().subscribe(
+      res=>{
+        this.misDatos=res;
+      },
+      err=>console.error(err)
+    );
   }
 
 }

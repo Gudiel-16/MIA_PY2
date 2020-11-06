@@ -1,1 +1,21 @@
-<p>reporte-paises-credito-producto works!</p>
+<app-navigation-admin></app-navigation-admin>
+
+
+<table class="table table-bordered table-dark" style="margin-top: 15px;">
+    <thead>    
+      <tr class="table-primary" style="color: black;">
+        <th scope="col">PAIS</th>
+        <th scope="col">CANTIDAD DE CLIENTES</th>
+        <th scope="col">CANTIDAD DE CREDITOS</th>
+        <th scope="col">CANTIDAD DE PRODUCTOS</th>        
+      </tr>    
+    </thead>
+    <tbody>
+      <tr style="color: white;" *ngFor="let celda of misDatos">
+        <td>{{celda[0]}}</td>
+        <td>{{celda[1]}}</td>
+        <td>{{celda[2]}}</td>
+        <td>{{celda[3]}}</td>
+      </tr> 
+    </tbody>
+</table>

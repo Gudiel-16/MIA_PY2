@@ -1,6 +1,11 @@
-<div class="container" style="width: 600px; margin-top: 100px; background-image: url(https://images4.alphacoders.com/495/49586.jpg);">
+<div class="container" style="width: 450px; margin-top: 100px; background-image: url(https://images4.alphacoders.com/495/49586.jpg);">
     <form style="padding: 35px;">
-        <div class="form-group">
+      <div class="card text-center">
+        <div class="card-body" style="background-color: #F1C40F ;">
+          <img src="/assets/Icono_login.png" class="img-fluid" alt="" style="height: 120px; width: 130px;">
+        </div>        
+      </div>
+        <div class="form-group" style="padding-top: 10px;">
           <label for="exampleInputEmail1" style="color: white;">CORREO</label>
           <input [(ngModel)]="miCorreo" [ngModelOptions]="{standalone: true}" type="email" autocomplete="off" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
           <small id="emailHelp" class="form-text text-muted" style="color: white;">Nunca compartiremos su correo electrónico con nadie más.</small>
