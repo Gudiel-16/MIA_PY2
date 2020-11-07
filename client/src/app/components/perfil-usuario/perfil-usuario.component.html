@@ -4,34 +4,48 @@
 <!--TARJETA PRINCIPAL, DONDE INSERTAREMOS LOS DATOS-->
 <div class="row" style="margin-top: 25px;"> <!--para que los ponga a la par-->
 
-    <div class="col-md-4 offset-md-2">
+    <div class="col-md-6 offset-md-1">
         <div class="card">
             <div class="card-body">
                 <form> 
                     <div class="form-group">
-                        <input type="text" [(ngModel)]="miClient.creditos" [ngModelOptions]="{standalone: true}" name="creditos" placeholder="Creditos" class="form-control">
+                        <label style="color: navy;">Creditos:</label>
+                        <input type="text" [(ngModel)]="miClient.creditos" [ngModelOptions]="{standalone: true}" style="text-align: center; font-size: 20px; background-color: white; color: black; border: solid; border-color: navy;" name="creditos" placeholder="Creditos" class="form-control">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label style="color: navy;">Nombre:</label>
+                            <input type="text" [(ngModel)]="miClient.nombre" [ngModelOptions]="{standalone: true}" name="nombre" placeholder="Nombre" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label style="color: navy;">Apellido:</label>
+                            <input type="text" [(ngModel)]="miClient.apellido" [ngModelOptions]="{standalone: true}" name="apellido" placeholder="Apellido" class="form-control">
+                        </div>    
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label style="color: navy;">Pais:</label>
+                            <input type="text" [(ngModel)]="miClient.pais" [ngModelOptions]="{standalone: true}" name="pais" placeholder="Pais" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label style="color: navy;">Fecha de nacimiento:</label>
+                            <input class="form-control" [(ngModel)]="miClient.fech_nac" [ngModelOptions]="{standalone: true}" type="date" value="2020-11-06">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" [(ngModel)]="miClient.nombre" [ngModelOptions]="{standalone: true}" name="nombre" placeholder="Nombre" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" [(ngModel)]="miClient.apellido" [ngModelOptions]="{standalone: true}" name="apellido" placeholder="Apellido" class="form-control">
-                    </div>                
-                    <div class="form-group">
-                        <input type="text" [(ngModel)]="miClient.pais" [ngModelOptions]="{standalone: true}" name="pais" placeholder="Pais" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" [(ngModel)]="miClient.fech_nac" [ngModelOptions]="{standalone: true}" type="date" value="2020-11-06">
-                    </div>
-                    <div class="form-group">
+                        <label style="color: navy;">Correo:</label>
                         <input type="text" name="correo" [(ngModel)]="miClient.correo" [ngModelOptions]="{standalone: true}" placeholder="Correo" class="form-control">
                     </div>
-                    <div class="form-group">
-                        <input type="text" name="pass" [(ngModel)]="miClient.pass" [ngModelOptions]="{standalone: true}" placeholder="Password" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="confPass" placeholder="Confirm Pass" class="form-control">
-                    </div>                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label style="color: navy;">Password:</label>
+                            <input type="text" name="pass" [(ngModel)]="miClient.pass" [ngModelOptions]="{standalone: true}" placeholder="Password" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label style="color: navy;">Confirmar Password:</label>
+                            <input type="text" name="confPass" placeholder="Confirmar Password" class="form-control">
+                        </div>  
+                    </div>                                      
                 </form>
             </div>
         </div>
@@ -40,10 +54,10 @@
     <div class="col-md-4">
         <div class="card card-body text-center">
             <form>
-                <h5>Foto de Perfil</h5>
+                <h5 style="padding-bottom: 10px; font-family: Georgia, 'Times New Roman', Times, serif;">Foto de Perfil</h5>
                 <input type="file" class="d-none" (change)="onPhotoSelected($event)" #photoInput><!--cuando de click en la imagen le pasamos un evento-->
                 <img [src]="photoSelecter || miClient.image" class="img-fluid" alt="No Image" (click)="photoInput.click()"> <!--se ejecuta lo de arriba por el #-->  
-                <p>Para actualizar foto, click encima de la misma</p>
+                <p style="padding-top: 10px;">Para actualizar foto, click encima de la misma</p>
                 <button class="btn btn-outline-info btn-block" (click)="updateCliente(contenido)">
                     <i class="fas fa-edit"></i> MODIFICAR DATOS
                 </button>
