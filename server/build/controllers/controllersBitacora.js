@@ -35,5 +35,13 @@ class IndexControllerBitacora {
             });
         });
     }
+    pruebaNGROK(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            //devuelvo el dato que se inserto
+            res.status(200).json({
+                "Respuesta": "TE ADORO HERMOSA, SOS LO MEJOR MY LORE!"
+            });
+        });
+    }
 }
 exports.indexControllerBitacora = new IndexControllerBitacora();

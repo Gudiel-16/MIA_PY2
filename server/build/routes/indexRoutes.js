@@ -85,6 +85,7 @@ class IndexRoutes {
         this.router.post('/bloqueo/envCorreDeBloqueo', controllersCorreoBloqueo_1.indexControllerCorreoBloqueo.enviarCorreoBloqueo);
         //BITACORA
         this.router.post('/bitacora/insertar', controllersBitacora_1.indexControllerBitacora.insertar);
+        this.router.get('/NGROK', controllersBitacora_1.indexControllerBitacora.pruebaNGROK);
         //REPORTES
         this.router.get('/reporte/bitacoraASC', controllersReportes_1.indexControllerReportes.bitacoraASC);
         this.router.get('/reporte/bitacoraDESC', controllersReportes_1.indexControllerReportes.bitacoraDESC);

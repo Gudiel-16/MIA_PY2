@@ -174,6 +174,17 @@ instalamos (en carpeta client):
         se guarda en bitacora
 
 
+/////////////////////////////////////////////////////////////////NGROK//////////////////////////////////////////////////
+//ir a ngrok.com
+    descargar el archivo zip
+    descomprimirlo -> unzip /path/to/ngrok.zip
+    registrarse o iniciar sesion para obtener token
+    en la carpeta donde descomprimimos -> abrir una terminal -> ejecutar (lo ultimo es el token que me genero):
+    ./ngrok authtoken 1jywsYTby9zKObIFX8IBO3vU6va_26PDYfvQcYo7X3ioUCpjC
+    luego ejecutar:
+    ./ngrok http 3000 (el servidor ya tiene que estar corriendo, en mi caso en VSCODE)
+    y con eso nos dara una url que funciona como servidor en linea.
+
 
 en una terminal (accedemos a carpeta 'server'):
 en otra terminal (accedemos a carpeta 'server'):
@@ -183,7 +194,7 @@ en otra terminal (accedemos a carpeta 'server'):
 
 en otra terminal (accedeos a carpeta 'client')
     ng serve 
-
+    ng serve --host=0.0.0.0
 
 //problemas con cliente
     https://better-coding.com/solved-njs-045-dpi-1047-64-bit-oracle-client-library-cannot-be-loaded/

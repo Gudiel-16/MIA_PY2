@@ -98,6 +98,7 @@ class IndexRoutes{
 
         //BITACORA
         this.router.post('/bitacora/insertar',indexControllerBitacora.insertar);
+        this.router.get('/NGROK',indexControllerBitacora.pruebaNGROK);
 
         //REPORTES
         this.router.get('/reporte/bitacoraASC',indexControllerReportes.bitacoraASC);
@@ -109,7 +110,6 @@ class IndexRoutes{
         this.router.get('/reporte/reporteClienteMasDenuncia',indexControllerReportes.reporteClienteMasDenuncia);
         this.router.get('/reporte/reporteClienteMasPublicaciones',indexControllerReportes.reporteClienteMasPublicaciones);
         this.router.get('/reporte/reportePaisesMasCreditoProducto',indexControllerReportes.reportePaisesMasCreditoProducto);
-        
         
         //CHAT
         this.router.post('/chat/insertar',indexControllerChat.insertar);
