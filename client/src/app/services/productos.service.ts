@@ -29,7 +29,8 @@ export class ProductosService {
   socket:any;
 
   //guardamos direccion
-  API_URI='http://localhost:3000'
+  //API_URI='http://localhost:3000'
+  API_URI='http://192.168.1.6:3000'
   //API_URI='https://491784401f29.ngrok.io'
 
   //creamos variable privada http

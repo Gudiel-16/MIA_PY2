@@ -30,7 +30,7 @@ class IndexControllerBitacora{
         
         //devuelvo el dato que se inserto
         res.status(200).json({
-            "Respuesta": "TE ADORO HERMOSA, SOS LO MEJOR MY LORE!"
+            "Respuesta": "TODO FUNCIONANDO!"
         });
     }
 

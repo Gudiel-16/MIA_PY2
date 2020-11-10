@@ -34,7 +34,10 @@ class Server {
         const miMSJ = [];
         const miMSJ2 = [];
         var idcaenv = 0;
-        const serverWeb = this.app.listen(this.app.get('port'), () => {
+        /*const serverWeb=this.app.listen(this.app.get('port'), () => {
+            console.log("Ejecutando Server en port",this.app.get('port'));
+        });*/
+        const serverWeb = this.app.listen(this.app.get('port'), "0.0.0.0", () => {
             console.log("Ejecutando Server en port", this.app.get('port'));
         });
         //al socket le paso el servidor web

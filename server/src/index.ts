@@ -41,7 +41,11 @@ class Server{
         const miMSJ2:any=[];
         var idcaenv:number=0;
 
-        const serverWeb=this.app.listen(this.app.get('port'), () => {
+        /*const serverWeb=this.app.listen(this.app.get('port'), () => {
+            console.log("Ejecutando Server en port",this.app.get('port'));
+        });*/
+
+        const serverWeb=this.app.listen(this.app.get('port'), "0.0.0.0", () => {
             console.log("Ejecutando Server en port",this.app.get('port'));
         });
 
