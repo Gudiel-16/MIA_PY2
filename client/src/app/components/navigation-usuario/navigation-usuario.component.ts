@@ -41,6 +41,10 @@ export class NavigationUsuarioComponent implements OnInit {
     }    
   }
 
+  inicio(){
+    this.router.navigate(['/usuario']);
+  }
+
   perfil(){
     this.router.navigate(['/usuario/perfil']);
   }
