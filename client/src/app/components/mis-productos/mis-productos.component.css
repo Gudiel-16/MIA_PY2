@@ -1,0 +1,54 @@
+#cardd{
+    position: relative;
+    overflow: hidden;
+    background: #17202A;
+}
+
+#cardd::before{
+    content: '';
+    position: absolute;
+    top:-50%;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    transform: skewY(345deg);
+    transition: 0.5s;
+}
+
+#cardd:hover::before{
+    top:-70%;
+    transform: skewY(390deg);
+}
+
+
+#cardd #imgBx{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+#cardd #imgBx img{
+    max-width: 100%;
+    transition: 0.5s;
+}
+
+#cardd:hover #imgBx img{
+    max-width: 75%;
+}
+
+#cardd #contentBx{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1;
+}
+
+#cardd #contentBx p{
+    color: white;
+    font-weight: 500;
+}

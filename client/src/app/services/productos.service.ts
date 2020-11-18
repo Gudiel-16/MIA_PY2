@@ -415,6 +415,22 @@ export class ProductosService {
     return this.http.get(`${this.API_URI}/reporte/reportePaisesMasCreditoProducto`);
   }
 
+  //CHAT
+  getListaChats(id_producto,id_c){
+    return this.http.post(`${this.API_URI}/chat/listaChats`,
+    {
+      "id_producto":id_producto,
+      "id_c":id_c
+    });
+  }
+
+  getConversacion(room){
+    return this.http.post(`${this.API_URI}/chat/conversacionChat`,
+    {
+      "room":room
+    });
+  }
+
   //LOCALSTORAGE
 
   setAdminLS(admin:Administrador){

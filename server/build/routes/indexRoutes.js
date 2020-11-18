@@ -98,6 +98,8 @@ class IndexRoutes {
         this.router.get('/reporte/reportePaisesMasCreditoProducto', controllersReportes_1.indexControllerReportes.reportePaisesMasCreditoProducto);
         //CHAT
         this.router.post('/chat/insertar', controllersChat_1.indexControllerChat.insertar);
+        this.router.post('/chat/listaChats', controllersChat_1.indexControllerChat.listaChats);
+        this.router.post('/chat/conversacionChat', controllersChat_1.indexControllerChat.conversacionChat);
     }
 }
 const indexRoutes = new IndexRoutes();

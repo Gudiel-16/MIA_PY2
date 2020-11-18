@@ -37,14 +37,16 @@
 
 <!--LISTADO DE PRODUCTOS-->
 <div class="float-md-left col-md-3" *ngFor="let aja of misProductos" style="padding: 10px;">
-    <div class="card text-center">
-        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+    <div id="cardd" class="card text-center">
+        <div id="imgBx" class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
             {{aja[1]}}            
         </div>        
-        <div class="card-body">
+        <div id="imgBx" class="card-body">
             <img [src]="aja[5]" class="card-img-top" alt="" style="height: 200px; width: 200px;">
-            <p>Precio: Q. {{aja[4]}}</p>
-            <p>{{aja[6]}}</p>
+        </div>
+        <div id="contentBx">
+          <p>Precio: Q. {{aja[4]}}</p>
+          <p>{{aja[6]}}</p>
         </div>
         <button [routerLink]="['detalleMiProducto',aja[0]]" class="btn btn-success" alt=""><!--redireccionamos a ruta, y pasamos ID-->                
           <i class="fas fa-info-circle"></i>

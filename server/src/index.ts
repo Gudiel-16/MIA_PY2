@@ -52,8 +52,31 @@ class Server{
         //al socket le paso el servidor web
         const io=SocketIO.listen(serverWeb);
 
+        io.on('connection', (socket)=>{
+
+            socket.on('subscribe', function(room) {
+                console.log('joining room', room);
+                socket.join(room);
+            });
+
+            socket.on('send-message', function(data) {
+                console.log('Enviando en: ', data.room, ' ', data.message);
+                miMSJ.push(data);
+
+                indexControllerChat.insertar(data).then((res)=>{
+                    indexControllerChat.conversacionChatServer(data).then((res)=>{
+                        io.sockets.in(data.room).emit('conversation private', res);
+                    });                    
+                });
+                //socket.broadcast.to(data.room).emit('conversation private', miMSJ);
+                //socket.broadcast.to(data.room).emit('conversation private', miMSJ);
+                
+            });
+
+        });
+
         //cada vez que alguien se conecte
-        io.on('connection',(socket)=>{
+        /*io.on('connection',(socket)=>{
 
             socket.on('send-message',(data)=>{
                 miMSJ.push(data);
@@ -78,13 +101,9 @@ class Server{
                         });                        
 
                     });                    
-                });
-                
-                              
-                
+                });           
             });
-
-        });
+        });*/
     }
 
 }

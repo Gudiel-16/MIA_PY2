@@ -199,3 +199,9 @@ en otra terminal (accedeos a carpeta 'client')
 //problemas con cliente
     https://better-coding.com/solved-njs-045-dpi-1047-64-bit-oracle-client-library-cannot-be-loaded/
     sudo dnf install libnsl 
+
+//VERSION QUE SE ENTREGO:
+    commit 43
+
+//VERSION MEJORADA
+    commit 44: se mejoro el chat, ahora es privado y aspecto de 'mis productos'

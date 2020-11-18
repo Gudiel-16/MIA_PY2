@@ -113,6 +113,8 @@ class IndexRoutes{
         
         //CHAT
         this.router.post('/chat/insertar',indexControllerChat.insertar);
+        this.router.post('/chat/listaChats',indexControllerChat.listaChats);
+        this.router.post('/chat/conversacionChat',indexControllerChat.conversacionChat);
     }
 }
 

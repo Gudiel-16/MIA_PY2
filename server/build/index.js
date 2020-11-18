@@ -42,32 +42,52 @@ class Server {
         });
         //al socket le paso el servidor web
         const io = SocketIO.listen(serverWeb);
-        //cada vez que alguien se conecte
         io.on('connection', (socket) => {
-            socket.on('send-message', (data) => {
+            socket.on('subscribe', function (room) {
+                console.log('joining room', room);
+                socket.join(room);
+            });
+            socket.on('send-message', function (data) {
+                console.log('Enviando en: ', data.room, ' ', data.message);
+                miMSJ.push(data);
+                controllersChat_1.indexControllerChat.insertar(data).then((res) => {
+                    controllersChat_1.indexControllerChat.conversacionChatServer(data).then((res) => {
+                        io.sockets.in(data.room).emit('conversation private', res);
+                    });
+                });
+                //socket.broadcast.to(data.room).emit('conversation private', miMSJ);
+                //socket.broadcast.to(data.room).emit('conversation private', miMSJ);
+            });
+        });
+        //cada vez que alguien se conecte
+        /*io.on('connection',(socket)=>{
+
+            socket.on('send-message',(data)=>{
                 miMSJ.push(data);
                 miMSJ2.push(data);
                 //lo envia el dueno del producto
-                if (data["bandera"] == 1) {
-                    data["id_c_Aenviar"] = idcaenv;
-                    //lo envia un cliente
+                if(data["bandera"]==1){
+                    data["id_c_Aenviar"]=idcaenv;
+                //lo envia un cliente
+                }else if(data["bandera"]==0){
+                    idcaenv=data["id_c"];
                 }
-                else if (data["bandera"] == 0) {
-                    idcaenv = data["id_c"];
-                }
-                controllersChat_1.indexControllerChat.insertar(data).then((res) => {
-                    controllersChat_1.indexControllerChat.datosParaCliente(data).then((res) => {
-                        const datosCliente = res;
-                        controllersChat_1.indexControllerChat.datosParaVendedor(data).then((res) => {
-                            socket.emit('text-event', datosCliente);
-                            socket.emit('text-event-2', res);
-                            socket.broadcast.emit('text-event', datosCliente);
-                            socket.broadcast.emit('text-event-2', res); //dueno
+                indexControllerChat.insertar(data).then((res)=>{
+                    indexControllerChat.datosParaCliente(data).then((res)=>{
+
+                        const datosCliente=res;
+
+                        indexControllerChat.datosParaVendedor(data).then((res)=>{
+                            socket.emit('text-event',datosCliente);
+                            socket.emit('text-event-2',res);
+                            socket.broadcast.emit('text-event',datosCliente);
+                            socket.broadcast.emit('text-event-2',res);//dueno
                         });
+
                     });
                 });
             });
-        });
+        });*/
     }
 }
 const server = new Server();
